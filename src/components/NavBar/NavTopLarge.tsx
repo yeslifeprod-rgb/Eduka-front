@@ -4,7 +4,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Avatar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import MenuBurger from "./MenuBurger";
 
 export default function NavBar() {
   const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
@@ -33,9 +32,6 @@ export default function NavBar() {
       >
         <section className=" flex  h-10 ">
           <img src="./public/logo.png" alt="eduka" />
-        </section>
-        <section className=" lg:hidden">
-          <MenuBurger />
         </section>
         <section className="hidden  text-gray-600 lg:flex justify-end items-center gap-8">
           <NavLink to="/" className="nav-link flex  items-center gap-2">
