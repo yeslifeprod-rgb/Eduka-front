@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { BlueButton, OrangeButton } from '../../components/Button/CustomButton';
 
 const EditProfilBySchoolPage: React.FC = () => {
     const [openModal, setOpenModal] = useState(false);
@@ -80,7 +81,7 @@ const EditProfilBySchoolPage: React.FC = () => {
                 </div>
             </form>
             <div className="flex flex-col md:flex-row w-full md:items-center md:mt-8 mb-4 space-y-4 md:space-y-0 md:space-x-4">
-                <Button variant="contained" style={{ backgroundColor: "#0FA3B1", color: "white" }}>Valider</Button>
+                <BlueButton variant="contained" style={{ backgroundColor: "#0FA3B1", color: "white" }}>Valider</BlueButton>
                 <div className="hidden md:block" style={{ width: '1rem' }}></div> {/* Espace entre les boutons sur desktop */}
                 <Button variant="contained" style={{ backgroundColor: "#F7A072", color: "white" }} onClick={handleOpenModal}>
                     <DeleteIcon />
@@ -93,8 +94,8 @@ const EditProfilBySchoolPage: React.FC = () => {
                     <h2 className="text-lg font-bold mb-4">Confirmer la suppression</h2>
                     <p className="text-sm mb-4">Êtes-vous sûr de vouloir supprimer le profil ? Cette action est irréversible.</p>
                     <div className="flex justify-end">
-                        <Button onClick={handleCloseModal} style={{ marginRight: '8px' }}>Annuler</Button>
-                        <Button onClick={handleConfirmModalOpen} style={{ backgroundColor: "#F7A072", color: "white" }}>Valider la suppression</Button>
+                        <OrangeButton onClick={handleCloseModal} style={{ marginRight: '8px', backgroundColor: "#F7A072", color: "white" }}>Annuler</  OrangeButton>
+                        <BlueButton onClick={handleConfirmModalOpen} style={{ backgroundColor: "#0FA3B1", color: "white" }}>Valider la suppression</ BlueButton>
                     </div>
                 </div>
             </Modal>
@@ -103,10 +104,10 @@ const EditProfilBySchoolPage: React.FC = () => {
                     <h2 className="text-lg font-bold mb-4">Compte supprimé</h2>
                     <p className="text-sm mb-4">Le compte a été supprimé avec succès.</p>
                     <div className="flex justify-end">
-                        <Button onClick={handleConfirmModalOk} style={{ backgroundColor: "#0FA3B1", color: "white" }}>
+                        <BlueButton onClick={handleConfirmModalOk} style={{ backgroundColor: "#0FA3B1", color: "white" }}>
                             <CheckCircleOutlineIcon />
                             OK
-                        </Button>
+                        </BlueButton>
                     </div>
                 </div>
             </Modal>
