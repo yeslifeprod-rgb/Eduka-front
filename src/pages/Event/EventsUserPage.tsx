@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CardEvent from "../../components/Card/EventCard";
-import ModalCategory from "../../components/Modals/ModalCategory";
+import ModalCategory from "../../components/Modal/ModalCategory";
 import eventInterface from "../../services/interfaces/event";
 
 const events: eventInterface[] = [
