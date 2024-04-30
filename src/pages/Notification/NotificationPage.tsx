@@ -3,6 +3,8 @@ import IconButton from "@mui/material/IconButton";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import NotificationCard from "../../components/Card/NotificationCard";
+import NavBottom from "../../components/NavBar/NavBottom";
+import NavTopLarge from "../../components/NavBar/NavTopLarge";
 
 export default function NotificationPage() {
   const [eventsOnChange, setEventsOnChange] = useState([
@@ -113,6 +115,7 @@ export default function NotificationPage() {
 
   return (
     <>
+      <NavTopLarge />
       <div className="bg-white w-full flex items-center justify-between py-5 px-4 border-b">
         <h2 className="text-2xl text-gray-900 mx-auto">Nouveau Profil</h2>
         <NavLink to="#">
@@ -131,6 +134,8 @@ export default function NotificationPage() {
           <NotificationCard key={index} eventOnChange={event} />
         ))}
       </div>
+
+      <NavBottom />
     </>
   );
 }

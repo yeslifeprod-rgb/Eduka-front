@@ -11,7 +11,7 @@ export default function MessageDetailPage() {
       {user ? (
         <>
           <div className=" bg-white w-full flex justify-start items-center py-5 px-4 ">
-            <NavLink to="/search">
+            <NavLink to="/search_by_parent">
               <IconButton aria-label="delete" size="large">
                 <CloseIcon fontSize="inherit" />
               </IconButton>

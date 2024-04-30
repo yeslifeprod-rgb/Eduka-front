@@ -34,7 +34,7 @@ export default function NavTopLarge() {
           <img src="./public/logo.png" alt="eduka" />
         </section>
         <section className="hidden  text-gray-600 lg:flex justify-end items-center gap-8">
-          <NavLink to="/home" className="nav-link flex  items-center gap-2">
+          <NavLink to="/home_page_parent" className="nav-link flex  items-center gap-2">
             <HomeIcon className="nav-icon" sx={{ width: 32, height: 32 }} />
 
             <p className="nav-icon">Accueil</p>
@@ -51,7 +51,7 @@ export default function NavTopLarge() {
             <p className="nav-icon">Notifications</p>
           </NavLink>
           <NavLink
-            to="/search"
+            to="/search_by_parent"
             className="nav-link nav-icon flex items-center gap-2"
           >
             <SearchIcon className="nav-icon" sx={{ width: 32, height: 32 }} />

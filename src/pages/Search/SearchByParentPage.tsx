@@ -1,5 +1,7 @@
 import { useState } from "react";
 import UserCard from "../../components/Card/UserCard";
+import NavBottom from "../../components/NavBar/NavBottom";
+import NavTopLarge from "../../components/NavBar/NavTopLarge";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { userInterface } from "../../services/interfaces/user";
 const users: userInterface[] = [
@@ -170,7 +172,7 @@ const users: userInterface[] = [
   },
 ];
 
-export default function SearchPage() {
+export default function SearchByParentPage() {
   const [searchResults, setSearchResults] = useState<userInterface[]>(users);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -184,6 +186,7 @@ export default function SearchPage() {
   };
   return (
     <>
+      <NavTopLarge />
       <SearchBar handleSearch={searchUsers} />
       <section className="flex flex-col md:flex-row gap-8 justify-center">
         {searchQuery && searchResults.length === 0 && (
@@ -197,6 +200,7 @@ export default function SearchPage() {
           ))}
         </article>
       </section>
+      <NavBottom />
     </>
   );
 }

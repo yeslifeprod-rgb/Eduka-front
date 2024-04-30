@@ -1,11 +1,10 @@
+import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import { BlueFullButton } from "../../components/Button/Button";
-import Checkbox from "@mui/material/Checkbox";
-
 
 export default function Login() {
   const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
@@ -139,7 +138,7 @@ export default function Login() {
           </div>
         </Form>
       </Formik>
-      {shouldNavigate && <Navigate to="/home" />}
+      {shouldNavigate && <Navigate to="/home_page_parent" />}
     </>
   );
 }
