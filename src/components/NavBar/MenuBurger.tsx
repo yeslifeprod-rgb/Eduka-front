@@ -71,11 +71,11 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose} component={Link} to="/">
+        <MenuItem onClick={handleClose} component={Link} to="/home">
           <ListItemIcon>
             <Home fontSize="small" />
           </ListItemIcon>
-          Accueuil
+          Accueil
         </MenuItem>
         <MenuItem onClick={handleClose} component={Link} to="/blog">
           <ListItemIcon>

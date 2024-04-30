@@ -4,15 +4,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Avatar } from "@mui/material";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import MenuBurger from "./MenuBurger";
 
-export default function NavBar() {
-  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
-  const [visible, setVisible] = useState(true);
+export default function NavTopLarge() {
+  const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+  const [visible, setVisible] = useState<boolean>(true);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
+    const handleScroll = (): void => {
+      const currentScrollPos = window.scrollY;
       setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
       setPrevScrollPos(currentScrollPos);
     };
@@ -27,18 +26,15 @@ export default function NavBar() {
       <nav
         className={`fixed text-sm top-0 bg-white left-0 right-0 w-full flex justify-between items-center py-5 px-10 transition-transform duration-300 ${
           visible
-            ? "transform translate-y-0 z-50"
+            ? "transform translate-y-0 z-10"
             : "transform -translate-y-full z-0"
         }`}
       >
         <section className=" flex  h-10 ">
           <img src="./public/logo.png" alt="eduka" />
         </section>
-        <section className=" lg:hidden">
-          <MenuBurger />
-        </section>
         <section className="hidden  text-gray-600 lg:flex justify-end items-center gap-8">
-          <NavLink to="/" className="nav-link flex  items-center gap-2">
+          <NavLink to="/home" className="nav-link flex  items-center gap-2">
             <HomeIcon className="nav-icon" sx={{ width: 32, height: 32 }} />
 
             <p className="nav-icon">Accueil</p>

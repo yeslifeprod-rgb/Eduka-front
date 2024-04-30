@@ -33,3 +33,14 @@
 .nav-toggle-link:hover {
   cursor: pointer;
 }
+.slider-custom .MuiSlider-thumb {
+  background-color: #0fa3b1; /* Utilisez votre couleur personnalisée ici */
+}
+
+.slider-custom .MuiSlider-rail {
+  background-color: #e2e8f0; /* Couleur de fond du rail du Slider */
+}
+
+.slider-custom .MuiSlider-track {
+  background-color: #0fa3b1; /* Couleur de la piste du Slider */
+}

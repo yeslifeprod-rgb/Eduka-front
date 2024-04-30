@@ -2,9 +2,14 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Avatar, Button, Card, IconButton } from "@mui/material";
 import { useEffect, useRef } from "react";
+import eventInterface from "../../services/interfaces/event";
 import FormatRelativeDate from "../../utils/CalculRelative/FormatRelativeDate";
 
-export default function CardEvent({ event }) {
+interface CardEventPropsInterface {
+  event: eventInterface;
+}
+export default function CardEvent(props: CardEventPropsInterface) {
+  const { event } = props;
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -17,7 +22,7 @@ export default function CardEvent({ event }) {
   }, [textRef]);
 
   return (
-    <Card className="relative mx-4 my-5 p-2">
+    <Card variant="outlined" className="relative shadow-md m-2 p-2">
       <section className="flex gap-3 pb-2">
         <img
           className="hidden lg:block w-32 h-32 object-cover rounded-lg shadow-md"

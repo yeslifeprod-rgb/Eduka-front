@@ -4,10 +4,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Avatar, IconButton } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-export default function NavBar() {
+export default function NavBottom() {
   return (
     <nav className="fixed bottom-0 bg-white flex justify-between w-full py-2 px-10 items-center border-t border-gray-100 lg:hidden">
-      <NavLink to="/" className="nav-link">
+      <NavLink to="/home" className="nav-link">
         <IconButton aria-label="home" size="large">
           <HomeIcon className="nav-icon" sx={{ width: 32, height: 32 }} />
         </IconButton>

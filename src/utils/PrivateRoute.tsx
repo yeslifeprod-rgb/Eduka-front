@@ -1,7 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
 
 export default function PrivateRoute() {
-  const auth = { token: true };
-
-  return auth.token ? <Outlet /> : <Navigate to="/" />;
+  return isAuthenticated() ? <Outlet /> : <Navigate to="/" />;
 }
+
+export const isAuthenticated = () => {
+  const token = sessionStorage.getItem('token');
+  // Check if the token exists and is valid
+  return token !== null && token !== undefined;
+};
