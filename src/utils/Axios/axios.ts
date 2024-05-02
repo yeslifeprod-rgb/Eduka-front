@@ -1,13 +1,24 @@
-import axios from "axios";
+
+import { fakeEventData, receivedMessagesChatData } from "../Fakers/Fakers";
 
 
-export const getFakers = async () => {
+export const getReceivedMessagesChatData = async () => {
     
     try {
-        const response = await axios.get('./Fakers/Faker');
-        return response.data;
+        const data = receivedMessagesChatData
+        return data
     } catch (error) {
         console.log(error);
     }
 }
 
+
+    export const getFakeEventData = async () => {
+
+        try {
+            const data = fakeEventData
+            return data
+        } catch (error) {
+            console.log(error);
+        }
+    }

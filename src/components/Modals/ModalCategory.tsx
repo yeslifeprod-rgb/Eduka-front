@@ -59,7 +59,7 @@ export default function EventsPage(props: ModalCategoryProps) {
   return (
     <Box>
       {isModalOpen && (
-        <section className="absolute top-0 left-0 right-0 bottom-0 backdrop-filter backdrop-blur-sm  z-30"></section>
+        <section className="absolute top-0 left-0 right-0 bottom-0 backdrop-blur-sm bg-opacity-20 bg-black"></section>
       )}
       {isModalOpen && (
         <section className="absolute bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md  border rounded-lg shadow-sm m-auto ">

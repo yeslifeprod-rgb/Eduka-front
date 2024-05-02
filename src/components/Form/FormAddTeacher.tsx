@@ -68,19 +68,19 @@ export const FormAddTeacher = () => {
         <div className="mb-4">
           <label htmlFor="lastname">Nom</label>
           <input type="text" onChange={formik.handleChange}
-            value={formik.values.lastName} name='lastName' className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange" />
+            value={formik.values.lastName} name='lastName' className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue" />
           <small>{formik.errors.lastName}</small>
         </div>
         <div className="mb-4">
           <label htmlFor="firstname">Prénom</label>
           <input type="text" onChange={formik.handleChange}
-            value={formik.values.firstName} name='firstName' className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange" />
+            value={formik.values.firstName} name='firstName' className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue" />
           <small>{formik.errors.firstName}</small>
         </div>
         <div className="mb-4">
           <label htmlFor="email">Email</label>
           <input type="email" onChange={formik.handleChange}
-            value={formik.values.email} name="email" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange" />
+            value={formik.values.email} name="email" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue" />
           <small>{formik.errors.email}</small>
         </div>
         <div className='mt-10' onClick={handleClickModalDiscipline}>

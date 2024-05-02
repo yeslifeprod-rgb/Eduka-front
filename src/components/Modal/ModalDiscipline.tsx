@@ -1,7 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { Box, IconButton } from "@mui/material";
 import { useState } from "react";
-import { eventDiscipline } from '../../utils/Fakers/Faker';
+import { eventDiscipline } from '../../utils/Fakers/Fakers';
 import { BlueFullButton, BlueSelectedButton } from '../Button/CustomButton';
 
 interface ModalTestProps {
@@ -19,7 +19,7 @@ export const ModalDiscipline: React.FC<ModalTestProps> = ({ onClose, selectedDis
     //     }
     // }, []);
 
-    
+
 
     const toggleDiscipline = (discipline: string) => {
         if (localSelectedDisciplines.includes(discipline)) {
@@ -37,11 +37,11 @@ export const ModalDiscipline: React.FC<ModalTestProps> = ({ onClose, selectedDis
     };
 
     return (
-        <Box className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-opacity-80 bg-black">
+        <Box className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center backdrop-blur-sm bg-opacity-20 bg-black">
             <section className="bg-white w-full max-w-md border-2 rounded-lg shadow-sm p-4">
                 <div className="flex items-center justify-between py-2">
                     <IconButton aria-label="delete" size="large" onClick={() => onClose(localSelectedDisciplines)}>
-                        <CloseIcon fontSize="inherit"/>
+                        <CloseIcon fontSize="inherit" />
                     </IconButton>
                     <h3 className="text-gray-900 font-medium mx-auto ml-6">
                         Quel(s) filtre(s) voulez-vous appliquer?
