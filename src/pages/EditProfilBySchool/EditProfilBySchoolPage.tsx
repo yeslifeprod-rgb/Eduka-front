@@ -1,239 +1,404 @@
-import React, { useState, useEffect } from 'react';
-import { Formik, Form, Field } from 'formik';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import DeleteIcon from '@mui/icons-material/Delete';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import AddIcon from '@mui/icons-material/Add';
-import { BlueButton, OrangeButton } from '../../components/Button/CustomButton';
+import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { FiMinusCircle, FiPlusCircle } from 'react-icons/fi';
+import { BlueFullButton, ButtonAddDiscipline, ButtonDeleteChild, OrangeFullButton } from '../../components/Button/CustomButton';
+import ButtonRemoveChild from '../../components/Button/ButtonRemoveChild';
+import AddChildButton from '../../components/Button/ButtonAddChild';
 
-const EditProfileBySchoolPage: React.FC = () => {
-    const [openModal, setOpenModal] = useState(false);
-    const [confirmModalOpen, setConfirmModalOpen] = useState(false);
-    const [children, setChildren] = useState<Child[]>([]);
-    const [childToDeleteId, setChildToDeleteId] = useState<number | null>(null);
-    const [selectedSubject, setSelectedSubject] = useState<string | null>(null);
+// Interface pour les données d'un enfant
+interface FormChildInterface {
+    firstName: string; // Ajout du champ prénom pour les enfants
+    name: string;
+    birthday: string;
+    class: string;
+}
+
+// Interface pour les données du parent
+interface FormUserFLEInterface {
+    firstName: string;
+    lastName: string;
+    email: string;
+}
+
+// Composant EditProfilBySchoolPage
+export const EditProfilBySchoolPage: React.FC = () => {
+    const [parents, setParents] = useState<FormUserFLEInterface>({
+        firstName: '',
+        lastName: '',
+        email: '',
+    });
+
+    const [children, setChildren] = useState<FormChildInterface[]>([
+        {
+            firstName: '', // Initialisation du prénom de l'enfant
+            name: '',
+            birthday: '',
+            class: ''
+        },
+    ]);
+
+    const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [showSuccessSaveModal, setShowSuccessSaveModal] = useState(false);
+    const [showAddSubjectModal, setShowAddSubjectModal] = useState(false);
+    const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
 
     useEffect(() => {
-        const storedChildren = localStorage.getItem('children');
-        if (storedChildren) {
-            setChildren(JSON.parse(storedChildren));
+        const savedSubjects = localStorage.getItem('selectedSubjects');
+        if (savedSubjects) {
+            setSelectedSubjects(JSON.parse(savedSubjects));
         }
     }, []);
 
-    useEffect(() => {
-        localStorage.setItem('children', JSON.stringify(children));
-    }, [children]);
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
 
-    const handleOpenModal = () => {
-        setOpenModal(true);
-    };
+        if (name === 'lastName' || name === 'firstName' || name === 'email') {
+            setParents(prevParents => ({ ...prevParents, [name]: value }));
+            setFormErrors(prevErrors => ({ ...prevErrors, [name]: '' }));
+        } else {
+            const childIndex = Number(name.split('_')[1]);
+            const childField = name.split('_')[0];
 
-    const handleCloseModal = () => {
-        setOpenModal(false);
-    };
-
-    const handleConfirmModalOpen = () => {
-        setConfirmModalOpen(true);
-    };
-
-    const handleConfirmModalClose = () => {
-        setConfirmModalOpen(false);
-    };
-
-    const handleConfirmModalOk = () => {
-        setConfirmModalOpen(false);
-        window.location.reload();
-    };
-
-    const handleAddChild = (child: Child) => {
-        if (children.length < 4) {
-            setChildren([...children, child]);
-        }
-    };
-
-    const handleDeleteChild = (id: number) => {
-        setChildToDeleteId(id);
-    };
-
-    const handleConfirmDeleteChild = () => {
-        if (childToDeleteId !== null) {
-            const updatedChildren = children.filter(child => child.id !== childToDeleteId);
-            setChildren(updatedChildren);
-            setChildToDeleteId(null);
-        }
-    };
-
-    const handleSubjectSelection = (subject: string) => {
-        setSelectedSubject(subject);
-        handleCloseModal();
-    };
-
-    const handleAddSubject = (childId: number, subject: string | null) => {
-        if (childId && subject) {
-            const updatedChildren = children.map(child => {
-                if (child.id === childId) {
-                    if (!child.matieres) {
-                        child.matieres = [];
-                    }
-                    child.matieres.push(subject);
+            setChildren(prevChildren => prevChildren.map((child, index) => {
+                if (index === childIndex) {
+                    return { ...child, [childField]: value };
                 }
                 return child;
-            });
-            setChildren(updatedChildren);
-            setSelectedSubject(null);
+            }));
+
+            setFormErrors(prevErrors => ({ ...prevErrors, [`child_${childIndex}_${childField}`]: '' }));
         }
+    };
+
+    const handleDateChange = (date: Date | null, index: number) => {
+        setChildren(prevChildren => prevChildren.map((child, i) => {
+            if (i === index) {
+                return { ...child, birthday: date ? date.toISOString() : '' };
+            }
+            return child;
+        }));
+    };
+
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const errors: { [key: string]: string } = {};
+
+        if (!parents.firstName.trim()) {
+            errors.firstName = 'Le prénom est requis.';
+        } else if (parents.firstName.trim().length < 2) {
+            errors.firstName = 'Le prénom doit contenir au moins 2 caractères.';
+        }
+
+        if (!parents.lastName.trim()) {
+            errors.lastName = 'Le nom est requis.';
+        } else if (parents.lastName.trim().length < 2) {
+            errors.lastName = 'Le nom doit contenir au moins 2 caractères.';
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!parents.email.trim()) {
+            errors.email = 'L\'email est requis.';
+        } else if (!emailRegex.test(parents.email.trim())) {
+            errors.email = 'L\'email est invalide.';
+        }
+
+        children.forEach((child, index) => {
+            if (!child.firstName.trim()) {
+                errors[`child_${index}_firstName`] = 'Le prénom de l\'enfant est requis.';
+            } else if (child.firstName.trim().length < 2) {
+                errors[`child_${index}_firstName`] = 'Le prénom de l\'enfant doit contenir au moins 2 caractères.';
+            }
+
+            if (!child.name.trim()) {
+                errors[`child_${index}_name`] = 'Le nom de l\'enfant est requis.';
+            } else if (child.name.trim().length < 2) {
+                errors[`child_${index}_name`] = 'Le nom de l\'enfant doit contenir au moins 2 caractères.';
+            }
+
+            if (!child.birthday.trim()) {
+                errors[`child_${index}_birthday`] = 'La date de naissance de l\'enfant est requise.';
+            }
+
+            if (!child.class.trim()) {
+                errors[`child_${index}_class`] = 'La classe de l\'enfant est requise.';
+            }
+        });
+
+        setFormErrors(errors);
+
+        if (Object.keys(errors).length === 0) {
+            localStorage.setItem('parents', JSON.stringify(parents));
+            localStorage.setItem('children', JSON.stringify(children));
+            setShowSuccessSaveModal(true);
+        }
+    };
+
+    const handleAddChild = () => {
+        if (children.length < 4) {
+            setChildren(prevChildren => [
+                ...prevChildren,
+                {
+                    firstName: '', // Initialisation du prénom du nouvel enfant
+                    name: '',
+                    birthday: '',
+                    class: '',
+                },
+            ]);
+        }
+    };
+
+    const handleRemoveChild = (index: number) => {
+        setChildren(prevChildren => prevChildren.filter((_, i) => i !== index));
+    };
+
+    const handleDeleteProfile = () => {
+        localStorage.clear();
+        setShowDeleteModal(false);
+        setShowSuccessModal(true);
+    };
+
+
+    const handleOpenAddSubjectModal = () => {
+        setShowAddSubjectModal(true);
+    };
+
+    const handleCloseAddSubjectModal = () => {
+        setShowAddSubjectModal(false);
+    };
+
+    const handleSelectSubject = (subject: string) => {
+        if (selectedSubjects.length < 3) {
+            setSelectedSubjects(prevSubjects => [...prevSubjects, subject]);
+            // Enregistrer les matières sélectionnées dans localStorage
+            localStorage.setItem('selectedSubjects', JSON.stringify([...selectedSubjects, subject]));
+        } else {
+            // Afficher un message ou une notification indiquant que le nombre maximal de matières est atteint
+            console.log("Vous ne pouvez pas sélectionner plus de trois matières.");
+        }
+    };
+
+
+    const handleRemoveSelectedSubject = (index: number) => {
+        const updatedSubjects = [...selectedSubjects];
+        updatedSubjects.splice(index, 1);
+        setSelectedSubjects(updatedSubjects);
+        localStorage.setItem('selectedSubjects', JSON.stringify(updatedSubjects));
     };
 
     return (
         <div className="max-w-md mx-auto flex flex-col items-center justify-center">
             <div className="md:max-lg:flex" style={{ marginBottom: '5rem' }}></div>
-
-            <img src="/public/profil.png" alt="Profil" className="w-50 h-auto rounded-full mb-8 md:mb-0 my-4 md:my-0" />
+            <img src="/public/profil.png" alt="Cindy Baker" className="w-35 h-35 rounded-full mb-8 md:mb-0 my-4 md:my-0" />
             <div className="mb-8 flex items-center"></div>
 
-            <Formik
-                initialValues={{
-                    nom: '',
-                    prenom: '',
-                    email: '',
-                    childName: '',
-                    dateOfBirth: '',
-                    class: ''
-                }}
-                onSubmit={(values, { resetForm }) => {
-                    const newChild: Child = {
-                        id: children.length + 1,
-                        nom: values.nom,
-                        prenom: values.prenom,
-                        classe: values.class,
-                        matieres: []
-                    };
-                    handleAddChild(newChild);
-                    resetForm();
-                }}
-            >
-                <Form className="w-full max-w-md space-y-4 md:space-y-8">
-                    <div>
-                        <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">Nom</label>
-                        <Field type="text" id="last-name" name="nom" className="mt-1 p-2 block w-full border border-gray-300 rounded-md" />
-                    </div>
-                    <div>
-                        <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">Prénom</label>
-                        <Field type="text" id="first-name" name="prenom" className="mt-1 p-2 block w-full border border-gray-300 rounded-md" />
-                    </div>
-                    <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-                        <Field type="email" id="email" name="email" className="mt-1 p-2 block w-full border border-gray-300 rounded-md" />
-                    </div>
-                    <div>
-                        <label htmlFor="child-name" className="block text-sm font-medium text-gray-700">Nom de l'enfant</label>
-                        <Field type="text" id="child-name" name="childName" className="mt-1 p-2 block w-full border border-gray-300 rounded-md" />
-                    </div>
-                    <div>
-                        <label htmlFor="date-of-birth" className="block text-sm font-medium text-gray-700">Date de naissance de l'enfant</label>
-                        <Field type="date" id="date-of-birth" name="dateOfBirth" className="mt-1 p-2 block w-full border border-gray-300 rounded-md" />
-                    </div>
-                    <div>
-                        <label htmlFor="class" className="block text-sm font-medium text-gray-700">Classe de l'enfant</label>
-                        <Field as="select" id="class" name="class" className="mt-1 p-2 block w-full border border-gray-300 rounded-md">
-                            <option value="">Sélectionner la classe</option>
-                            <option value="class1">Classe 1</option>
-                            <option value="class2">Classe 2</option>
-                            <option value="class3">Classe 3</option>
-                        </Field>
-                        <div className="md:hidden" style={{ marginBottom: '5rem' }}></div>
-                    </div>
-                    {children.map(child => (
-                        <div key={child.id}>
-                            <label htmlFor={`child-name-${child.id}`} className="block text-sm font-medium text-gray-700">Nom de l'enfant</label>
-                            <input type="text" id={`child-name-${child.id}`} name={`nom-enfant-${child.id}`} value={child.nom} readOnly className="mt-1 p-2 block w-full border border-gray-300 rounded-md" />
-                            <label htmlFor={`date-of-birth-${child.id}`} className="block text-sm font-medium text-gray-700">Date de naissance de l'enfant</label>
-                            <input type="text" id={`date-of-birth-${child.id}`} name={`prenom-enfant-${child.id}`} value={child.dateOfBirth} readOnly className="mt-1 p-2 block w-full border border-gray-300 rounded-md" />
-                            <label htmlFor={`class-${child.id}`} className="block text-sm font-medium text-gray-700">Classe de l'enfant</label>
-                            <input type="text" id={`class-${child.id}`} name={`classe-enfant-${child.id}`} value={child.classe} readOnly className="mt-1 p-2 block w-full border border-gray-300 rounded-md" />
-                            {child.matieres && child.matieres.map((matiere, index) => (
-                                <div key={index}>{matiere}</div>
-                            ))}
-                            <Button variant="contained" style={{ backgroundColor: "#F7A072", color: "white" }} onClick={() => handleDeleteChild(child.id)}>
-                                <DeleteIcon />
-                                Supprimer l'enfant
-                            </Button>
-                            {selectedSubject && (
-                                <Button variant="contained" style={{ backgroundColor: "#0FA3B1", color: "white" }} onClick={() => handleAddSubject(child.id, selectedSubject)}>
-                                    <AddIcon />
-                                    Ajouter une matière
-                                </Button>
-                            )}
+            <form className="w-full md:w-96 ml-4 mb-30" onSubmit={handleSubmit}>
+                {showSuccessSaveModal && (
+                    <div className="mb-4 bg-green-200 p-4 rounded-lg">Données enregistrées avec succès!</div>
+                )}
+                <div className="mb-4">
+                    <label htmlFor="lastName">Nom</label>
+                    <input
+                        type="text"
+                        name="lastName"
+                        onChange={handleChange}
+                        className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
+                    />
+                    {formErrors.lastName && <p className="text-red-500">{formErrors.lastName}</p>}
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="firstName">Prénom</label>
+                    <input
+                        type="text"
+                        name="firstName"
+                        onChange={handleChange}
+                        className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
+                    />
+                    {formErrors.firstName && <p className="text-red-500">{formErrors.firstName}</p>}
+                </div>
+                <div className="mb-4">
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        onChange={handleChange}
+                        className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
+                    />
+                    {formErrors.email && <p className="text-red-500">{formErrors.email}</p>}
+                </div>
+                {children.map((child, index) => (
+                    <div key={index}>
+                        <div className="mb-4">
+                            <label htmlFor={`firstNameChild${index + 1}`}>Prénom de l'enfant {index + 1}</label>
+                            <input
+                                type="text"
+                                name={`firstName_${index}`}
+                                value={child.firstName}
+                                onChange={handleChange}
+                                className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
+                            />
+                            {formErrors[`child_${index}_firstName`] && <p className="text-red-500">{formErrors[`child_${index}_firstName`]}</p>}
                         </div>
-                    ))}
-                    {children.length < 4 && (
-                        <div className="flex flex-col">
-                            <Button type="submit" variant="contained" style={{ backgroundColor: "#0FA3B1", color: "white", marginBottom: '1rem' }}>
-                                <AddIcon />
-                                Ajouter un enfant
-                            </Button>
+                        <div className="mb-4">
+                            <label htmlFor={`nameChild${index + 1}`}>Nom de l'enfant {index + 1}</label>
+                            <input
+                                type="text"
+                                name={`name_${index}`}
+                                value={child.name}
+                                onChange={handleChange}
+                                className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
+                            />
+                            {formErrors[`child_${index}_name`] && <p className="text-red-500">{formErrors[`child_${index}_name`]}</p>}
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor={`birthday${index + 1}`}>Date de naissance de l'enfant {index + 1}</label>
+                            <DatePicker
+                                selected={child.birthday ? new Date(child.birthday) : null}
+                                onChange={(date) => handleDateChange(date, index)}
+                                className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
+                            />
+                            {formErrors[`child_${index}_birthday`] && <p className="text-red-500">{formErrors[`child_${index}_birthday`]}</p>}
+                        </div>
+                        <div className="mb-4">
+                            <label htmlFor={`classChild${index + 1}`}>Classe de l'enfant {index + 1}</label>
+                            <select
+                                name={`class_${index}`}
+                                value={child.class}
+                                onChange={handleChange}
+                                className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
+                            >
+                                <option value="">Sélectionner une classe</option>
+                                <option value="CP">CP</option>
+                                <option value="CE1">CE1</option>
+                                <option value="CE2">CE2</option>
+                                <option value="CM1">CM1</option>
+                                <option value="CM2">CM2</option>
+                            </select>
+                            {formErrors[`child_${index}_class`] && <p className="text-red-500">{formErrors[`child_${index}_class`]}</p>}
+                        </div>
+                        {index > 0 && (
+                            <div onClick={() => handleRemoveChild(index)}>
+                                <ButtonRemoveChild />
+                            </div>
+                        )}
+                    </div>
+                ))}
+                {children.length < 4 && (
+                    <div className="mt-6" onClick={handleAddChild}>
+                        <AddChildButton />
+                    </div>
+                )}
+                <div className="mt-10 mb-20">
+                    <BlueFullButton onClick={handleOpenAddSubjectModal}>Ajouter une matière</BlueFullButton>
+                </div>
+                <div className="mt-4 flex justify-center">
+                    {selectedSubjects.length > 0 && (
+                        <div className="text-center">
+                            <p className="text-blue-800 ">Matieres sélectionnées :</p>
+                            <ul className="mt-2">
+                                {selectedSubjects.map((subject, index) => (
+                                    <li key={index} className="mb-2">
+                                        <ButtonDeleteChild
+                                            onClick={() => handleRemoveSelectedSubject(index)}
+                                            className="text-red-500 flex items-center"
+                                        >
+                                            {subject} <FiMinusCircle className="ml-2" /> {/* Utilisation de l'icône FiMinusCircle */}
+                                        </ButtonDeleteChild>
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     )}
+                </div>
 
-                    <Button variant="contained" style={{ backgroundColor: "#0FA3B1", color: "white", marginBottom: '1rem' }} onClick={handleOpenModal}>
-                        Sélectionner une matière
-                    </Button>
-                    <Modal open={openModal} onClose={handleCloseModal} className="flex items-center justify-center">
-                        <div className="bg-white p-8 rounded-md">
-                            <h2 className="text-lg font-bold mb-4">Sélectionner une matière</h2>
-                            <div className="flex flex-col">
-                                <Button onClick={() => handleSubjectSelection("Anglais")} style={{ marginBottom: '1rem' }}>Anglais</Button>
-                                <Button onClick={() => handleSubjectSelection("Français")} style={{ marginBottom: '1rem' }}>Français</Button>
-                                <Button onClick={() => handleSubjectSelection("Mathématiques")}>Mathématiques</Button>
-                            </div>
+
+
+                <div className="mt-10 mb-20">
+                    <BlueFullButton type="submit">VALIDER</BlueFullButton>
+                </div>
+                <div className="mt-10 mb-20">
+                    <OrangeFullButton onClick={() => setShowDeleteModal(true)}>Supprimer le profil</OrangeFullButton >
+                </div>
+            </form >
+
+            {showDeleteModal && (
+                <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
+                    <div className="bg-white p-6 rounded-lg shadow-lg md:max-w-md sm:max-w-sm w-full">
+                        <p className="mb-4">Êtes-vous sûr de vouloir supprimer votre profil ?</p>
+                        <div className="flex justify-between">
+                            <OrangeFullButton
+                                className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg mr-2"
+                                onClick={handleDeleteProfile}
+                            >
+                                Supprimer
+                            </OrangeFullButton >
+                            <div className="w-4"></div>
+                            <BlueFullButton
+                                className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-lg"
+                                onClick={() => setShowDeleteModal(false)}
+                            > Annuler </BlueFullButton>
                         </div>
-                    </Modal>
+                    </div>
+                </div>
+            )}
 
-                </Form>
-            </Formik>
-            <div className="flex flex-col md:flex-row w-full md:items-center md:mt-8 space-y-4 md:space-y-0 md:space-x-4">
-                <BlueButton variant="contained" style={{ backgroundColor: "#0FA3B1", color: "white" }}>Valider</BlueButton>
-                <div className="md:hidden" style={{ width: '1rem' }}></div>
-                <Button variant="contained" style={{ backgroundColor: "#F7A072", color: "white" }} onClick={handleOpenModal}>
-                    <DeleteIcon />
-                    Supprimer le profil
-                </Button>
-            </div>
-            <Modal open={openModal} onClose={handleCloseModal} className="flex items-center justify-center">
-                <div className="bg-white p-8 rounded-md">
-                    <h2 className="text-lg font-bold mb-4">Confirmer la suppression</h2>
-                    <p className="text-sm mb-4">Êtes-vous sûr de vouloir supprimer le profil ? Cette action est irréversible.</p>
-                    <div className="flex justify-end">
-                        <OrangeButton onClick={handleCloseModal} style={{ marginRight: '8px', backgroundColor: "#F7A072", color: "white" }}>Annuler</OrangeButton>
-                        <BlueButton onClick={handleConfirmModalOpen} style={{ backgroundColor: "#0FA3B1", color: "white" }}>Valider la suppression</BlueButton>
+            {
+                showSuccessModal && (
+                    <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
+                        <div className="bg-white p-6 rounded-lg shadow-lg md:max-w-md sm:max-w-sm w-full">
+                            <p className="mb-4">Profil supprimé avec succès!</p>
+                            <BlueFullButton
+                                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
+                                onClick={() => setShowSuccessModal(false)}
+                            >
+                                OK
+                            </BlueFullButton>
+                        </div>
                     </div>
-                </div>
-            </Modal>
-            <Modal open={confirmModalOpen} onClose={handleConfirmModalClose} className="flex items-center justify-center">
-                <div className="bg-white p-8 rounded-md">
-                    <h2 className="text-lg font-bold mb-4">Compte supprimé</h2>
-                    <p className="text-sm mb-4">Le compte a été supprimé avec succès.</p>
-                    <div className="flex justify-end">
-                        <BlueButton onClick={handleConfirmModalOk} style={{ backgroundColor: "#0FA3B1", color: "white" }}>
-                            <CheckCircleOutlineIcon />
-                            OK
-                        </BlueButton>
+                )
+            }
+
+            {
+                showAddSubjectModal && (
+                    <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
+                        <div className="bg-white p-6 rounded-lg shadow-lg md:max-w-md sm:max-w-sm w-full border border-gray-400">
+                            <p className="mb-2">Sélectionnez une matière :</p>
+                            <div className="mb-4 flex flex-wrap gap-2">
+                                <ButtonAddDiscipline
+                                    className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg flex items-center"
+                                    onClick={() => handleSelectSubject('Anglais')}
+                                >
+                                    <FiPlusCircle className="mr-2" /> Anglais
+                                </ButtonAddDiscipline>
+                                <ButtonAddDiscipline
+                                    className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg flex items-center"
+                                    onClick={() => handleSelectSubject('Français')}
+                                >
+                                    <FiPlusCircle className="mr-2" /> Français
+                                </ButtonAddDiscipline>
+                                <ButtonAddDiscipline
+                                    className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg flex items-center"
+                                    onClick={() => handleSelectSubject('Maths')}
+                                >
+                                    <FiPlusCircle className="mr-2" /> Maths
+                                </ButtonAddDiscipline>
+                            </div>
+                            <BlueFullButton
+                                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg mt-4"
+                                onClick={handleCloseAddSubjectModal}
+                            >
+                                Fermer
+                            </BlueFullButton>
+                        </div>
                     </div>
-                </div>
-            </Modal>
-            <Modal open={childToDeleteId !== null} onClose={() => setChildToDeleteId(null)} className="flex items-center justify-center">
-                <div className="bg-white p-8 rounded-md">
-                    <h2 className="text-lg font-bold mb-4">Confirmer la suppression</h2>
-                    <p className="text-sm mb-4">Êtes-vous sûr de vouloir supprimer cet enfant ? Cette action est irréversible.</p>
-                    <div className="flex justify-end">
-                        <OrangeButton onClick={() => setChildToDeleteId(null)} style={{ marginRight: '8px', backgroundColor: "#F7A072", color: "white" }}>Annuler</OrangeButton>
-                        <BlueButton onClick={handleConfirmDeleteChild} style={{ backgroundColor: "#0FA3B1", color: "white" }}>Confirmer la suppression</BlueButton>
-                    </div>
-                </div>
-            </Modal>
-        </div>
+                )
+            }
+
+
+
+        </div >
     );
-}
-
-export default EditProfileBySchoolPage;
+};
