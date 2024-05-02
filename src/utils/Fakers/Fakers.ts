@@ -1,7 +1,7 @@
 import { MessageChatInterface } from "../Interface/MessageChatInterface";
 import { faker } from "@faker-js/faker";
 
-export const eventDiscipline = [
+export const eventDiscipline:string[] = [
     "Mathématiques",
     "Arts plastiques",
     "Français",

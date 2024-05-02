@@ -3,7 +3,7 @@ import { IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getFakeEventData } from "../../utils/Axios/axios";
-import { FakeEventInterface } from "../../utils/Interface/FakeEvent";
+import { FakeEventInterface } from "../../utils/Interface/FakeEventInterface";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
