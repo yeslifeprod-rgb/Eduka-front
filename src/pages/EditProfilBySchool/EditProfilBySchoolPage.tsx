@@ -62,7 +62,7 @@ export const EditProfilBySchoolPage: React.FC = () => {
             }
         };
 
-        Data(); // Appel de la fonction fetchData pour récupérer les données
+        Data(); // Appel de la fonction Data pour récupérer les données
     }, []);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
