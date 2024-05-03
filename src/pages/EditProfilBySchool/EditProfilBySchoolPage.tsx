@@ -2,6 +2,7 @@ import React, { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { FiMinusCircle, FiPlusCircle } from 'react-icons/fi';
+import axios from 'axios'; // Import d'axios
 import { BlueFullButton, ButtonAddDiscipline, ButtonDeleteChild, OrangeFullButton } from '../../components/Button/CustomButton';
 import ButtonRemoveChild from '../../components/Button/ButtonRemoveChild';
 import AddChildButton from '../../components/Button/ButtonAddChild';
@@ -46,10 +47,22 @@ export const EditProfilBySchoolPage: React.FC = () => {
     const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
 
     useEffect(() => {
-        const savedSubjects = localStorage.getItem('selectedSubjects');
-        if (savedSubjects) {
-            setSelectedSubjects(JSON.parse(savedSubjects));
-        }
+        // Fonction asynchrone pour récupérer les données de l'utilisateur lors du montage du composant
+        const Data = async () => {
+            try {
+                const response = await axios.get('https://jsonplaceholder.typicode.com/users/3');
+                const userData = response.data;
+                setParents({
+                    firstName: userData.name.split(' ')[0],
+                    lastName: userData.name.split(' ')[1],
+                    email: userData.email,
+                });
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        Data(); // Appel de la fonction fetchData pour récupérer les données
     }, []);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -204,6 +217,7 @@ export const EditProfilBySchoolPage: React.FC = () => {
                     <input
                         type="text"
                         name="lastName"
+                        value={parents.lastName} // Ajout de la valeur du nom du parent
                         onChange={handleChange}
                         className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                     />
@@ -214,6 +228,7 @@ export const EditProfilBySchoolPage: React.FC = () => {
                     <input
                         type="text"
                         name="firstName"
+                        value={parents.firstName} // Ajout de la valeur du prénom du parent
                         onChange={handleChange}
                         className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                     />
@@ -224,6 +239,7 @@ export const EditProfilBySchoolPage: React.FC = () => {
                     <input
                         type="email"
                         name="email"
+                        value={parents.email} // Ajout de la valeur de l'email du parent
                         onChange={handleChange}
                         className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                     />
@@ -236,7 +252,7 @@ export const EditProfilBySchoolPage: React.FC = () => {
                             <input
                                 type="text"
                                 name={`firstName_${index}`}
-                                value={child.firstName}
+                                value={parents.firstName}
                                 onChange={handleChange}
                                 className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                             />
@@ -247,7 +263,7 @@ export const EditProfilBySchoolPage: React.FC = () => {
                             <input
                                 type="text"
                                 name={`name_${index}`}
-                                value={child.name}
+                                value={parents.lastName}
                                 onChange={handleChange}
                                 className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                             />
