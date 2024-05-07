@@ -3,8 +3,8 @@ import {
   GreatBlueButton,
   GreatOrangeBleuButton,
   GreatOrangeButton,
-} from "../components/Button/CustomButton";
-import { NavBarNewProfil } from "../components/NavBar/NavBarNewProfil";
+} from "../../components/Button/CustomButton";
+import { NavBarNewProfil } from "../../components/NavBar/NavBarNewProfil";
 
 export const SchoolCreateUser = () => {
   return (

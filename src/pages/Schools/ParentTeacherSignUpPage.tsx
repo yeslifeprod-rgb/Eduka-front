@@ -1,12 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import AddChildButton from "../components/Button/ButtonAddChild";
-import ButtonRemoveChild from "../components/Button/ButtonRemoveChild";
-import { OrangeFullButton } from "../components/Button/CustomButton";
-import { NavBarNewProfil } from "../components/NavBar/NavBarNewProfil";
-import AddDisciplineButton from "../components/Button/ButtonAddDiscipline";
-import { FormUserFLEInterface } from "../utils/Interface/FormUseStateParentInterface";
-import { FormChildInterface } from "../utils/Interface/FormUseStateChildInterface";
-import { ModalDiscipline } from "../components/Modal/ModalDiscipline";
+import AddChildButton from "../../components/Button/ButtonAddChild";
+import ButtonRemoveChild from "../../components/Button/ButtonRemoveChild";
+import { OrangeFullButton } from "../../components/Button/CustomButton";
+import { NavBarNewProfil } from "../../components/NavBar/NavBarNewProfil";
+import AddDisciplineButton from "../../components/Button/ButtonAddDiscipline";
+import { FormUserFLEInterface } from "../../utils/Interface/FormUseStateParentInterface";
+import { FormChildInterface } from "../../utils/Interface/FormUseStateChildInterface";
+import { ModalDiscipline } from "../../components/Modals/ModalDiscipline";
 interface ParentTeacherFormInterface extends FormUserFLEInterface {
     selectedDisciplines: string[];
 }

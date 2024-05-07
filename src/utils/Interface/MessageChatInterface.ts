@@ -3,6 +3,6 @@
 export interface MessageChatInterface {
     firstName: string;
     message: string;
-    date: Date;
+    createdAt: Date;
     file?: File;
   }

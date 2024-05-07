@@ -3,7 +3,7 @@ import { IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getFakeEventData } from "../../utils/Axios/axios";
-import { FakeEventInterface } from "../../utils/Interface/FakeEventInterface";
+import { FakeEventInterface } from "../../utils/Interface/EventInterface";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 
@@ -27,7 +27,7 @@ export const NavBarEvent = () => {
 
   return (
     <div className="flex justify-between items-center py-5 px-4 border-b-2">
-      <NavLink to="/home_page_parent">
+      <NavLink to="/home_page_parent"> {/*penser a rediriger où il faut @dev*/}
         <IconButton aria-label="delete" size="large">
           <CloseIcon />
         </IconButton>
@@ -36,7 +36,7 @@ export const NavBarEvent = () => {
         {fakeEvent.map((event, index) => (
           <div className="mr-14" key={index}>
             <p className="text-2xl">{event.title}</p>
-            <p className="">{format(event.createdAt,"EEEE dd MMMM yyyy 'à' HH:mm", { locale: fr })}</p>
+            <p className="">{format(event.createdAt, "EEEE dd MMMM yyyy 'à' HH:mm", { locale: fr })}</p>
           </div>
         ))}
       </div>

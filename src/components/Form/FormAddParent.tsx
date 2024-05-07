@@ -82,17 +82,17 @@ export const FormAddParent = () => {
         // Validation des champs des enfants
         children.forEach((child, index) => {
             if (!child.name.trim()) {
-                errors[`child_${index}_name`] = 'Le nom de l\'enfant est requis.';
+                errors[`child_${index}_name`] = "Le nom de l'enfant est requis.";
             } else if (child.name.trim().length < 2) {
-                errors[`child_${index}_name`] = 'Le nom de l\'enfant doit contenir au moins 2 caractères.';
+                errors[`child_${index}_name`] = "Le nom de l'enfant doit contenir au moins 2 caractères.";
             }
 
             if (!child.birthday.trim()) {
-                errors[`child_${index}_birthday`] = 'La date de naissance de l\'enfant est requise.';
+                errors[`child_${index}_birthday`] = "La date de naissance de l\'enfant est requise.";
             }
 
             if (!child.class.trim()) {
-                errors[`child_${index}_class`] = 'La classe de l\'enfant est requise.';
+                errors[`child_${index}_class`] = "La classe de l\'enfant est requise.";
             }
         });
 
@@ -133,7 +133,7 @@ export const FormAddParent = () => {
                         onChange={handleChange}
                         className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                     />
-                    {formErrors.lastName && <p className="text-custom-orange">{formErrors.lastName}</p>}
+                    <p className="text-custom-orange">{formErrors.lastName}</p>
                 </div>
                 <div className="mb-4">
                     <label htmlFor="firstName">Prénom</label>
@@ -143,7 +143,7 @@ export const FormAddParent = () => {
                         onChange={handleChange}
                         className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                     />
-                    {formErrors.firstName && <p className="text-custom-orange">{formErrors.firstName}</p>}
+                    <p className="text-custom-orange">{formErrors.firstName}</p>
                 </div>
                 <div className="mb-4">
                     <label htmlFor="email">Email</label>
@@ -153,7 +153,7 @@ export const FormAddParent = () => {
                         onChange={handleChange}
                         className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                     />
-                    {formErrors.email && <p className="text-custom-orange">{formErrors.email}</p>}
+                    <p className="text-custom-orange">{formErrors.email}</p>
                 </div>
                 {children.map((child, index) => (
                     <div key={index}>
@@ -166,7 +166,7 @@ export const FormAddParent = () => {
                                 onChange={handleChange}
                                 className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                             />
-                            {formErrors[`child_${index}_name`] && <p className="text-custom-orange">{formErrors[`child_${index}_name`]}</p>}
+                            <p className="text-custom-orange">{formErrors[`child_${index}_name`]}</p>
                         </div>
                         <div className="mb-4">
                             <label htmlFor={`birthday${index + 1}`}>Date de naissance de l'enfant {index + 1}</label>
@@ -177,7 +177,7 @@ export const FormAddParent = () => {
                                 onChange={handleChange}
                                 className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                             />
-                            {formErrors[`child_${index}_birthday`] && <p className="text-custom-orange">{formErrors[`child_${index}_birthday`]}</p>}
+                            <p className="text-custom-orange">{formErrors[`child_${index}_birthday`]}</p>
                         </div>
                         <div className="mb-4">
                             <label htmlFor={`classChild${index + 1}`}>Classe de l'enfant {index + 1}</label>
@@ -188,10 +188,10 @@ export const FormAddParent = () => {
                                 onChange={handleChange}
                                 className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                             />
-                            {formErrors[`child_${index}_class`] && <p className="text-custom-orange">{formErrors[`child_${index}_class`]}</p>}
+                            <p className="text-custom-orange">{formErrors[`child_${index}_class`]}</p>
                         </div>
                         {index > 0 && (
-                            <div onClick={() => handleRemoveChild(index)}>
+                            <div className='flex justify-end' onClick={() => handleRemoveChild(index)}>
                                 <ButtonRemoveChild />
                             </div>
                         )}

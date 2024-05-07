@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useRef, useState } from "react";
+import React, { MouseEvent ,ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { Send as SendIcon, InsertDriveFile as InsertDriveFileIcon, EmojiEmotions as EmojiEmotionsIcon } from "@mui/icons-material";
 import { formatDistanceToNow } from 'date-fns';
@@ -51,7 +51,7 @@ export const Chat: React.FC = () => {
   };
 
   // Fonction pour ouvrir le menu des smileys
-  const SmileyButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const SmileyButton = (event: MouseEvent<HTMLButtonElement>) => {
     setSmileyIcon(event.currentTarget);
   };
 
@@ -75,7 +75,7 @@ export const Chat: React.FC = () => {
   };
 
   // Fonction qui est appelée lorsque l'utilisateur sélectionne un fichier
-  const FileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const FileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setSelectedFile(file);
@@ -87,7 +87,7 @@ export const Chat: React.FC = () => {
     return formatDistanceToNow(timestamp, { addSuffix: true, locale: fr });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     SendButton();
   };
@@ -104,7 +104,7 @@ export const Chat: React.FC = () => {
                   <p className="italic text-white text-xs mt-1">{message.firstName}</p>
                   <p>{message.message}</p>
                   {/* Calcul de la différence de temps */}
-                  <p className="flex justify-end text-white text-xs mt-1">{getTimeDifference(message.date)}</p>
+                  <p className="flex justify-end text-white text-xs mt-1">{getTimeDifference(message.createdAt)}</p>
                 </div>
               </div>
             ))}
@@ -122,7 +122,6 @@ export const Chat: React.FC = () => {
                   ) : (
                     <p>{message.text}</p>
                   )}
-                  {/* Calcul de la différence de temps */}
                   <p className="flex justify-end text-white text-xs mt-1">{getTimeDifference(message.timestamp)}</p>
                 </div>
               </div>
