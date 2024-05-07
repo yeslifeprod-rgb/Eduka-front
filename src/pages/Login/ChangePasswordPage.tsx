@@ -35,12 +35,12 @@ export const ChangePassword = () => {
     }),
 
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-      handleClickModalDiscipline();
+      console.log("🚀 ~ ChangePassword ~ values:", values)
+      handleClickModalConfirmPassword();
     },
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleClickModalDiscipline = () => {
+  const handleClickModalConfirmPassword = () => {
     setIsModalOpen(true);
   }
   const handleCloseModal = () => {

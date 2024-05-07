@@ -95,7 +95,7 @@ export const ParentTeacherSignUp = () => {
 
         setFormErrors(errors);
 
-        if (Object.keys(errors).length === 0) { }
+        
     };
     const handleClickModalDiscipline = () => {
         setIsModalOpen(true);

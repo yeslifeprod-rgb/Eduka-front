@@ -1,7 +1,10 @@
+import eventInterface from "../../services/interfaces/event";
 import { EventDisciplineInterface } from "../Interface/EventDisciplineInterface";
 import { EventInterface} from "../Interface/EventInterface";
 import { MessageChatInterface } from "../Interface/MessageChatInterface";
 import { faker } from "@faker-js/faker";
+import { ProfilInterface } from "../Interface/ProfilInterface";
+import { UserInterface } from "../Interface/UserInterface";
 
 export const FakeEventDiscipline: EventDisciplineInterface[] = [
   { name: "Mathématiques" },
@@ -61,3 +64,31 @@ export const FakedisciplineData = {
   export const FakeSchoolNameData = {
     datas : FakeSchoolName
   }
+
+  const FakeProfil: ProfilInterface = {
+    id: 12345,
+    lastName: "Van Damme",
+    firstName: "Jean-Claude",
+    photo: "",
+    adresse_id: "12 allée parlà-bas",
+    user_id: 6789,
+  };
+
+  export const FakeProfilData = {
+    datas : FakeProfil
+  }
+  
+  const FakeUser: UserInterface ={
+      id: 6789,
+      email:"JCVD@gmail.com",
+      password:"Azerty@31",
+      status:true,
+      created_At: faker.date.recent(),
+      updated_dAt: faker.date.recent(),
+    }
+
+  export const FakeUserData = {
+    datas : FakeUser
+  }
+
+  

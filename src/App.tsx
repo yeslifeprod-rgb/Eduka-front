@@ -5,25 +5,22 @@ import { ParentSignUpPage } from "./pages/Schools/ParentSignUpPage";
 import { ParentTeacherSignUp } from "./pages/Schools/ParentTeacherSignUpPage";
 import { SchoolCreateUser } from "./pages/Schools/SchoolCreateUserPage";
 import { TeacherSignUpPage } from "./pages/Schools/TeacherSignUpPage";
-
 import EventsPage from "./pages/Event/EventsPage";
 import EventsUserPage from "./pages/Event/EventsUserPage";
 import HomePageParent from "./pages/Home/HomePageParent";
 import NotificationPage from "./pages/Notification/NotificationPage";
-
 import LoginPage from "./pages/Login/LoginPage";
 import { ModalProvider } from "./services/Context/ModalContext";
 import PrivateRoute from "./utils/PrivateRoute";
-
 import EditProfilBySchoolPage from "./pages/EditProfilBySchool/EditProfilBySchoolPage";
-
-import ProfilPage from "./pages/Profil/ProfilPage";
 import SearchByParentDetailPage from "./pages/Search/SearchByParentDetailPage";
 import SearchByParentPage from "./pages/Search/SearchByParentPage";
 import SearchBySchoolPage from "./pages/Search/SearchBySchoolPage";
 import NotFoundPage from "./utils/NotFoundPage";
 import { ChatPage } from "./pages/Chat/ChatPage";
 import { ChangePassword } from "./pages/Login/ChangePasswordPage";
+import { ProfilPage } from "./pages/Profil/ProfilPage";
+
 
 function App() {
   return (
@@ -32,7 +29,6 @@ function App() {
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route element={<PrivateRoute />}>
-
             <Route path="/home_page_parent" element={<HomePageParent />} />
             <Route path="/home_page_school" element={<HomePageSchool />} />
             <Route path="/edit_profil_by_school" element={<EditProfilBySchoolPage />} />

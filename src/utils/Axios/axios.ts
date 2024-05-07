@@ -1,5 +1,5 @@
 
-import { FakeSchoolNameData, FakedisciplineData, fakeEventData, receivedMessagesChatData } from "../Fakers/Fakers";
+import { FakeProfilData, FakeSchoolNameData, FakeUserData, FakedisciplineData, fakeEventData, receivedMessagesChatData } from "../Fakers/Fakers";
 
 
 export const getReceivedMessagesChatData = async () => {
@@ -35,6 +35,26 @@ export const getReceivedMessagesChatData = async () => {
 
         try {
             const data = FakeSchoolNameData
+            return data
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    export const getProfilData = async () => {
+
+        try {
+            const data = FakeProfilData
+            return data
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    export const getUserData = async () => {
+
+        try {
+            const data = FakeUserData
             return data
         } catch (error) {
             console.log(error);
