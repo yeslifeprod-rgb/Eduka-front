@@ -2,11 +2,12 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { Avatar, Button, Card, IconButton } from "@mui/material";
 import { useEffect, useRef } from "react";
-import eventInterface from "../../services/interfaces/event";
+
+import { EventInterface } from "../../services/interfaces/event";
 import FormatRelativeDate from "../../utils/CalculRelative/FormatRelativeDate";
 
 interface CardEventPropsInterface {
-  event: eventInterface;
+  event: EventInterface;
 }
 export default function CardEvent(props: CardEventPropsInterface) {
   const { event } = props;
@@ -33,7 +34,7 @@ export default function CardEvent(props: CardEventPropsInterface) {
           <h5 className="text-lg font-bold tracking-tight text-gray-900 dark:text-white">
             {event.title}
           </h5>
-          <p className="hidden lg:text-sm text-gray-700 ">
+          <p className="hidden lg:block text-sm text-gray-700 ">
             <LocationOnIcon /> {event.location}
           </p>
           <p

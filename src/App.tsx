@@ -1,27 +1,23 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { HomePageSchool } from "./pages/Home/HomePageSchool";
-import { ParentSignUpPage } from "./pages/ParentSignUpPage";
-import { ParentTeacherSignUp } from "./pages/ParentTeacherSignUpPage";
-import { SchoolCreateUser } from "./pages/SchoolCreateUserPage";
-import { TeacherSignUpPage } from "./pages/TeacherSignUpPage";
-
+import { AddEventPage } from "./pages/CreateEvent/AddEventPage";
+import EditProfilBySchoolPage from "./pages/EditProfilBySchool/EditProfilBySchoolPage";
 import EventsPage from "./pages/Event/EventsPage";
 import EventsUserPage from "./pages/Event/EventsUserPage";
 import HomePageParent from "./pages/Home/HomePageParent";
-import NotificationPage from "./pages/Notification/NotificationPage";
-
+import { HomePageSchool } from "./pages/Home/HomePageSchool";
 import LoginPage from "./pages/Login/LoginPage";
-import { ModalProvider } from "./services/Context/ModalContext";
-import PrivateRoute from "./utils/PrivateRoute";
-
-import EditProfilBySchoolPage from "./pages/EditProfilBySchool/EditProfilBySchoolPage";
-
+import NotificationPage from "./pages/Notification/NotificationPage";
+import { ParentSignUpPage } from "./pages/ParentSignUpPage";
+import { ParentTeacherSignUp } from "./pages/ParentTeacherSignUpPage";
 import ProfilPage from "./pages/Profil/ProfilPage";
+import { SchoolCreateUser } from "./pages/SchoolCreateUserPage";
 import SearchByParentDetailPage from "./pages/Search/SearchByParentDetailPage";
 import SearchByParentPage from "./pages/Search/SearchByParentPage";
 import SearchBySchoolPage from "./pages/Search/SearchBySchoolPage";
-import NotFoundPage from "./utils/NotFoundPage";
+import { TeacherSignUpPage } from "./pages/TeacherSignUpPage";
+import { ModalProvider } from "./services/Context/ModalContext";
+import PrivateRoute from "./utils/PrivateRoute";
 
 function App() {
   return (
@@ -56,8 +52,9 @@ function App() {
               path="/search_by_parent_detail/:id"
               element={<SearchByParentDetailPage />}
             />
+            <Route path="/add_event_page" element={<AddEventPage />} />
           </Route>
-          <Route path="*" element={<NotFoundPage />} />
+          {/* <Route path="*" element={<NotFoundPage />} /> */}
         </Routes>
       </ModalProvider>
     </>

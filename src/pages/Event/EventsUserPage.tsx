@@ -1,98 +1,59 @@
 import { useEffect, useState } from "react";
 import CardEvent from "../../components/Card/EventCard";
-import ModalCategory from "../../components/Modal/ModalCategory";
-import eventInterface from "../../services/interfaces/event";
+import ModalFilterTags from "../../components/Modals/ModalFilterTags";
+import { CardEventInterface } from "../../services/interfaces/event";
+import { getFakerUserEventsData } from "../../utils/Axios/axios";
 
-const events: eventInterface[] = [
-  {
-    name: "Jean-Claude",
-    title: "Fête d'anniversaire de Pierre",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis sed purus sed congue. Duis pharetra eget ipsum quis dignissim. Nullam consequat sem eu massa dignissim sagittis. Vivamus vehicula augue sem, vel auctor mauris vulputate sed. Ut vel mauris a ipsum eleifend aliquet ornare eu augue. Donec ultrices justo nec arcu sodales, in eleifend odio pulvinar. Proin finibus ligula nec malesuada fermentum. Etiam pretium cursus cursus. Donec vitae metus eu ex aliquam pulvinar. Sed et nulla sit amet tortor cursus varius eu vel tortor. Mauris pellentesque ipsum vel faucibus elementum. Donec erat libero, facilisis in euismod ut, auctor non tortor. In consequat justo vitae nibh ultricies consectetur.",
-    date: new Date("2024-04-15"),
-    image: "/public/event1.jpeg",
-    avatar_name: "./public/profil1.png",
-    location: "Marseille",
-    tags: ["Fête", "Musique"],
-  },
-  {
-    name: "Robert",
-    title: "Sortie au parc",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis sed purus sed congue. Duis pharetra eget ipsum quis dignissim. Nullam consequat sem eu massa dignissim sagittis. Vivamus vehicula augue sem, vel auctor mauris vulputate sed. Ut vel mauris a ipsum eleifend aliquet ornare eu augue. Donec ultrices justo nec arcu sodales, in eleifend odio pulvinar. Proin finibus ligula nec malesuada fermentum. Etiam pretium cursus cursus. Donec vitae metus eu ex aliquam pulvinar. Sed et nulla sit amet tortor cursus varius eu vel tortor. Mauris pellentesque ipsum vel faucibus elementum. Donec erat libero, facilisis in euismod ut, auctor non tortor. In consequat justo vitae nibh ultricies consectetur.",
-    date: new Date("2024-04-20"),
-    image: "/public/event2.jpeg",
-    avatar_name: "./public/profil.png",
-    location: "Marseille",
-    tags: ["Fête", "Musique"],
-  },
-  {
-    name: "Bernadette",
-    title: "Match de football",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis sed purus sed congue. Duis pharetra eget ipsum quis dignissim. Nullam consequat sem eu massa dignissim sagittis. Vivamus vehicula augue sem, vel auctor mauris vulputate sed. Ut vel mauris a ipsum eleifend aliquet ornare eu augue. Donec ultrices justo nec arcu sodales, in eleifend odio pulvinar. Proin finibus ligula nec malesuada fermentum. Etiam pretium cursus cursus. Donec vitae metus eu ex aliquam pulvinar. Sed et nulla sit amet tortor cursus varius eu vel tortor. Mauris pellentesque ipsum vel faucibus elementum. Donec erat libero, facilisis in euismod ut, auctor non tortor. In consequat justo vitae nibh ultricies consectetur.",
-    date: new Date("2024-04-30"),
-    image: "/public/event1.jpeg",
-    avatar_name: "./public/profil2.png",
-    location: "Marseille",
-    tags: ["Fête", "Musique"],
-  },
-  {
-    name: "Jean-Claude",
-    title: "Fête d'anniversaire de Pierre",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis sed purus sed congue. Duis pharetra eget ipsum quis dignissim. Nullam consequat sem eu massa dignissim sagittis. Vivamus vehicula augue sem, vel auctor mauris vulputate sed. Ut vel mauris a ipsum eleifend aliquet ornare eu augue. Donec ultrices justo nec arcu sodales, in eleifend odio pulvinar. Proin finibus ligula nec malesuada fermentum. Etiam pretium cursus cursus. Donec vitae metus eu ex aliquam pulvinar. Sed et nulla sit amet tortor cursus varius eu vel tortor. Mauris pellentesque ipsum vel faucibus elementum. Donec erat libero, facilisis in euismod ut, auctor non tortor. In consequat justo vitae nibh ultricies consectetur.",
-    date: new Date("2024-04-15"),
-    image: "/public/event1.jpeg",
-    avatar_name: "./public/profil1.png",
-    location: "Marseille",
-    tags: ["Fête", "Musique"],
-  },
-  {
-    name: "Robert",
-    title: "Sortie au parc",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis sed purus sed congue. Duis pharetra eget ipsum quis dignissim. Nullam consequat sem eu massa dignissim sagittis. Vivamus vehicula augue sem, vel auctor mauris vulputate sed. Ut vel mauris a ipsum eleifend aliquet ornare eu augue. Donec ultrices justo nec arcu sodales, in eleifend odio pulvinar. Proin finibus ligula nec malesuada fermentum. Etiam pretium cursus cursus. Donec vitae metus eu ex aliquam pulvinar. Sed et nulla sit amet tortor cursus varius eu vel tortor. Mauris pellentesque ipsum vel faucibus elementum. Donec erat libero, facilisis in euismod ut, auctor non tortor. In consequat justo vitae nibh ultricies consectetur.",
-    date: new Date("2024-04-20"),
-    image: "/public/event2.jpeg",
-    avatar_name: "./public/profil.png",
-    location: "Marseille",
-    tags: ["Fête", "Musique"],
-  },
-  {
-    name: "Ania",
-    title: "Fête d'anniversaire de Pierre",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lobortis sed purus sed congue. Duis pharetra eget ipsum quis dignissim. Nullam consequat sem eu massa dignissim sagittis. Vivamus vehicula augue sem, vel auctor mauris vulputate sed. Ut vel mauris a ipsum eleifend aliquet ornare eu augue. Donec ultrices justo nec arcu sodales, in eleifend odio pulvinar. Proin finibus ligula nec malesuada fermentum. Etiam pretium cursus cursus. Donec vitae metus eu ex aliquam pulvinar. Sed et nulla sit amet tortor cursus varius eu vel tortor. Mauris pellentesque ipsum vel faucibus elementum. Donec erat libero, facilisis in euismod ut, auctor non tortor. In consequat justo vitae nibh ultricies consectetur.",
-    date: new Date("2024-04-15"),
-    image: "/public/event3.jpeg",
-    avatar_name: "./public/profil.png",
-    location: "Marseille",
-    tags: ["Fête", "Musique"],
-  },
-];
+export default function EventsPage() {
+  const [fakeUserEvents, setFakeUserEvents] = useState<CardEventInterface[]>(
+    []
+  );
+  const [filteredEvents, setFilteredEvents] = useState<CardEventInterface[]>(
+    []
+  );
 
-export default function EventsUserPage() {
-  const [filteredEvents, setFilteredEvents] =
-    useState<eventInterface[]>(events);
-
-  // Vérifier si les catégories sont déjà stockées dans le localStorage
+  // Récupérer les événements lors du chargement initial de la page
   useEffect(() => {
-    const storedCategories = localStorage.getItem("selectedCategories");
-    if (storedCategories) {
-      // Si des catégories sont déjà stockées, mettre à jour les événements en conséquence
-      const selectedCategories = JSON.parse(storedCategories);
-      updateEvents(selectedCategories);
-    }
+    const fetchFakeUserEvents = async () => {
+      try {
+        const data = await getFakerUserEventsData();
+        if (data) {
+          setFakeUserEvents(data.datas); // Mise à jour de FakeUserEvents
+          updateEvents(data.datas); // Appel de updateEvents avec les nouvelles données
+        }
+      } catch (error) {
+        console.error("Error fetching fake events:", error);
+      }
+    };
+
+    fetchFakeUserEvents();
   }, []);
 
   // Fonction pour mettre à jour les événements en fonction des catégories sélectionnées
-  const updateEvents = (selectedCategories: string[]) => {
-    if (selectedCategories.length === 0) {
-      setFilteredEvents(events);
+  const updateEvents = (events: CardEventInterface[]) => {
+    const storedTags = localStorage.getItem("selectedTags");
+    if (storedTags) {
+      const selectedTags = JSON.parse(storedTags);
+      if (Array.isArray(selectedTags) && selectedTags.length === 0) {
+        setFilteredEvents(events);
+      } else {
+        const updatedEvents = events.filter((event) =>
+          event.tags.some((tag) => selectedTags.includes(tag))
+        );
+        setFilteredEvents(updatedEvents);
+      }
     } else {
-      const updatedEvents = events.filter((event) =>
-        event.tags.some((tag) => selectedCategories.includes(tag))
+      setFilteredEvents(events);
+    }
+  };
+
+  // Fonction de mise à jour des événements lors de la sélection de catégories
+  const handleCategorySelection = (selectedTags: string[]) => {
+    if (selectedTags.length === 0) {
+      setFilteredEvents(fakeUserEvents);
+    } else {
+      const updatedEvents = fakeUserEvents.filter((event) =>
+        event.tags.some((tag) => selectedTags.includes(tag))
       );
       setFilteredEvents(updatedEvents);
     }
@@ -103,7 +64,7 @@ export default function EventsUserPage() {
       {filteredEvents.map((event, index) => (
         <CardEvent key={index} event={event} />
       ))}
-      <ModalCategory updateEvents={updateEvents} />
+      <ModalFilterTags updateEvents={handleCategorySelection} />
     </section>
   );
 }
