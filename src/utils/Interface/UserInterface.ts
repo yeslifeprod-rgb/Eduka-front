@@ -1,10 +1,10 @@
 
 
 export interface UserInterface {
-    id: number;
+    id: string;
     email: string;
     password: string;
     status: boolean;
     created_At: Date;
-    updated_dAt: Date;
+    updated_At: Date;
 }

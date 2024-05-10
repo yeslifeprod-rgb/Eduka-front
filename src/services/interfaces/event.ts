@@ -8,3 +8,4 @@ export default interface eventInterface {
   location: string;
   tags: string[];
 }
+

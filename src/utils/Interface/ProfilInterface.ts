@@ -1,10 +1,10 @@
 
 
 export interface ProfilInterface {
-    id: number;
+    id: string;
     lastName: string;
     firstName: string;
     photo: string;
     adresse_id: string;
-    user_id: number;
+    user_id: string;
 }
