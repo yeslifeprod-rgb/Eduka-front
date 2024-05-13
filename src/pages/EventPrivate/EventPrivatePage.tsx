@@ -56,13 +56,19 @@ export default function EventPrivatePage() {
 
     return (
         <>
-            <div className="max-w-md mx-auto md:max-w-full md:mx-auto rounded-lg shadow-lg mb-4 md:mb-8 flex items-center justify-center space-x-4">
+            <div className="bg-white shadow-md rounded-lg p-6 w-full lg:w-auto  ">
                 <NavToggleEvent />
             </div>
 
-            <div className="flex justify-center items-center max-w-md mx-auto mb-9">
-                <img src={FakePost.image} alt="" className="mx-auto my-auto rounded-md  sm:block max-w-sm" />
+            <div className="flex justify-center items-center max-w-md mx-auto mt-9 mb-9">
+                <img src={FakePost.image} alt="" className="mx-auto my-auto rounded-md sm:justify-center sm:block max-w-sm" />
             </div>
+
+
+
+
+
+
 
             <form onSubmit={handleSubmit} className="max-w-md mx-auto">
                 <div className="mb-6">

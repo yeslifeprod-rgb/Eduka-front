@@ -1,23 +1,38 @@
-
-
-
 {
   "users": [
     {
       "id": "1",
-      "firstName": "Ilyes"  
+      "firstName": "Ilyes"
     },
     {
       "id": "2",
-      "firstName": "Ania"  
+      "firstName": "Ania"
     },
     {
       "id": "3",
-      "firstName": "Julien"  
+      "firstName": "Julien"
     },
     {
       "id": "4",
-      "firstName": "Sylvain"  
+      "firstName": "Sylvain"
+    },
+    {
+      "id": "f084",
+      "selectedNames": [
+        "Julien",
+        "Ilyes",
+        "Ania",
+        "Sylvain"
+      ]
+    },
+    {
+      "id": "3ac9",
+      "selectedNames": [
+        "Ilyes",
+        "Ania",
+        "Julien",
+        "Sylvain"
+      ]
     }
   ]
 }
