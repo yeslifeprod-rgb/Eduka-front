@@ -4,8 +4,8 @@ import ButtonRemoveChild from "../../components/Button/ButtonRemoveChild";
 import { OrangeFullButton } from "../../components/Button/CustomButton";
 import { NavBarNewProfil } from "../../components/NavBar/NavBarNewProfil";
 import AddDisciplineButton from "../../components/Button/ButtonAddDiscipline";
-import { FormUserFLEInterface } from "../../utils/Interface/FormUseStateParentInterface";
-import { FormChildInterface } from "../../utils/Interface/FormUseStateChildInterface";
+import { FormUserFLEInterface } from "../../services/interfaces/FormUseStateParentInterface";
+import { FormChildInterface } from "../../services/interfaces/FormUseStateChildInterface";
 import { ModalDiscipline } from "../../components/Modals/ModalDiscipline";
 interface ParentTeacherFormInterface extends FormUserFLEInterface {
     selectedDisciplines: string[];
@@ -95,7 +95,7 @@ export const ParentTeacherSignUp = () => {
 
         setFormErrors(errors);
 
-        
+
     };
     const handleClickModalDiscipline = () => {
         setIsModalOpen(true);

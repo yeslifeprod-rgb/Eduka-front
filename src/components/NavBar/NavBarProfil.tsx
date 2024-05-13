@@ -15,7 +15,7 @@ export const NavBarProfil = () => {
     }
 
     return (
-        <div className="flex justify-between items-center py-5 px-4 border-b-2 ">
+        <div className=" flex justify-between items-center py-5 px-4 border-b-2 ">
           <IconButton aria-label="delete" size="large" onClick={handleClickModalLogOut}>
             <LogoutOutlinedIcon style={{ color: "#5f6369", fontSize: "2rem", transform: "rotate(180deg)" }}/>
           </IconButton>

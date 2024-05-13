@@ -1,11 +1,10 @@
 
-import { EventDisciplineInterface } from "../Interface/EventDisciplineInterface";
-import { EventInterface} from "../Interface/EventInterface";
-import { MessageChatInterface } from "../Interface/MessageChatInterface";
-import { faker } from "@faker-js/faker";
-import { ProfilInterface } from "../Interface/ProfilInterface";
-import { UserInterface } from "../Interface/UserInterface";
-import { FakeEventsInterface } from "../Interface/EventsInterface";
+import { EventDisciplineInterface } from "../../services/interfaces/EventDisciplineInterface";
+import { EventInterface} from "../../services/interfaces/EventInterface";
+import { MessageChatInterface } from "../../services/interfaces/MessageChatInterface";
+import { ProfilInterface } from "../../services/interfaces/ProfilInterface";
+import { UserInterface } from "../../services/interfaces/UserInterface";
+import { FakeEventsInterface } from "../../services/interfaces/EventsInterface";
 
 export const FakeEventDiscipline: EventDisciplineInterface[] = [
   { name: "Mathématiques" },

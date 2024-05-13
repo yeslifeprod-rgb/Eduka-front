@@ -1,10 +1,10 @@
-import React, { MouseEvent ,ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import React, { MouseEvent, ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { Send as SendIcon, InsertDriveFile as InsertDriveFileIcon, EmojiEmotions as EmojiEmotionsIcon } from "@mui/icons-material";
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
 import { getReceivedMessagesChatData } from "../../utils/Axios/axios";
-import { MessageChatInterface } from "../../utils/Interface/MessageChatInterface";
+import { MessageChatInterface } from "../../services/interfaces/MessageChatInterface";
 
 export const Chat: React.FC = () => {
 

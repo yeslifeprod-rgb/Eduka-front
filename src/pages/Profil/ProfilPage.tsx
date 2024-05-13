@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { NavBarProfil } from "../../components/NavBar/NavBarProfil";
 import { getFakeEventsData, getProfilData, getUserData } from "../../utils/Axios/axios";
-import { ProfilInterface } from "../../utils/Interface/ProfilInterface";
-import { UserInterface } from "../../utils/Interface/UserInterface";
+import { ProfilInterface } from "../../services/interfaces/ProfilInterface";
+import { UserInterface } from "../../services/interfaces/UserInterface";
 import { format, formatDistanceToNow } from "date-fns";
 import { NavBarBottomFix } from "../../components/NavBar/NavBarBottomFix";
-import { FakeEventsInterface } from "../../utils/Interface/EventsInterface";
+import { FakeEventsInterface } from "../../services/interfaces/EventsInterface";
 import { Avatar, Button, Card, IconButton } from "@mui/material";
 import { fr } from "date-fns/locale";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -85,10 +85,7 @@ export const ProfilPage = () => {
       <NavBarProfil />
       {profil && user && (
         <div className="flex items-center gap-5 justify-center mt-5 sm:mt-10 lg:mt-16">
-          <img
-            src={profil.photo ? profil.photo : defaultImageUrl}
-            alt="Profil"
-            style={{
+          <img src={profil.photo ? profil.photo : defaultImageUrl} alt="Profil" style={{
               width: "100px",
               height: "100px",
               borderRadius: "50%",
@@ -106,23 +103,20 @@ export const ProfilPage = () => {
         </div>
       )}
       <nav
-        className={`flex justify-between items-end text-sm text-gray-500 bg-white dark:text-gray-400 md:px-6 pt-8 border-gray-100 shadow-sm ${
-          isFixed ? "z-50 fixed top-0 left-0 right-0" : ""
-        }`}
+        className={`flex justify-between items-end text-sm text-gray-500 bg-white dark:text-gray-400 md:px-6 pt-8 border-gray-100 shadow-sm ${isFixed ? "z-50 fixed top-0 left-0 right-0" : ""
+          }`}
       >
         <section className="grid grid-cols-2 w-full text-center h-8">
           <a
-            className={`nav-toggle-link mx-4 px-4 ${
-              selectedTab === "MyEvents" ? "toggle_is_active" : ""
-            }`}
+            className={`nav-toggle-link mx-4 px-4 ${selectedTab === "MyEvents" ? "toggle_is_active" : ""
+              }`}
             onClick={handleMyEventsClick}
           >
             Mes événements
           </a>
           <a
-            className={`nav-toggle-link mx-4 px-4 ${
-              selectedTab === "Participations" ? "toggle_is_active" : ""
-            }`}
+            className={`nav-toggle-link mx-4 px-4 ${selectedTab === "Participations" ? "toggle_is_active" : ""
+              }`}
             onClick={handleParticipationsClick}
           >
             Participations
@@ -132,7 +126,7 @@ export const ProfilPage = () => {
       {selectedTab === "MyEvents" && userEvents && (
         <section className="mt-8 grid lg:grid-cols-3 sm:grid-cols-2 gap-4">
           {userEvents.map((event, index) => (
-            <Card key={index} variant="outlined" className="relative shadow-md m-2 p-2">
+            <div key={index}  className="relative shadow-md m-2 p-2">
               <div className="flex gap-3 pb-2">
                 <img
                   className="hidden lg:block w-32 h-32 object-cover rounded-lg shadow-md"
@@ -161,7 +155,7 @@ export const ProfilPage = () => {
                 </div>
                 <p>{formatDistanceToNow(new Date(event.created_at), { locale: fr, addSuffix: true }).replace("environ", "")}</p>
                 <div className="hidden lg:block">
-                  <Button  variant="contained" style={{ backgroundColor: "#0fa3b1", color: "#fff", fontSize: 12 }}>
+                  <Button variant="contained" style={{ backgroundColor: "#0fa3b1", color: "#fff", fontSize: 12 }}>
                     Voir
                   </Button>
                 </div>
@@ -171,7 +165,7 @@ export const ProfilPage = () => {
                   <ArrowForwardIosIcon fontSize="inherit" />
                 </IconButton>
               </div>
-            </Card>
+            </div>
           ))}
         </section>
       )}
@@ -199,6 +193,7 @@ export const ProfilPage = () => {
                   <IconButton aria-label="delete" size="small">
                     <Avatar
                       alt="Cindy Baker"
+                      // comment faire pour les photos profil avec id unique ?
                       src={profil?.photo}
                       sx={{ width: 24, height: 24 }}
                     />
@@ -207,7 +202,7 @@ export const ProfilPage = () => {
                 </div>
                 <p>{formatDistanceToNow(new Date(event.created_at), { locale: fr, addSuffix: true }).replace("environ", "")}</p>
                 <div className="hidden lg:block">
-                  <Button  variant="contained" style={{ backgroundColor: "#0fa3b1", color: "#fff", fontSize: 12 }}>
+                  <Button variant="contained" style={{ backgroundColor: "#0fa3b1", color: "#fff", fontSize: 12 }}>
                     Voir
                   </Button>
                 </div>

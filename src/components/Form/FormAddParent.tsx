@@ -2,13 +2,13 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import { OrangeFullButton } from '../Button/CustomButton';
 import AddChildButton from '../Button/ButtonAddChild';
 import ButtonRemoveChild from '../Button/ButtonRemoveChild';
-import { FormChildInterface } from '../../utils/Interface/FormUseStateChildInterface';
-import { FormUserFLEInterface } from '../../utils/Interface/FormUseStateParentInterface';
+import { FormChildInterface } from '../../services/interfaces/FormUseStateChildInterface';
+import { FormUserFLEInterface } from '../../services/interfaces/FormUseStateParentInterface';
 
 
 
 export const FormAddParent = () => {
-    
+
     const [parents, setParents] = useState<FormUserFLEInterface>({
         firstName: '',
         lastName: '',
@@ -26,10 +26,10 @@ export const FormAddParent = () => {
     const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        
+
         //extraction du nom [name] et la valeur du champ de formulaire qui a déclenché l'événement de changement.
         const { name, value } = e.target;
-    
+
         if (name === 'lastName' || name === 'firstName' || name === 'email') {
             // met à jour les informations des parents dans l'état et efface les erreurs de formulaire pour ce champ.
             setParents(prevParents => ({ ...prevParents, [name]: value }));
@@ -40,7 +40,7 @@ export const FormAddParent = () => {
             const childIndex = Number(name.split('_')[1]);
             //Extraction du nom du champ de l'attribut [name] du champ de formulaire modifié.
             const childField = name.split('_')[0];
-            
+
             // Met à jour les informations de l'enfant correspondant dans l'état des enfants.
             setChildren(prevChildren => prevChildren.map((child, index) => {
                 if (index === childIndex) {
@@ -48,7 +48,7 @@ export const FormAddParent = () => {
                 }
                 return child;
             }));
-            
+
             // Efface les erreurs de formulaire pour le champ d'enfant modifié.
             setFormErrors(prevErrors => ({ ...prevErrors, [`child_${childIndex}_${childField}`]: '' }));
         }
@@ -56,15 +56,15 @@ export const FormAddParent = () => {
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        
+
         const errors: { [key: string]: string } = {};
 
         // Validation des champs du parent
-         if (!parents.firstName.trim()) {
-             errors.firstName = 'Le prénom est requis.';
-         } else if (parents.firstName.trim().length < 2) {
-             errors.firstName = 'Le prénom doit contenir au moins 2 caractères.';
-         }
+        if (!parents.firstName.trim()) {
+            errors.firstName = 'Le prénom est requis.';
+        } else if (parents.firstName.trim().length < 2) {
+            errors.firstName = 'Le prénom doit contenir au moins 2 caractères.';
+        }
 
         if (!parents.lastName.trim()) {
             errors.lastName = 'Le nom est requis.';

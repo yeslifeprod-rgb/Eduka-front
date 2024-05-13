@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import { object, string } from 'yup';
 import { BlueFullButton } from '../Button/CustomButton';
 import AddDisciplineButton from '../Button/ButtonAddDiscipline';
-import { FormUserFLEInterface } from '../../utils/Interface/FormUseStateParentInterface';
+import { FormUserFLEInterface } from '../../services/interfaces/FormUseStateParentInterface';
 import { ModalDiscipline } from '../Modals/ModalDiscipline';
 
 // Définir l'interface pour les données du formulaire de l'enseignant
