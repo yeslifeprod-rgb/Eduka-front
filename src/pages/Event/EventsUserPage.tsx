@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import CardEvent from "../../components/Card/EventCard";
 import ModalFilterTags from "../../components/Modals/ModalFilterTags";
-import { CardEventInterface } from "../../services/interfaces/event";
+import {
+  CardEventInterface,
+  EventInterface,
+} from "../../services/interfaces/event";
 import { getFakerUserEventsData } from "../../utils/Axios/axios";
 
 export default function EventsPage() {
@@ -38,7 +41,7 @@ export default function EventsPage() {
         setFilteredEvents(events);
       } else {
         const updatedEvents = events.filter((event) =>
-          event.tags.some((tag) => selectedTags.includes(tag))
+          event.tags!.some((tag) => selectedTags.includes(tag))
         );
         setFilteredEvents(updatedEvents);
       }
@@ -53,7 +56,7 @@ export default function EventsPage() {
       setFilteredEvents(fakeUserEvents);
     } else {
       const updatedEvents = fakeUserEvents.filter((event) =>
-        event.tags.some((tag) => selectedTags.includes(tag))
+        event.tags!.some((tag) => selectedTags.includes(tag))
       );
       setFilteredEvents(updatedEvents);
     }
@@ -62,7 +65,7 @@ export default function EventsPage() {
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       {filteredEvents.map((event, index) => (
-        <CardEvent key={index} event={event} />
+        <CardEvent key={index} event={event as EventInterface} />
       ))}
       <ModalFilterTags updateEvents={handleCategorySelection} />
     </section>

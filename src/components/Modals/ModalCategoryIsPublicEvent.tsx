@@ -4,17 +4,29 @@ import { NavLink } from "react-router-dom";
 import { useModal } from "../../services/Context/ModalContext";
 import { EventInterface } from "../../services/interfaces/event";
 import { BlueButton } from "../Button/CustomButton";
+import {useEffect, useState} from "react";
+import {getFakerPublicEventData} from "../../utils/Axios/axios.ts";
 
 export default function TypeEventPage() {
   const { isCategoryPublicEventOpen, closeCategoryPublicEvent } = useModal();
+  const [publicEvents, setPublicEvents] = useState<string[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Récupérer les données des types d'événements via Axios
+        const data = await getFakerPublicEventData();
+        if (data) {
+          setPublicEvents(data.datas);
+        }
+      } catch (error) {
+        console.error("Error fetching type events:", error);
+      }
+    };
 
-  const PublicEvents = [
-    "Sortie loisirs",
-    "Cagnotte",
-    "Covoiturage",
-    "Cours particuliers",
-    "Sondage",
-  ];
+    fetchData();
+  }, []);
+
+
   const handleEventSelection = (category: string) => {
     // Stocker la valeur de l'événement sélectionné dans le localStorage
     const storedDataString: string | null =
@@ -46,7 +58,7 @@ export default function TypeEventPage() {
           </article>
 
           <article className="grid grid-cols-1 justify-center gap-4 m-10">
-            {PublicEvents.map((event) => (
+            {publicEvents.map((event) => (
               <NavLink
                 to="/add_event_page"
                 onClick={() => {

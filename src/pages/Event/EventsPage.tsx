@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import CardEvent from "../../components/Card/EventCard";
 import ModalFilterTags from "../../components/Modals/ModalFilterTags";
-import { CardEventInterface, EventInterface } from "../../services/interfaces/event";
+import {
+  CardEventInterface,
+  EventInterface,
+} from "../../services/interfaces/event";
 import { getFakerEventsData } from "../../utils/Axios/axios";
 
 export default function EventsPage() {

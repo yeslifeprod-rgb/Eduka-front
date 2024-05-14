@@ -5,13 +5,9 @@ import { useModal } from "../../services/Context/ModalContext";
 
 import { EventInterface } from "../../services/interfaces/event";
 import { OrangeButton } from "../Button/CustomButton";
+import {useEffect, useState} from "react";
+import { getFakerPrivateEventData} from "../../utils/Axios/axios.ts";
 
-const PrivateEvents = [
-  "Sortie loisirs",
-  "Anniversaire",
-  "Covoiturage",
-  "Cours particuliers",
-];
 const handleEventSelection = (category: string) => {
   // Stocker la valeur de l'événement sélectionné dans le localStorage
   const storedDataString: string | null =
@@ -24,7 +20,22 @@ const handleEventSelection = (category: string) => {
 };
 export default function TypeEventPage() {
   const { isCategoryPrivateEventOpen, closeCategoryPrivateEvent } = useModal();
+  const [privateEvents, setPrivateEvents] = useState<string[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Récupérer les données des types d'événements via Axios
+        const data = await getFakerPrivateEventData();
+        if (data) {
+          setPrivateEvents(data.datas);
+        }
+      } catch (error) {
+        console.error("Error fetching type events:", error);
+      }
+    };
 
+    fetchData();
+  }, []);
   return (
     <Box>
       {isCategoryPrivateEventOpen && (
@@ -45,7 +56,7 @@ export default function TypeEventPage() {
           </article>
 
           <article className="grid grid-cols-1 justify-center gap-4 m-10">
-            {PrivateEvents.map((event) => (
+            {privateEvents.map((event) => (
               <NavLink
                 to="/add_event_page"
                 onClick={() => {

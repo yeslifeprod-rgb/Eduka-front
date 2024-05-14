@@ -9,13 +9,13 @@ export interface TagsInterface {
   tags: string[];
 }
 export interface CardEventInterface {
-  name: string;
+  firstname_profil: string;
   title: string;
-  date?: Date;
+  date: Date;
   description: string;
   image: string | null;
-  avatar_name?: string;
-  location: string;
+  photo_profil?: string;
+  address: string;
   tags?: string[] | null;
 }
 
@@ -26,7 +26,7 @@ export interface EventInterface
   id: string;
   startDate?: Date;
   endDate?: Date;
-  createdAt: Date;
+  created_at: Date;
   maxParticipants?: number;
   jackpotLink?: string;
   jackpotLimitDate?: Date;

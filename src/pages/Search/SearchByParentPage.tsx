@@ -1,334 +1,39 @@
-import { faker, fakerFR } from "@faker-js/faker";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UserCard from "../../components/Card/UserCard";
 import NavBottom from "../../components/NavBar/NavBottom";
 import NavTopLarge from "../../components/NavBar/NavTopLarge";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { userInterface } from "../../services/interfaces/user";
-const users: userInterface[] = [
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
-  },
-];
+import { getFakerUsersData } from "../../utils/Axios/axios";
 
 export default function SearchByParentPage() {
-  const [searchResults, setSearchResults] = useState<userInterface[]>(users);
+  const [usersData, setUsersData] = useState<userInterface[]>([]);
+  const [searchResults, setSearchResults] =
+    useState<userInterface[]>(usersData);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Récupérer les données des types d'événements via Axios
+        const data = await getFakerUsersData();
+        if (data) {
+          setUsersData(data.datas);
+        }
+      } catch (error) {
+        console.error("Error fetching type events:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    setSearchResults([...usersData]);
+  }, [usersData]);
+
   const searchUsers = (query: string) => {
-    const filteredUsers = users.filter((user) => {
+    const filteredUsers = usersData.filter((user) => {
       const fullName = `${user.first_name} ${user.last_name}`;
       return fullName.toLowerCase().includes(query.toLowerCase());
     });
