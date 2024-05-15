@@ -12,6 +12,7 @@ import { OrangeFullButton } from "../Button/Button";
 import ButtonAddChoice from "../Button/ButtonAddChoice";
 
 import { faker } from "@faker-js/faker/locale/fr";
+
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { AddChildButtonOrange } from "../Button/ButtonAddChild";
 import { ButtonAddTagsOrange } from "../Button/ButtonAddTags";
@@ -74,6 +75,7 @@ export default function FormAddEventPrivate({
       /* Mettez à jour la liste des enfants sélectionnés après suppression */
     }
   };
+
   const validationSchema = Yup.object().shape({
     title: Yup.string()
       .min(2, "Le titre doit contenir au moins 2 caractères")
@@ -237,10 +239,6 @@ export default function FormAddEventPrivate({
               id: id,
               choices: choices,
               childrenList: selectedChildren,
-              type: "",
-              category: "",
-              name: "",
-              image: null,
             };
             onSubmit({
               ...eventData,
@@ -372,25 +370,28 @@ export default function FormAddEventPrivate({
                   />
                 </div>
               )}
-              {category !== "Sondage" && category !== "Cagnotte" && (
+
+              {category !== "Sondage" && (
                 <div className="mb-4">
                   {category === "Covoiturage" ? (
-                    <label htmlFor="address">Lieu de covoiturage</label>
+                    <label htmlFor="endDate">Heure d'arrivée</label>
+                  ) : category === "Cagnotte" ? (
+                    <label htmlFor="endDate">Date limite de la cagnotte</label>
                   ) : (
-                    <label htmlFor="address">Adresse</label>
+                    <label htmlFor="endDate">Date de fin</label>
                   )}
                   <Field
-                    id="address"
-                    name="address"
-                    type="text"
-                    className={`block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange ${
-                      errors.address && touched.address
+                    id="endDate"
+                    name="endDate"
+                    type="datetime-local"
+                    className={`block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue ${
+                      errors.endDate && touched.endDate
                         ? "border-red-500"
                         : "border-gray-300"
                     }`}
                   />
                   <ErrorMessage
-                    name="address"
+                    name="starDate"
                     component="div"
                     className="text-red-500 text-sm mt-1"
                   />
@@ -616,6 +617,7 @@ export default function FormAddEventPrivate({
             </Form>
           )}
         </Formik>
+        {/* <AddressField name="address" /> */}
       </section>
       <Modal
         open={showModal}
