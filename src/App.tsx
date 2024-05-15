@@ -22,6 +22,7 @@ import SearchByParentDetailPage from "./pages/Search/SearchByParentDetailPage";
 import SearchByParentPage from "./pages/Search/SearchByParentPage";
 import SearchBySchoolPage from "./pages/Search/SearchBySchoolPage";
 import NotFoundPage from "./utils/NotFoundPage";
+import EventPublicPage from "./pages/EventPublic/EventPublicPage";
 
 function App() {
   return (
@@ -32,20 +33,14 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path="/home_page_parent" element={<HomePageParent />} />
             <Route path="/home_page_school" element={<HomePageSchool />} />
-            <Route
-              path="/edit_profil_by_school"
-              element={<EditProfilBySchoolPage />}
-            />
+            <Route path="/edit_profil_by_school" element={<EditProfilBySchoolPage />} />
+
+            <Route path="/event_public_page/information" element={<EventPublicPage />} />
+
             <Route path="/school_create_user" element={<SchoolCreateUser />} />
             <Route path="/parent_sign_up_page" element={<ParentSignUpPage />} />
-            <Route
-              path="/teacher_sign_up_page"
-              element={<TeacherSignUpPage />}
-            />
-            <Route
-              path="/parent_teacher_sign_up_page"
-              element={<ParentTeacherSignUp />}
-            />
+            <Route path="/teacher_sign_up_page" element={<TeacherSignUpPage />} />
+            <Route path="/parent_teacher_sign_up_page" element={<ParentTeacherSignUp />} />
             <Route path="/notification" element={<NotificationPage />} />
             <Route path="/search_by_parent" element={<SearchByParentPage />} />
             <Route path="/search_by_school" element={<SearchBySchoolPage />} />
