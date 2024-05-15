@@ -46,7 +46,7 @@ export default function FormAddEventPublic({
       category !== "Sondage"
         ? Yup.string().required("La date de fin est requise")
         : Yup.string(),
-    location:
+    address:
       category !== "Sondage" && category !== "Cagnotte"
         ? Yup.string().required("L'adresse est requise")
         : Yup.string(),
@@ -130,13 +130,13 @@ export default function FormAddEventPublic({
       storedDataEvent.description = data.description;
       storedDataEvent.startDate = data.startDate;
       storedDataEvent.endDate = data.endDate;
-      storedDataEvent.location = data.location;
+      storedDataEvent.address = data.address;
       storedDataEvent.maxParticipants = data.maxParticipants;
       storedDataEvent.jackpotLink = data.jackpotLink;
       storedDataEvent.tags = data.tags; // Inclure les tags sélectionnés
       storedDataEvent.choices = data.choices; // Inclure les choix de sondage
       storedDataEvent.id = data.id;
-      storedDataEvent.createdAt = data.createdAt;
+      storedDataEvent.created_at = data.created_at;
 
       if (image) {
         storedDataEvent.image = image;
@@ -176,7 +176,7 @@ export default function FormAddEventPublic({
             description: "",
             startDate: "",
             endDate: "",
-            location: "",
+            address: "",
             jackpotLink: "",
             tags: [] as string[],
             choices: [],
@@ -187,7 +187,7 @@ export default function FormAddEventPublic({
               ...values,
               tags: selectedTags,
               maxParticipants: counterValue,
-              createdAt: new Date(),
+              created_at: new Date(),
               id: id,
               choices: choices,
             };
@@ -196,7 +196,7 @@ export default function FormAddEventPublic({
               tags: selectedTags,
               choices: choices,
               maxParticipants: counterValue,
-              createdAt: new Date(),
+              created_at: new Date(),
             }); // Inclure les tags sélectionnés dans l'objet de données
             saveToLocalStorage(eventData);
 
@@ -324,22 +324,22 @@ export default function FormAddEventPublic({
               {category !== "Sondage" && category !== "Cagnotte" && (
                 <div className="mb-4">
                   {category === "Covoiturage" ? (
-                    <label htmlFor="location">Lieu de covoiturage</label>
+                    <label htmlFor="address">Lieu de covoiturage</label>
                   ) : (
-                    <label htmlFor="location">Adresse</label>
+                    <label htmlFor="address">Adresse</label>
                   )}
                   <Field
-                    id="location"
-                    name="location"
+                    id="address"
+                    name="address"
                     type="text"
                     className={`block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue ${
-                      errors.location && touched.location
+                      errors.address && touched.address
                         ? "border-red-500"
                         : "border-gray-300"
                     }`}
                   />
                   <ErrorMessage
-                    name="location"
+                    name="address"
                     component="div"
                     className="text-red-500 text-sm mt-1"
                   />

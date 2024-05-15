@@ -38,14 +38,13 @@ export default function FormAddEventPrivate({
     faker.person.firstName()
   );
 
-
   const [selectedChild, setSelectedChild] = useState("");
   const [selectedChildren, setSelectedChildren] = useState<string[]>([]);
   const [selectedChildLabel, setSelectedChildLabel] = useState(
     "Sélectionner un enfant"
   );
 
-  const handleChildSelect = (e: React.ChangeEvent<HTMLSelectElement>) :void => {
+  const handleChildSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const selectedValue = e.target.value;
     setSelectedChild(selectedValue);
     setSelectedChildLabel(selectedValue); // Mettre à jour le libellé de l'option sélectionnée
@@ -90,7 +89,7 @@ export default function FormAddEventPrivate({
       category !== "Sondage"
         ? Yup.string().required("La date de fin est requise")
         : Yup.string(),
-    location:
+    address:
       category !== "Sondage" && category !== "Cagnotte"
         ? Yup.string().required("L'adresse est requise")
         : Yup.string(),
@@ -174,13 +173,13 @@ export default function FormAddEventPrivate({
       storedDataEvent.description = data.description;
       storedDataEvent.startDate = data.startDate;
       storedDataEvent.endDate = data.endDate;
-      storedDataEvent.location = data.location;
+      storedDataEvent.address = data.address;
       storedDataEvent.maxParticipants = data.maxParticipants;
       storedDataEvent.jackpotLink = data.jackpotLink;
       storedDataEvent.tags = data.tags; // Inclure les tags sélectionnés
       storedDataEvent.choices = data.choices; // Inclure les choix de sondage
       storedDataEvent.id = data.id;
-      storedDataEvent.createdAt = data.createdAt;
+      storedDataEvent.created_at = data.created_at;
       storedDataEvent.childrenList = data.childrenList;
 
       if (image) {
@@ -222,7 +221,7 @@ export default function FormAddEventPrivate({
             description: "",
             startDate: "",
             endDate: "",
-            location: "",
+            address: "",
             jackpotLink: "",
             tags: [] as string[],
             choices: [],
@@ -234,7 +233,7 @@ export default function FormAddEventPrivate({
               ...values,
               tags: selectedTags,
               maxParticipants: counterValue,
-              createdAt: new Date(),
+              created_at: new Date(),
               id: id,
               choices: choices,
               childrenList: selectedChildren,
@@ -248,7 +247,7 @@ export default function FormAddEventPrivate({
               tags: selectedTags,
               choices: choices,
               maxParticipants: counterValue,
-              createdAt: new Date(),
+              created_at: new Date(),
             }); // Inclure les tags sélectionnés dans l'objet de données
             saveToLocalStorage(eventData);
 
@@ -376,22 +375,22 @@ export default function FormAddEventPrivate({
               {category !== "Sondage" && category !== "Cagnotte" && (
                 <div className="mb-4">
                   {category === "Covoiturage" ? (
-                    <label htmlFor="location">Lieu de covoiturage</label>
+                    <label htmlFor="address">Lieu de covoiturage</label>
                   ) : (
-                    <label htmlFor="location">Adresse</label>
+                    <label htmlFor="address">Adresse</label>
                   )}
                   <Field
-                    id="location"
-                    name="location"
+                    id="address"
+                    name="address"
                     type="text"
                     className={`block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange ${
-                      errors.location && touched.location
+                      errors.address && touched.address
                         ? "border-red-500"
                         : "border-gray-300"
                     }`}
                   />
                   <ErrorMessage
-                    name="location"
+                    name="address"
                     component="div"
                     className="text-red-500 text-sm mt-1"
                   />
