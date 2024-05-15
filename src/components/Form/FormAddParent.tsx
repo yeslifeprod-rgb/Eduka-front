@@ -4,7 +4,7 @@ import { OrangeFullButton } from "../Button/CustomButton";
 import { FormChildInterface } from "../../utils/Interface/FormUseStateChildInterface";
 import { FormUserFLEInterface } from "../../utils/Interface/FormUseStateParentInterface";
 import { AddChildButton } from "../Button/ButtonAddChild";
-import ButtonRemoveChild from "../Button/ButtonRemovehild";
+import ButtonRemoveChild from "../Button/ButtonRemoveChild";
 
 export const FormAddParent = () => {
   const [parents, setParents] = useState<FormUserFLEInterface>({

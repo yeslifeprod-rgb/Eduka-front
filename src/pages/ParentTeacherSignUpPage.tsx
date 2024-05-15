@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 
 import { AddChildButton } from "../components/Button/ButtonAddChild";
 import AddDisciplineButton from "../components/Button/ButtonAddDiscipline";
-import ButtonRemoveChild from "../components/Button/ButtonRemovehild";
+import ButtonRemoveChild from "../components/Button/ButtonRemoveChild";
 import { OrangeFullButton } from "../components/Button/CustomButton";
 import { ModalDiscipline } from "../components/Modals/ModalDiscipline";
 import { NavBarNewProfil } from "../components/NavBar/NavBarNewProfil";
