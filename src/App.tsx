@@ -20,6 +20,7 @@ import NotFoundPage from "./utils/NotFoundPage";
 import { ChatPage } from "./pages/Chat/ChatPage";
 import { ChangePassword } from "./pages/Login/ChangePasswordPage";
 import { ProfilPage } from "./pages/Profil/ProfilPage";
+import { HomePageTeacher } from "./pages/Teacher/HomePageTeacher";
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
             <Route path="/search_by_parent_detail/:id" element={<SearchByParentDetailPage />} />
             <Route path="/chat" element={<ChatPage />} />
             <Route path="/change_password" element={<ChangePassword/>} />
+            <Route path="/home_page_teacher" element={<HomePageTeacher/>} />
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

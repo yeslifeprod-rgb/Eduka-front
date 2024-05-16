@@ -1,4 +1,4 @@
-export interface FakeEventsInterface {
+export interface EventsInterface {
     id: string;
     title: string;
     description: string;

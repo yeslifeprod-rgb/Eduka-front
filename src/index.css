@@ -26,6 +26,7 @@
   color: #0fa3b1;
   border-bottom: 2px solid #0fa3b1;
 }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
