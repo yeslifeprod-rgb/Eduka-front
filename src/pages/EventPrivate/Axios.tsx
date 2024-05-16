@@ -1,15 +1,4 @@
 import axios from "axios";
-import { FakeData } from "./Faker";
-
-// Fonction pour récupérer les données de l'événement
-export async function getPost() {
-    try {
-
-        return FakeData.data;
-    } catch (error) {
-        console.error("Erreur lors de la récupération des données de l'événement :", error);
-    }
-}
 
 // Fonction pour récupérer les utilisateurs depuis l'API
 export const fetchUsers = async () => {

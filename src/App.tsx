@@ -37,7 +37,7 @@ function App() {
             <Route path="/home_page_school" element={<HomePageSchool />} />
             <Route path="/edit_profil_by_school" element={<EditProfilBySchoolPage />} />
 
-            <Route path="/event_private_page" element={<EventPrivatePage />} />
+            <Route path="/event_private_page/information" element={<EventPrivatePage />} />
 
             <Route path="/school_create_user" element={<SchoolCreateUser />} />
             <Route path="/parent_sign_up_page" element={<ParentSignUpPage />} />
