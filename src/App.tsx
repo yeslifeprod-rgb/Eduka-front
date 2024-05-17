@@ -6,6 +6,7 @@ import EventsPage from "./pages/Event/EventsPage";
 import EventsUserPage from "./pages/Event/EventsUserPage";
 import HomePageParent from "./pages/Home/HomePageParent";
 import { HomePageSchool } from "./pages/Home/HomePageSchool";
+import ChangePassword from "./pages/Login/ChangePassword";
 import LoginPage from "./pages/Login/LoginPage";
 import NotificationPage from "./pages/Notification/NotificationPage";
 import { ParentSignUpPage } from "./pages/ParentSignUpPage";
@@ -25,6 +26,7 @@ function App() {
       <ModalProvider>
         <Routes>
           <Route path="/" element={<LoginPage />} />
+          <Route path="/change_password" element={<ChangePassword />} />
           <Route element={<PrivateRoute />}>
             <Route path="/home_page_parent" element={<HomePageParent />} />
             <Route path="/home_page_school" element={<HomePageSchool />} />

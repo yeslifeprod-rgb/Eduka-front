@@ -118,7 +118,7 @@ export default function Login() {
               name="password"
             />
           </div>
-          <NavLink className="flex justify-end mt-10" to="#">
+          <NavLink className="flex justify-end mt-10" to="/change_password">
             Mot de passe oublié ?
           </NavLink>
           <div className="flex justify-end items-center mt-2">
