@@ -14,6 +14,7 @@ import ButtonAddChoice from "../Button/ButtonAddChoice";
 import { faker } from "@faker-js/faker/locale/fr";
 
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import AddressField from "../../utils/AddressField/AdressField";
 import { AddChildButtonOrange } from "../Button/ButtonAddChild";
 import { ButtonAddTagsOrange } from "../Button/ButtonAddTags";
 import ModalAddTagsPrivate from "../Modals/ModalAddTagsPrivate";
@@ -84,7 +85,7 @@ export default function FormAddEventPrivate({
       .min(2, "La description doit contenir au moins 2 caractères")
       .required("La description est requise"),
     startDate:
-      category !== "Sondage" && category !== "Cagnotte"
+      category !== "Cagnotte"
         ? Yup.string().required("La date de début est requise")
         : Yup.string(),
     endDate:
@@ -92,8 +93,19 @@ export default function FormAddEventPrivate({
         ? Yup.string().required("La date de fin est requise")
         : Yup.string(),
     address:
-      category !== "Sondage" && category !== "Cagnotte"
-        ? Yup.string().required("L'adresse est requise")
+      category !== "Cagnotte"
+        ? Yup.string().test(
+            "address-validation",
+            "L'adresse est requise",
+            function (value) {
+              const storedDataString = localStorage.getItem("storedDataEvent");
+              if (storedDataString) {
+                const storedDataEvent = JSON.parse(storedDataString);
+                return storedDataEvent.address || value;
+              }
+              return !!value;
+            }
+          )
         : Yup.string(),
   });
 
@@ -183,6 +195,7 @@ export default function FormAddEventPrivate({
       storedDataEvent.id = data.id;
       storedDataEvent.created_at = data.created_at;
       storedDataEvent.childrenList = data.childrenList;
+      storedDataEvent.address = data.address;
 
       if (image) {
         storedDataEvent.image = image;
@@ -231,6 +244,13 @@ export default function FormAddEventPrivate({
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
+            const storedDataString = localStorage.getItem("storedDataEvent");
+            let storedAddress = "";
+
+            if (storedDataString) {
+              const storedDataEvent = JSON.parse(storedDataString);
+              storedAddress = storedDataEvent.address;
+            }
             const eventData: EventInterface = {
               ...values,
               tags: selectedTags,
@@ -239,6 +259,7 @@ export default function FormAddEventPrivate({
               id: id,
               choices: choices,
               childrenList: selectedChildren,
+              address: values.address || storedAddress,
             };
             onSubmit({
               ...eventData,
@@ -370,7 +391,30 @@ export default function FormAddEventPrivate({
                   />
                 </div>
               )}
-
+              {category !== "Sondage" && category !== "Cagnotte" && (
+                <div className="mb-4">
+                  {category === "Covoiturage" ? (
+                    <label htmlFor="address">Lieu de covoiturage</label>
+                  ) : (
+                    <label htmlFor="address">Adresse</label>
+                  )}
+                  <Field
+                    id="address"
+                    name="address"
+                    component={AddressField}
+                    className={`block w-full ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue ${
+                      errors.address && touched.address
+                        ? "border-red-500"
+                        : "border-gray-300"
+                    }`}
+                  />
+                  <ErrorMessage
+                    name="address"
+                    component="div"
+                    className="text-red-500 text-sm mt-1"
+                  />
+                </div>
+              )}
               {category !== "Sondage" && (
                 <div className="mb-4">
                   {category === "Covoiturage" ? (

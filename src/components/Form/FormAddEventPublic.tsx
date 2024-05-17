@@ -9,6 +9,7 @@ import { getFakerEventTagsData } from "../../utils/Axios/axios";
 import CounterInput from "../../utils/CounterInput";
 import ButtonAddChoice from "../Button/ButtonAddChoice";
 
+import AddressField from "../../utils/AddressField/AdressField";
 import { ButtonAddTags } from "../Button/ButtonAddTags";
 import { BlueFullButton } from "../Button/CustomButton";
 import ModalAddTags from "../Modals/ModalAddTags";
@@ -48,7 +49,18 @@ export default function FormAddEventPublic({
         : Yup.string(),
     address:
       category !== "Sondage" && category !== "Cagnotte"
-        ? Yup.string().required("L'adresse est requise")
+        ? Yup.string().test(
+            "address-validation",
+            "L'adresse est requise",
+            function (value) {
+              const storedDataString = localStorage.getItem("storedDataEvent");
+              if (storedDataString) {
+                const storedDataEvent = JSON.parse(storedDataString);
+                return storedDataEvent.address || value;
+              }
+              return !!value;
+            }
+          )
         : Yup.string(),
   });
 
@@ -137,6 +149,7 @@ export default function FormAddEventPublic({
       storedDataEvent.choices = data.choices; // Inclure les choix de sondage
       storedDataEvent.id = data.id;
       storedDataEvent.created_at = data.created_at;
+      storedDataEvent.address = data.address;
 
       if (image) {
         storedDataEvent.image = image;
@@ -183,6 +196,13 @@ export default function FormAddEventPublic({
           }}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
+            const storedDataString = localStorage.getItem("storedDataEvent");
+            let storedAddress = "";
+
+            if (storedDataString) {
+              const storedDataEvent = JSON.parse(storedDataString);
+              storedAddress = storedDataEvent.address;
+            }
             const eventData: EventInterface = {
               ...values,
               tags: selectedTags,
@@ -190,14 +210,16 @@ export default function FormAddEventPublic({
               created_at: new Date(),
               id: id,
               choices: choices,
+              address: values.address || storedAddress,
             };
+
             onSubmit({
               ...eventData,
               tags: selectedTags,
               choices: choices,
               maxParticipants: counterValue,
               created_at: new Date(),
-            }); // Inclure les tags sélectionnés dans l'objet de données
+            });
             saveToLocalStorage(eventData);
 
             setShowModal(true);
@@ -331,8 +353,8 @@ export default function FormAddEventPublic({
                   <Field
                     id="address"
                     name="address"
-                    type="text"
-                    className={`block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue ${
+                    component={AddressField}
+                    className={`block w-full ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue ${
                       errors.address && touched.address
                         ? "border-red-500"
                         : "border-gray-300"
