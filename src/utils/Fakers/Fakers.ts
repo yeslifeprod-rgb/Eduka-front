@@ -1,10 +1,9 @@
 
 import { EventDisciplineInterface } from "../../services/interfaces/EventDisciplineInterface";
-import { EventInterface} from "../../services/interfaces/EventInterface";
-import { MessageChatInterface } from "../../services/interfaces/MessageChatInterface";
+import { EventsInterface } from "../../services/interfaces/EventsInterface";
 import { ProfilInterface } from "../../services/interfaces/ProfilInterface";
 import { UserInterface } from "../../services/interfaces/UserInterface";
-import { FakeEventsInterface } from "../../services/interfaces/EventsInterface";
+import { MessageInterface } from "../../services/interfaces/MessageInterface";
 
 export const FakeEventDiscipline: EventDisciplineInterface[] = [
   { name: "Mathématiques" },
@@ -25,21 +24,35 @@ export const FakedisciplineData = {
   datas: FakeEventDiscipline,
 };
   
-  const receivedMessagesChat: MessageChatInterface[] = [
+  const receivedMessagesChat: MessageInterface[] = [
     {
-      firstName: "Ania",
-      message: "Bonjour",
-      createdAt: new Date(Date.now() - 15 * 60 * 1000) // il y a 15 minutes
+      id:"a35zse4",
+      user_id: "5678azdq",
+      content: "Bonjour",
+      created_at: new Date(Date.now() - 15 * 60 * 1000), // il y a 15 minutes
+      updated_at: new Date(Date.now() - 15 * 60 * 1000),
+      message_type: "text"
+
     },
     {
-      firstName: "Ilyes",
-      message: "Salut",
-      createdAt: new Date(Date.now() - 7 * 60 * 1000) // il y a 7 minutes
+      
+      id:"a35zse4",
+      user_id: "1234bfec",
+      content: "Salut",
+      created_at: new Date(Date.now() - 15 * 60 * 1000), // il y a 15 minutes
+      updated_at: new Date(Date.now() - 15 * 60 * 1000),
+      message_type: "text"
+
     },
     {
-      firstName: "Julien",
-      message: "Comment ça va?",
-      createdAt: new Date(Date.now() - 1 * 60 * 1000) // il y a 1 minute
+      
+      id:"a35zse4",
+      user_id: "9087pokl",
+      content: "Comment ça va ?",
+      created_at: new Date(Date.now() - 15 * 60 * 1000), // il y a 15 minutes
+      updated_at: new Date(Date.now() - 15 * 60 * 1000),
+      message_type: "text"
+
     },
     
   ];
@@ -48,16 +61,6 @@ export const FakedisciplineData = {
     datas : receivedMessagesChat
   }
 
-  const FakeEvent:EventInterface[] = [
-    {
-      id: 1,
-      title: "Sortie au parc",
-      createdAt: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
-    },
-  ];
-  export const fakeEventData = {
-    datas : FakeEvent
-  }
 
   const FakeSchoolName:string = "Jean-Baptiste de la Salle";
 
@@ -101,24 +104,24 @@ export const FakedisciplineData = {
       email:"JCVD@gmail.com",
       password:"Azerty@31",
       status:true,
-      created_At: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
-      updated_At: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
+      created_at: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
+      updated_at: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
     },
     {
       id: "1234bfec",
       email: "JLopez@gmail.com",
       password: "Password@123",
       status: true,
-      created_At: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
-      updated_At: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
+      created_at: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
+      updated_at: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
     },
     {
       id: "9087pokl",
       email: "WillSmith@gmail.com",
       password: "HelloWorld45",
       status: true,
-      created_At: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
-      updated_At: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
+      created_at: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
+      updated_at: new Date(new Date().getTime() - Math.floor(Math.random() * 15 + 15) * 24 * 60 * 60 * 1000),
     }
   ]
 
@@ -126,7 +129,7 @@ export const FakedisciplineData = {
     datas : FakeUser
   }
 
-  const FakeEvents: FakeEventsInterface[] = [
+  const FakeEvents: EventsInterface[] = [
     {
       id: "13a215d4a8ez",
       title: "Fête d'anniversaire de Pierre",

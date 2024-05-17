@@ -5,6 +5,6 @@ export interface UserInterface {
     email: string;
     password: string;
     status: boolean;
-    created_At: Date;
-    updated_At: Date;
+    created_at: Date;
+    updated_at: Date;
 }

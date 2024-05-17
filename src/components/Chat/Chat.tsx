@@ -1,20 +1,23 @@
-import React, { MouseEvent, ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
+import  { MouseEvent, ChangeEvent, FormEvent, useEffect, useRef, useState, FC } from "react";
 import { IconButton, Menu, MenuItem } from "@mui/material";
 import { Send as SendIcon, InsertDriveFile as InsertDriveFileIcon, EmojiEmotions as EmojiEmotionsIcon } from "@mui/icons-material";
 import { formatDistanceToNow } from 'date-fns';
 import { fr } from 'date-fns/locale';
-import { getReceivedMessagesChatData } from "../../utils/Axios/axios";
-import { MessageChatInterface } from "../../services/interfaces/MessageChatInterface";
+import { getProfilData, getReceivedMessagesChatData} from "../../utils/Axios/axios";
+import { MessageInterface } from "../../services/interfaces/MessageInterface";
+import { ProfilInterface } from "../../services/interfaces/ProfilInterface";
 
-export const Chat: React.FC = () => {
+
+export const Chat: FC = () => {
 
   const [message, setMessage] = useState<string>("");// 'message' est utilisé pour stocker le message saisi par l'utilisateur
   const [messages, setMessages] = useState<{ text: string; timestamp: Date; file: File | null; filePreview: string | null }[]>([]);// 'messages' est utilisé pour stocker les messages envoyés par l'utilisateur
-  const [receivedMessages, setReceivedMessages] = useState<MessageChatInterface[]>([]);// 'receivedMessages' state est utilisé pour stocker les messages reçus depuis le serveur
+  const [receivedMessages, setReceivedMessages] = useState<MessageInterface[]>([]);// 'receivedMessages' state est utilisé pour stocker les messages reçus depuis le serveur
   const [selectedFile, setSelectedFile] = useState<File | null>(null);// 'selectedFile' state est utilisé pour stocker le fichier sélectionné par l'utilisateur
   const fileInputRef = useRef<HTMLInputElement>(null);// Référence vers l'input file
   const [smileyIcon, setSmileyIcon] = useState<null | HTMLElement>(null);// SmileyIcon pour le menu des smileys
   const smileyArray: string[] = ['😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😊', '😇']
+  const [profil, setProfil] = useState<ProfilInterface[] | null>(null);
 
 
   useEffect(() => {
@@ -28,9 +31,26 @@ export const Chat: React.FC = () => {
         console.error("Error fetching messages:", error);
       }
     };
-
+    const fetchProfil = async () => {
+      try {
+        const data = await getProfilData();
+        if (data && data.datas) {
+          const userProfil: ProfilInterface[] = data.datas;
+          setProfil(userProfil);
+        } else {
+          console.error("Profil data is undefined");
+          setProfil(null);
+        }
+      } catch (error) {
+        console.error("Error fetching profil:", error);
+        setProfil(null);
+      }
+    };
+    fetchProfil()
     fetchReceivedMessages();
   }, []);
+
+
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value); // je "lis" le message écrit dans le champs
@@ -66,6 +86,8 @@ export const Chat: React.FC = () => {
     setSmileyIcon(null);
   };
 
+  
+
   // Fonction qui est appelée lorsque l'utilisateur clique sur le bouton d'ajout de fichier
   const AttachmentButton = () => {
     // Déclencher l'ouverture de l'explorateur de fichiers
@@ -91,6 +113,28 @@ export const Chat: React.FC = () => {
     e.preventDefault();
     SendButton();
   };
+  const combinedData: { firstName: string; content: string; created_at: Date }[] = [];
+  // Vérification de l'existence de profil avant de l'utiliser
+  if (profil) {
+    profil.forEach((profile, index) => {
+      if (receivedMessages[index]) {
+        combinedData.push({
+          firstName: profile.firstName,
+          content: receivedMessages[index].content,
+          created_at: receivedMessages[index].created_at
+        });
+      } else {
+        // Si l'index n'existe pas dans receivedMessages, ajoutez seulement les données de profil
+        combinedData.push({
+          firstName: profile.firstName,
+          content: '', // Le contenu est vide car il n'y a pas de message correspondant
+          created_at: new Date() // Vous pouvez définir une date appropriée ici
+        });
+      }
+    });
+  } else {
+    console.log("Le tableau profil est null.");
+  }
 
   return (
     <div className="flex justify-center">
@@ -98,13 +142,13 @@ export const Chat: React.FC = () => {
         <div className="flex flex-col justify-center h-[90vh]">
           <section>
             {/* Affichage des messages reçus depuis le serveur */}
-            {receivedMessages.map((message, index) => (
+            {combinedData.map((message, index) => (
               <div key={index} className="flex justify-start mt-10">
                 <div className="text-white rounded-t-lg rounded-br-lg w-64 bg bg-custom-orange p-2 mr-2 relative">
-                  <p className="italic text-white text-xs mt-1">{message.firstName}</p>
-                  <p>{message.message}</p>
+                  <p className="text-xs italic">{message.firstName}</p>
+                  <p>{message.content}</p>
                   {/* Calcul de la différence de temps */}
-                  <p className="flex justify-end text-white text-xs mt-1">{getTimeDifference(message.createdAt)}</p>
+                  <p className="flex justify-end text-white text-xs mt-1">{getTimeDifference(message.created_at)}</p>
                 </div>
               </div>
             ))}

@@ -32,8 +32,8 @@ export const ProfilPage = () => {
       try {
         const data = await getProfilData();
         if (data) {
-          const userProfile = data.datas.find((profile) => profile.user_id === "5678azdq");
-          setProfil(userProfile);
+          const userProfil = data.datas.find((profil: ProfilInterface) => profil.user_id === "5678azdq");
+          setProfil(userProfil || null);
         }
       } catch (error) {
         console.error("Error fetching profil:", error);
@@ -44,8 +44,8 @@ export const ProfilPage = () => {
       try {
         const data = await getUserData();
         if (data) {
-          const userData = data.datas.find((user) => user.id === "5678azdq");
-          setUser(userData);
+          const userData = data.datas.find((user: UserInterface) => user.id === "5678azdq");
+          setUser(userData || null);
         }
       } catch (error) {
         console.error("Error fetching user:", error);
@@ -97,7 +97,7 @@ export const ProfilPage = () => {
             </h2>
             <p className="text-sm">
               Inscrit depuis le{" "}
-              <i>{format(new Date(user.created_At), "dd/MM/yyyy")}</i>
+              <i>{format(new Date(user.created_at), "dd/MM/yyyy")}</i>
             </p>
           </div>
         </div>
@@ -126,7 +126,7 @@ export const ProfilPage = () => {
       {selectedTab === "MyEvents" && userEvents && (
         <section className="mt-8 grid lg:grid-cols-3 sm:grid-cols-2 gap-4">
           {userEvents.map((event, index) => (
-            <div key={index}  className="relative shadow-md m-2 p-2">
+            <div key={index} className="relative shadow-md m-2 p-2">
               <div className="flex gap-3 pb-2">
                 <img
                   className="hidden lg:block w-32 h-32 object-cover rounded-lg shadow-md"
@@ -147,7 +147,7 @@ export const ProfilPage = () => {
                   <IconButton aria-label="delete" size="small">
                     <Avatar
                       alt="Cindy Baker"
-                      src={profil?.photo}
+                      src={profil?.photo || defaultImageUrl}
                       sx={{ width: 24, height: 24 }}
                     />
                   </IconButton>
@@ -193,8 +193,7 @@ export const ProfilPage = () => {
                   <IconButton aria-label="delete" size="small">
                     <Avatar
                       alt="Cindy Baker"
-                      // comment faire pour les photos profil avec id unique ?
-                      src={profil?.photo}
+                      src={profil?.photo || defaultImageUrl}
                       sx={{ width: 24, height: 24 }}
                     />
                   </IconButton>
