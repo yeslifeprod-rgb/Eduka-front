@@ -5,15 +5,17 @@ import { useEffect, useState } from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import { BlueFullButton } from "../../components/Button/Button";
+import LoginInterface from "../../services/interfaces/Login";
 
 export default function Login() {
   const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
   const [errorAuthentification, setErrorAuthentification] =
     useState<boolean>(false);
+  
 
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email address").required("Required"),
-    password: Yup.string().required("Required"),
+    email: Yup.string().email("Invalid email address").required("L'adresse email est requis"),
+    password: Yup.string().required("Le mot de passe est requis"),
   });
 
   const [initialValues, setInitialValues] = useState<LoginInterface>({
@@ -35,12 +37,14 @@ export default function Login() {
         email: credentials.email,
         password: credentials.password,
         rememberMe: credentials.rememberMe,
+       
       });
     }
   }, []);
 
-  const handleSubmit = async (values: LoginInterface) => {
+   const handleSubmit = async (values: LoginInterface) => {
     try {
+    
       const response = await axios.get(
         "https://jsonplaceholder.typicode.com/users"
       );
@@ -55,7 +59,9 @@ export default function Login() {
       if (filteredUsers && filteredUsers.length === 1) {
         console.log("vous etes bien authentifie");
         sessionStorage.setItem("token", "true");
-        localStorage.setItem("credentials", JSON.stringify(values));
+        localStorage.setItem("credentials", JSON.stringify({...filteredUsers[0],
+          ...values
+        }));
 
         setShouldNavigate(true);
       } else {
@@ -64,17 +70,17 @@ export default function Login() {
         setErrorAuthentification(true);
       }
 
-      // Handle successful login here, such as setting user state or redirecting to another page
+      //Handle successful login here, such as setting user state or redirecting to another page
     } catch (error) {
       console.error("Login failed:", error);
-      // Handle login error, display error message, etc.
+      //Handle login error, display error message, etc.
     }
   };
   return (
     <>
       {errorAuthentification && (
         <>
-          <h2>I don't know you so go.</h2>
+          <h2>I don't know you.</h2>
         </>
       )}
       <Formik
@@ -82,8 +88,10 @@ export default function Login() {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
         enableReinitialize
+     
       >
         <Form className="grid grid-col items-center justify-center mt-20">
+        
           <img
             className="h-48 m-auto"
             src="./public/logo_LoginPage.png"
@@ -134,7 +142,7 @@ export default function Login() {
             <label>Se souvenir de moi ?</label>
           </div>
           <div className="mt-8">
-            <BlueFullButton type="submit">Se Connecter</BlueFullButton>
+            <BlueFullButton type="submit" >Se Connecter</BlueFullButton>
           </div>
         </Form>
       </Formik>
