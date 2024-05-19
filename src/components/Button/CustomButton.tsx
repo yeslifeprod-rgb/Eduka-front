@@ -230,3 +230,17 @@ export const BlueSelectedButton = styled(Button)({
     },
   },
 }) as typeof Button;
+
+//@dev AK add an icon
+export const OrangeFullButtonDeleteIcon = styled(Button)({
+  color: "white",
+  border: "2px solid #F7A072",
+  borderRadius: "10px",
+  width: "384px",
+  height: "40px",
+  backgroundColor: "#F7A072",
+  '&:hover': {
+    backgroundColor: "#F7A072", 
+    borderColor: "#F7A072",
+  },
+}) as typeof Button;
