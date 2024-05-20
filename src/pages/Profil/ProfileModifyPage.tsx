@@ -4,12 +4,13 @@ import {
   BlueFullButton,
   OrangeFullButtonDeleteIcon,
 } from "../../components/Button/CustomButton";
-import ProfilModifyInterface from "../../services/interfaces/ProfilModify";
+import ProfilModifyInterface from "../../services/interfaces/ProfileModify";
 import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Box, IconButton, Modal, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import ProfileModifyInterface from "../../services/interfaces/ProfileModify";
 
 const validationSchema = Yup.object().shape({
   firstname: Yup.string()
@@ -23,8 +24,8 @@ const validationSchema = Yup.object().shape({
   //TODO ADD missing fields....
 });
 
-export default function ProfilModifyPage() {
-  const [initialValues, setInitialValues] = useState<ProfilModifyInterface>({
+export default function ProfileModifyPage() {
+  const [initialValues, setInitialValues] = useState<ProfileModifyInterface>({
     avatar: "",
     firstname: "",
     lastname: "",
@@ -62,7 +63,7 @@ export default function ProfilModifyPage() {
     }
   }, []);
 
-  const handleSaveProfil = async (values: ProfilModifyInterface) => {
+  const handleSaveProfil = async (values: ProfileModifyInterface) => {
     try {
       if (avatar) {
         values.avatar = avatar;

@@ -4,7 +4,7 @@ import { Avatar, Button, Card, IconButton } from "@mui/material";
 import { useEffect, useRef } from "react";
 
 import { EventInterface } from "../../services/interfaces/event";
-import FormatRelativeDate from "../../utils/CalculRelative/FormatRelativeDate";
+import { formatRelativeDate } from "../../utils/CalculRelative/FormatRelativeDate";
 
 interface CardEventPropsInterface {
   event: EventInterface;
@@ -56,7 +56,7 @@ export default function CardEvent(props: CardEventPropsInterface) {
           </IconButton>
           <p>de {event.firstname_profil}</p>
         </div>
-        <p>{FormatRelativeDate(event.date)}</p>
+        <p>{formatRelativeDate(event.date)}</p>
         <div className="hidden lg:block">
           <Button
             variant="contained"
