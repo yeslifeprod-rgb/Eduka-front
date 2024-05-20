@@ -6,6 +6,7 @@ import { NavLink, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import { BlueFullButton } from "../../components/Button/Button";
 import LoginInterface from "../../services/interfaces/Login";
+import { getFakerUsersData } from "../../utils/Axios/axios";
 
 export default function Login() {
   const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
@@ -26,7 +27,7 @@ export default function Login() {
 
   // Check if credentials are stored in localStorage on component mount
   useEffect(() => {
-    const credentialsAsString = localStorage.getItem("credentials");
+    const credentialsAsString = localStorage.getItem("rememeberMeCredentials");
     const credentials = credentialsAsString
       ? JSON.parse(credentialsAsString)
       : undefined;
@@ -42,14 +43,23 @@ export default function Login() {
     }
   }, []);
 
+  const handleRememberMe =  (values: LoginInterface) => {
+    if(values.rememberMe){
+      localStorage.setItem("rememeberMeCredentials", JSON.stringify(values));
+    }else{
+      localStorage.removeItem("rememeberMeCredentials");
+    }
+
+  }
+
    const handleSubmit = async (values: LoginInterface) => {
     try {
-    
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/users"
-      );
+      //Sauvegarde ou detruis l'email et le mot de passe pour le cas "se souvenir de moi"
+      handleRememberMe(values);
 
-      const usersList = response.data;
+      const response = await getFakerUsersData();
+
+      const usersList = response.datas;
 
       const filteredUsers = usersList.filter((user: { email: string }) =>
         user.email.toLowerCase().includes(values.email.toLowerCase())
@@ -58,9 +68,10 @@ export default function Login() {
 
       if (filteredUsers && filteredUsers.length === 1) {
         console.log("vous etes bien authentifie");
+        //Je suis authentifié
         sessionStorage.setItem("token", "true");
-        localStorage.setItem("credentials", JSON.stringify({...filteredUsers[0],
-          ...values
+        //J'enregistre les infos de l'utilisateur courant/connecté
+        localStorage.setItem("currentUser", JSON.stringify({...filteredUsers[0]
         }));
 
         setShouldNavigate(true);
@@ -130,7 +141,7 @@ export default function Login() {
             Mot de passe oublié ?
           </NavLink>
           <div className="flex justify-end items-center mt-2">
-            <Checkbox
+            <Field
               sx={{
                 color: "#0fa3b1",
                 "&.Mui-checked": {
@@ -138,6 +149,9 @@ export default function Login() {
                 },
               }}
               inputProps={{ "aria-label": "controlled" }}
+              type="checkbox"
+              id="rememberMe"
+              name="rememberMe"
             />
             <label>Se souvenir de moi ?</label>
           </div>

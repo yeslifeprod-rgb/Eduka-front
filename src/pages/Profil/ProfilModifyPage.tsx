@@ -6,7 +6,7 @@ import {
 } from "../../components/Button/CustomButton";
 import ProfilModifyInterface from "../../services/interfaces/ProfilModify";
 import { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate} from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Box, IconButton, Modal, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
@@ -23,8 +23,6 @@ const validationSchema = Yup.object().shape({
   //TODO ADD missing fields....
 });
 
-
-
 export default function ProfilModifyPage() {
   const [initialValues, setInitialValues] = useState<ProfilModifyInterface>({
     avatar: "",
@@ -35,43 +33,28 @@ export default function ProfilModifyPage() {
     password: "",
     email: "",
   });
-  const [image, setImage]= useState<string | null >(null);
+  const [avatar, setAvatar] = useState<string | null>(null);
   const [showModal, setShowModal] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const credentialsAsString = localStorage.getItem("credentials");
+    const credentialsAsString = localStorage.getItem("currentUser");
     const credentials = credentialsAsString
       ? JSON.parse(credentialsAsString)
       : undefined;
 
     if (credentials) {
-      let firstName = "";
-      let lastName = "";
-
-      if (credentials.name) {
-        const nameParts = credentials.name.split(" ");
-        firstName = nameParts[0];
-        lastName = nameParts.slice(1).join(" ");
-      }
-
-      if (credentials.firstname) {
-        firstName = credentials.firstname;
-      }
-      if (credentials.lastname) {
-        lastName = credentials.lastname;
-      }
       if (credentials.avatar) {
-        setImage(credentials.avatar);
+        setAvatar(credentials.avatar);
       }
 
       //credentials IS NOT NULL
       // Update initial values based on localstorage
       setInitialValues({
-        avatar:'',
-        firstname: firstName,
-        lastname: lastName,
-        address: `${credentials.address?.street} ${credentials.address?.suite} ${credentials.address?.city} ${credentials.address?.zipcode}`,
+        avatar: "",
+        firstname: credentials.first_name,
+        lastname: credentials.last_name,
+        address: credentials.address,
         phone: credentials.phone,
         email: credentials.email,
         password: credentials.password,
@@ -81,22 +64,21 @@ export default function ProfilModifyPage() {
 
   const handleSaveProfil = async (values: ProfilModifyInterface) => {
     try {
-      if (image){
-        values.avatar= image;
+      if (avatar) {
+        values.avatar = avatar;
       }
-      localStorage.setItem("credentials", JSON.stringify(values));
-      values.avatar= ""; //@dev workarround to fix because of Formik error:Uncaught DOMException: Failed to set the 'value' property on 'HTMLInputElement': This input element accepts a filename, which may only be programmatically set to the empty string.
+      localStorage.setItem("currentUser", JSON.stringify(values));
+      values.avatar = ""; //@dev workarround to fix because of Formik error:Uncaught DOMException: Failed to set the 'value' property on 'HTMLInputElement': This input element accepts a filename, which may only be programmatically set to the empty string.
       setShowModal(true);
       setTimeout(() => {
         setShowModal(false);
         navigate("/home_page_parent");
       }, 2000);
-
     } catch (error) {
       console.error("Saving Profile failed:", error);
     }
   };
-  
+
   const handleCloseModal = () => {
     setShowModal(false);
   };
@@ -109,13 +91,12 @@ export default function ProfilModifyPage() {
 
     reader.onload = (event) => {
       if (event.target?.result) {
-        const imageDataUrl = event.target.result.toString();
-        setImage(imageDataUrl);
+        const avatarDataUrl = event.target.result.toString();
+        setAvatar(avatarDataUrl);
       }
     };
     reader.readAsDataURL(file);
   };
-
 
   return (
     <>
@@ -140,30 +121,25 @@ export default function ProfilModifyPage() {
                 style={{ marginBottom: "5rem" }}
               ></div>
               <div className="flex justify-between items-center py-4 gap-4 ">
-              {/* <img
-                src="/public/profil.png"
-                alt="Cindy Baker"
-                className="w-35 h-35 rounded-full mb-8 md:mb-0 my-4 md:my-0"
-              /> */}
-                {image && (
+                {avatar && (
                   <img
-                    src={image}
+                    src={avatar}
                     alt="Uploaded"
                     className=" max-w-48 rounded-xl"
                   />
                 )}
 
-              <Field
-                id="avatar"
-                name="avatar"
-                type="file"
-                accept="image/*"
-                placeholder="Modifier mon avatar"
-                className={`block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue 
+                <Field
+                  id="avatar"
+                  name="avatar"
+                  type="file"
+                  accept="avatar/*"
+                  placeholder="Modifier mon avatar"
+                  className={`block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue 
                       : "border-gray-300"
                   }`}
                   onChange={handleUploadAvatar}
-              />
+                />
               </div>
               <div className="mb-8 flex items-center"></div>
               <div className="mb-4">
@@ -309,7 +285,6 @@ export default function ProfilModifyPage() {
           </Typography>
         </Box>
       </Modal>
-
     </>
   );
 }
