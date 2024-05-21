@@ -8,6 +8,7 @@ import { NavLink } from "react-router-dom";
 export default function NavTopLarge() {
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
   const [visible, setVisible] = useState<boolean>(true);
+  const [avatar, setAvatar] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -19,6 +20,19 @@ export default function NavTopLarge() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos]);
+
+  useEffect(() => {
+    const credentialsAsString = localStorage.getItem("currentUser");
+    const credentials = credentialsAsString
+      ? JSON.parse(credentialsAsString)
+      : undefined;
+
+    if (credentials) {
+      if (credentials.avatar) {
+        setAvatar(credentials.avatar);
+      }
+    }
+  }, []);
 
   return (
     <div className="hidden lg:block">
@@ -60,7 +74,7 @@ export default function NavTopLarge() {
           <NavLink to="/profil" className="nav-link-avatar">
             <Avatar
               alt="Cindy Baker"
-              src="/public/profil.png"
+              src={avatar}
               className="nav-avatar"
             />
           </NavLink>

@@ -3,4 +3,5 @@ export default interface LoginInterface {
   role: string;
   email: string;
   password: string;
+  rememberMe: boolean;
 }

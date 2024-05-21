@@ -11,7 +11,6 @@ import LoginPage from "./pages/Login/LoginPage";
 import NotificationPage from "./pages/Notification/NotificationPage";
 import { ParentSignUpPage } from "./pages/ParentSignUpPage";
 import { ParentTeacherSignUp } from "./pages/ParentTeacherSignUpPage";
-import ProfilPage from "./pages/Profil/ProfilPage";
 import { SchoolCreateUser } from "./pages/SchoolCreateUserPage";
 import SearchByParentDetailPage from "./pages/Search/SearchByParentDetailPage";
 import SearchByParentPage from "./pages/Search/SearchByParentPage";
@@ -19,6 +18,9 @@ import SearchBySchoolPage from "./pages/Search/SearchBySchoolPage";
 import { TeacherSignUpPage } from "./pages/TeacherSignUpPage";
 import { ModalProvider } from "./services/Context/ModalContext";
 import PrivateRoute from "./utils/PrivateRoute";
+import NotFoundPage from "./utils/NotFoundPage";
+import ProfilModifyPage from "./pages/Profil/ProfileModifyPage";
+import ProfilePage from "./pages/Profil/ProfilePage";
 
 function App() {
   return (
@@ -49,14 +51,15 @@ function App() {
             <Route path="/search_by_school" element={<SearchBySchoolPage />} />
             <Route path="/for_you_event" element={<EventsUserPage />} />
             <Route path="/all_events" element={<EventsPage />} />
-            <Route path="/profil" element={<ProfilPage />} />
+            <Route path="/participation" element={<ProfilePage />} />
+            <Route path="/profil" element={<ProfilModifyPage />} />
             <Route
               path="/search_by_parent_detail/:id"
               element={<SearchByParentDetailPage />}
             />
             <Route path="/add_event_page" element={<AddEventPage />} />
           </Route>
-          {/* <Route path="*" element={<NotFoundPage />} /> */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </ModalProvider>
     </>

@@ -1,11 +1,10 @@
-import Checkbox from "@mui/material/Checkbox";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import { BlueFullButton } from "../../components/Button/Button";
 import LoginInterface from "../../services/interfaces/Login";
-import { getFakerLoginData } from "../../utils/Axios/axios";
+import { getFakerUsersData } from "../../utils/Axios/axios";
 
 export default function Login() {
   const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
@@ -17,7 +16,7 @@ export default function Login() {
   useEffect(() => {
     const fetchFakeLoginData = async () => {
       try {
-        const data = await getFakerLoginData();
+        const data = await getFakerUsersData();
         if (data) {
           setFakeLogin(data.datas);
         }
@@ -30,61 +29,114 @@ export default function Login() {
   }, []);
 
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email address").required("Required"),
-    password: Yup.string().required("Required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("L'adresse email est requis"),
+    password: Yup.string().required("Le mot de passe est requis"),
   });
 
-  const initialValues: LoginInterface = {
+  const [initialValues, setInitialValues] = useState<LoginInterface>({
     email: "",
     password: "",
     rememberMe: false,
+  });
+
+  // Check if credentials are stored in localStorage on component mount
+  useEffect(() => {
+    const credentialsAsString = localStorage.getItem("rememeberMeCredentials");
+    const credentials = credentialsAsString
+      ? JSON.parse(credentialsAsString)
+      : undefined;
+
+    if (credentials) {
+      // Update initial values based on localstorage
+      setInitialValues({
+        email: credentials.email,
+        password: credentials.password,
+        rememberMe: credentials.rememberMe,
+      });
+    }
+  }, []);
+
+  const handleRememberMe = (values: LoginInterface) => {
+    if (values.rememberMe) {
+      localStorage.setItem("rememeberMeCredentials", JSON.stringify(values));
+    } else {
+      localStorage.removeItem("rememeberMeCredentials");
+    }
   };
 
   const handleSubmit = async (values: LoginInterface) => {
-    const filteredUsers = fakeLogin.filter(
-      (user) =>
-        user.email.toLowerCase() === values.email.toLowerCase() &&
-        user.password === values.password
-    );
+    try {
+      //Sauvegarde ou detruis l'email et le mot de passe pour le cas "se souvenir de moi"
+      handleRememberMe(values);
 
-    if (filteredUsers.length === 1) {
-      const user = filteredUsers[0];
-      sessionStorage.setItem("token", "true");
+      const response = await getFakerUsersData();
 
-      let redirectPath = "";
-      switch (user.role) {
-        case "school_admin":
-          redirectPath = "/home_page_school";
-          break;
-        case "parent":
-          redirectPath = "/home_page_parent";
-          break;
-        case "teacher":
-          redirectPath = "/home_page_teacher";
-          break;
-        default:
-          break;
+      const usersList = response.datas;
+
+      const filteredUsers = usersList.filter((user: { email: string }) =>
+        user.email.toLowerCase().includes(values.email.toLowerCase())
+      );
+      console.log(filteredUsers);
+
+      if (
+        filteredUsers &&
+        filteredUsers.length === 1 &&
+        values.password === filteredUsers[0].password
+      ) {
+        console.log("vous etes bien authentifie");
+        //Je suis authentifié
+        sessionStorage.setItem("token", "true");
+        //J'enregistre les infos de l'utilisateur courant/connecté
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({ ...filteredUsers[0] })
+        );
+        let redirectPath = "";
+        switch (filteredUsers[0].role) {
+          case "school_admin":
+            redirectPath = "/home_page_school";
+            break;
+          case "parent":
+            redirectPath = "/home_page_parent";
+            break;
+          case "teacher":
+            redirectPath = "/home_page_teacher";
+            break;
+          default:
+            break;
+        }
+        setShouldNavigate(true);
+      } else {
+        console.log("Vous n'etes pas authorise");
+        setShouldNavigate(false);
+        setErrorAuthentification(true);
       }
 
-      setRedirectTo(redirectPath);
-      setShouldNavigate(true);
-    } else {
-      setShouldNavigate(false);
-      setErrorAuthentification(true);
+      //Handle successful login here, such as setting user state or redirecting to another page
+    } catch (error) {
+      console.error("Login failed:", error);
+      //Handle login error, display error message, etc.
     }
   };
 
   if (shouldNavigate) {
-    return <Navigate to={redirectTo} />;
+    return <Navigate to={redirectTo} />; //@ changer redirect path par redirect to
   }
 
   return (
     <>
-      {errorAuthentification && <h2>I don't know you so go.</h2>}
+      {errorAuthentification && (
+        <>
+          <h2>I don't know you.</h2>
+        </>
+      )}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
+        enableReinitialize
       >
         <Form className="grid grid-col items-center justify-center mt-20">
           <img
@@ -125,7 +177,7 @@ export default function Login() {
             Mot de passe oublié ?
           </NavLink>
           <div className="flex justify-end items-center mt-2">
-            <Checkbox
+            <Field
               sx={{
                 color: "#0fa3b1",
                 "&.Mui-checked": {
@@ -133,6 +185,9 @@ export default function Login() {
                 },
               }}
               inputProps={{ "aria-label": "controlled" }}
+              type="checkbox"
+              id="rememberMe"
+              name="rememberMe"
             />
             <label>Se souvenir de moi ?</label>
           </div>
