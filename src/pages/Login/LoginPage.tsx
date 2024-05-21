@@ -66,15 +66,15 @@ export default function Login() {
       );
       console.log(filteredUsers);
 
-      if (filteredUsers && filteredUsers.length === 1) {
-        console.log("vous etes bien authentifie");
-        //Je suis authentifié
-        sessionStorage.setItem("token", "true");
-        //J'enregistre les infos de l'utilisateur courant/connecté
-        localStorage.setItem("currentUser", JSON.stringify({...filteredUsers[0]
-        }));
+      if (filteredUsers && filteredUsers.length === 1 && values.password === filteredUsers[0].password) {
+          console.log("vous etes bien authentifie");
+          //Je suis authentifié
+          sessionStorage.setItem("token", "true");
+          //J'enregistre les infos de l'utilisateur courant/connecté
+          localStorage.setItem("currentUser", JSON.stringify({...filteredUsers[0] }));
+          setShouldNavigate(true);
+    
 
-        setShouldNavigate(true);
       } else {
         console.log("Vous n'etes pas authorise");
         setShouldNavigate(false);

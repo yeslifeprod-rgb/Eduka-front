@@ -3,6 +3,7 @@ import NavBottom from "../../components/NavBar/NavBottom";
 import NavTopLarge from "../../components/NavBar/NavTopLarge";
 import ParsonalDataProfile from "../../components/PersonalData/PersonalDataProfile";
 import { useEffect, useState } from "react";
+import UserCard from "../../components/Card/UserCard";
 
 export default function ProfilePage() {
 
