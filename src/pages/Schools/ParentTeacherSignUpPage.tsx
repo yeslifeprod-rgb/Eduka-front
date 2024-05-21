@@ -1,5 +1,4 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import AddChildButton from "../../components/Button/ButtonAddChild";
 import ButtonRemoveChild from "../../components/Button/ButtonRemoveChild";
 import { OrangeFullButton } from "../../components/Button/CustomButton";
 import { NavBarNewProfil } from "../../components/NavBar/NavBarNewProfil";
@@ -7,6 +6,7 @@ import AddDisciplineButton from "../../components/Button/ButtonAddDiscipline";
 import { FormUserFLEInterface } from "../../services/interfaces/FormUseStateParentInterface";
 import { FormChildInterface } from "../../services/interfaces/FormUseStateChildInterface";
 import { ModalDiscipline } from "../../components/Modals/ModalDiscipline";
+import { AddChildButton } from "../../components/Button/ButtonAddChild";
 interface ParentTeacherFormInterface extends FormUserFLEInterface {
     selectedDisciplines: string[];
 }

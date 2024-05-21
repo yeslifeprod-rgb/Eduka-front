@@ -1,9 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { OrangeFullButton } from '../Button/CustomButton';
-import AddChildButton from '../Button/ButtonAddChild';
 import ButtonRemoveChild from '../Button/ButtonRemoveChild';
 import { FormChildInterface } from '../../services/interfaces/FormUseStateChildInterface';
 import { FormUserFLEInterface } from '../../services/interfaces/FormUseStateParentInterface';
+import { AddChildButton } from '../Button/ButtonAddChild';
 
 export const FormAddParent = () => {
     const [parents, setParents] = useState<FormUserFLEInterface>({
