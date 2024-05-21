@@ -1,7 +1,7 @@
 export default interface LoginInterface {
-  user_id: number;
-  role: string;
+  id?: number;
+  role?: string;
   email: string;
   password: string;
-  rememberMe: boolean;
+  rememberMe?: boolean;
 }

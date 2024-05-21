@@ -14,4 +14,5 @@ export interface userInterface {
   children: Child[];
   email: string;
   password: string;
+  role?: string;
 }
