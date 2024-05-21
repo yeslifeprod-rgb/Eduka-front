@@ -39,7 +39,6 @@ export const ModalDiscipline: FC<ModalTestProps> = ({ onClose, selectedDisciplin
       }
     }
   };
-
   const isDisciplineSelected = (discipline: string) => {
     return localSelectedDisciplines.includes(discipline);
   };

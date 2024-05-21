@@ -1,4 +1,7 @@
 import { useState } from "react";
+import ModalCategoryIsPrivateEvent from "../../components/Modals/ModalCategoryIsPrivateEvent";
+import ModalCategoryIsPublicEvent from "../../components/Modals/ModalCategoryIsPublicEvent";
+import ModalTypeEvent from "../../components/Modals/ModalTypeEvent";
 import NavBottom from "../../components/NavBar/NavBottom";
 import NavToggle from "../../components/NavBar/NavToggle";
 import NavTop from "../../components/NavBar/NavTop";
@@ -22,6 +25,9 @@ export default function HomePageParent() {
         {selectedTab === "ForYou" ? <EventsUserPage /> : <EventsPage />}
       </div>
       <NavBottom />
+      <ModalTypeEvent />
+      <ModalCategoryIsPrivateEvent />
+      <ModalCategoryIsPublicEvent />
     </>
   );
 }

@@ -46,6 +46,8 @@ export default function NavToggle(props: NavTogglePropsInterface) {
     setHasSelectedCategories(false);
   }, [location]); // Utilisation de history.location.pathname
 
+  const { openTypeEvent } = useModal();
+
   return (
     <nav
       className={`flex justify-between items-end text-sm text-gray-500 bg-white dark:text-gray-400 md:px-6 pt-8 border-gray-100 shadow-sm ${
@@ -80,7 +82,7 @@ export default function NavToggle(props: NavTogglePropsInterface) {
             style={{ color: hasSelectedCategories ? "#0fa3b1" : "inherit" }}
           />
         </IconButton>
-        <IconButton aria-label="filter" size="large">
+        <IconButton aria-label="filter" size="large" onClick={openTypeEvent}>
           <ControlPointIcon fontSize="inherit" />
         </IconButton>
       </section>

@@ -14,10 +14,10 @@ interface TeacherFormInterface extends FormUserFLEInterface {
 export const FormAddTeacher = () => {
   // État local pour stocker les données du formulaire de l'enseignant
   const [teachers, setTeachers] = useState<TeacherFormInterface>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    selectedDisciplines: []
+    firstName: "",
+    lastName: "",
+    email: "",
+    selectedDisciplines: [],
   });
 
   // État local pour gérer l'ouverture et la fermeture de la modal
@@ -50,14 +50,14 @@ export const FormAddTeacher = () => {
   // Gérer l'ouverture de la modal des disciplines
   const handleClickModalDiscipline = () => {
     setIsModalOpen(true);
-  }
+  };
 
   // Gérer la fermeture de la modal des disciplines et mettre à jour les disciplines sélectionnées
   const handleCloseModal = (selectedDisciplines: string[]) => {
     setIsModalOpen(false);
     setTeachers(prevState => ({ // je récupère les disciplines de manière asynchrone, donc je m'assure de les prendre correctement avec prevState
       ...prevState,
-      selectedDisciplines: selectedDisciplines
+      selectedDisciplines: selectedDisciplines,
     }));
   }
 
@@ -83,23 +83,31 @@ export const FormAddTeacher = () => {
             value={formik.values.email} name="email" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue" />
           <small>{formik.errors.email}</small>
         </div>
-        <div className='mt-10' onClick={handleClickModalDiscipline}>
+        <div className="mt-10" onClick={handleClickModalDiscipline}>
           <AddDisciplineButton />
         </div>
         {/* Afficher les disciplines sélectionnées */}
         <div className="mt-4 flex flex-wrap">
           {teachers.selectedDisciplines.map((discipline, index) => (
-            <div key={index} className=" px-5 py-1 border-2 border-custom-blue rounded-lg mr-3 mb-2 mt-2">{discipline}</div>
+            <div
+              key={index}
+              className=" px-5 py-1 border-2 border-custom-blue rounded-lg mr-3 mb-2 mt-2"
+            >
+              {discipline}
+            </div>
           ))}
         </div>
-        <div className='mt-5'>
+        <div className="mt-5">
           <BlueFullButton type="submit">VALIDER</BlueFullButton>
         </div>
       </form>
 
       {/* Afficher la modal des disciplines si isModalOpen est vrai */}
       {isModalOpen && (
-        <ModalDiscipline onClose={handleCloseModal} selectedDisciplines={teachers.selectedDisciplines} />
+        <ModalDiscipline
+          onClose={handleCloseModal}
+          selectedDisciplines={teachers.selectedDisciplines}
+        />
       )}
     </>
   );
