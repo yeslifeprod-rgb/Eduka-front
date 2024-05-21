@@ -1,87 +1,90 @@
 import Checkbox from "@mui/material/Checkbox";
-import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import { BlueFullButton } from "../../components/Button/Button";
+import LoginInterface from "../../services/interfaces/Login";
+import { getFakerLoginData } from "../../utils/Axios/axios";
 
 export default function Login() {
   const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
+  const [redirectTo, setRedirectTo] = useState<string>("");
   const [errorAuthentification, setErrorAuthentification] =
     useState<boolean>(false);
+  const [fakeLogin, setFakeLogin] = useState<LoginInterface[]>([]);
+
+  useEffect(() => {
+    const fetchFakeLoginData = async () => {
+      try {
+        const data = await getFakerLoginData();
+        if (data) {
+          setFakeLogin(data.datas);
+        }
+      } catch (error) {
+        console.error("Error fetching fake login data:", error);
+      }
+    };
+
+    fetchFakeLoginData();
+  }, []);
 
   const validationSchema = Yup.object({
     email: Yup.string().email("Invalid email address").required("Required"),
     password: Yup.string().required("Required"),
   });
 
-  const [initialValues, setInitialValues] = useState<LoginInterface>({
+  const initialValues: LoginInterface = {
     email: "",
     password: "",
     rememberMe: false,
-  });
-
-  // Check if credentials are stored in localStorage on component mount
-  useEffect(() => {
-    const credentialsAsString = localStorage.getItem("credentials");
-    const credentials = credentialsAsString
-      ? JSON.parse(credentialsAsString)
-      : undefined;
-
-    if (credentials) {
-      // Update initial values based on localstorage
-      setInitialValues({
-        email: credentials.email,
-        password: credentials.password,
-        rememberMe: credentials.rememberMe,
-      });
-    }
-  }, []);
+  };
 
   const handleSubmit = async (values: LoginInterface) => {
-    try {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/users"
-      );
+    const filteredUsers = fakeLogin.filter(
+      (user) =>
+        user.email.toLowerCase() === values.email.toLowerCase() &&
+        user.password === values.password
+    );
 
-      const usersList = response.data;
+    if (filteredUsers.length === 1) {
+      const user = filteredUsers[0];
+      sessionStorage.setItem("token", "true");
 
-      const filteredUsers = usersList.filter((user: { email: string }) =>
-        user.email.toLowerCase().includes(values.email.toLowerCase())
-      );
-      console.log(filteredUsers);
-
-      if (filteredUsers && filteredUsers.length === 1) {
-        console.log("vous etes bien authentifie");
-        sessionStorage.setItem("token", "true");
-        localStorage.setItem("credentials", JSON.stringify(values));
-
-        setShouldNavigate(true);
-      } else {
-        console.log("Vous n'etes pas authorise");
-        setShouldNavigate(false);
-        setErrorAuthentification(true);
+      let redirectPath = "";
+      switch (user.role) {
+        case "school_admin":
+          redirectPath = "/home_page_school";
+          break;
+        case "parent":
+          redirectPath = "/home_page_parent";
+          break;
+        case "teacher":
+          redirectPath = "/home_page_teacher";
+          break;
+        default:
+          break;
       }
 
-      // Handle successful login here, such as setting user state or redirecting to another page
-    } catch (error) {
-      console.error("Login failed:", error);
-      // Handle login error, display error message, etc.
+      setRedirectTo(redirectPath);
+      setShouldNavigate(true);
+    } else {
+      setShouldNavigate(false);
+      setErrorAuthentification(true);
     }
   };
+
+  if (shouldNavigate) {
+    return <Navigate to={redirectTo} />;
+  }
+
   return (
     <>
-      {errorAuthentification && (
-        <>
-          <h2>I don't know you so go.</h2>
-        </>
-      )}
+      {errorAuthentification && <h2>I don't know you so go.</h2>}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
-        enableReinitialize
       >
         <Form className="grid grid-col items-center justify-center mt-20">
           <img
@@ -138,7 +141,6 @@ export default function Login() {
           </div>
         </Form>
       </Formik>
-      {shouldNavigate && <Navigate to="/home_page_parent" />}
     </>
   );
 }

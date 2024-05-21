@@ -2,7 +2,7 @@ import {
   fakerEventTagsData,
   fakerEventsData,
   fakerTypeEventsData,
-  fakerUserEventsData, fakerEventsPrivateData, fakerEventsPublicData, fakerUsersData, fakerOnChangeData,
+  fakerUserEventsData, fakerEventsPrivateData, fakerEventsPublicData, fakerUsersData, fakerOnChangeData, fakerLoginData,
 } from "../Fakers/Faker";
 
 export const getFakerEventsData = async () => {
@@ -93,6 +93,18 @@ export const getFakerOnChangeData = async () => {
     // Simule une attente de 1 seconde pour imiter une requête HTTP asynchrone
     await new Promise((resolve) => setTimeout(resolve, 1000));
     const data = fakerOnChangeData;
+    // Une fois l'attente terminée, retourne les données simulées
+    return data;
+  } catch (error) {
+    console.error("Error fetching user events:", error);
+    throw error; // Renvoie l'erreur pour être traitée à un niveau supérieur
+  }
+};
+export const getFakerLoginData = async () => {
+  try {
+    // Simule une attente de 1 seconde pour imiter une requête HTTP asynchrone
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const data = fakerLoginData;
     // Une fois l'attente terminée, retourne les données simulées
     return data;
   } catch (error) {

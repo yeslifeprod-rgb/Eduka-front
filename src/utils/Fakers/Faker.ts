@@ -1,4 +1,5 @@
 import { faker, fakerFR } from "@faker-js/faker";
+import LoginInterface from "../../services/interfaces/Login";
 import { CardEventInterface } from "../../services/interfaces/event";
 import eventOnChangeInterface from "../../services/interfaces/eventOnChange";
 import { userInterface } from "../../services/interfaces/user";
@@ -887,4 +888,28 @@ const fakerOnChange: eventOnChangeInterface[] = [
 ];
 export const fakerOnChangeData = {
   datas: fakerOnChange,
+};
+
+const fakerLogin: LoginInterface = [
+  {
+    user_id: 1,
+    role: "teacher",
+    email: "teacher@example.com",
+    password: "1234",
+  },
+  {
+    user_id: 2,
+    role: "parent",
+    email: "parent@example.com",
+    password: "1234",
+  },
+  {
+    user_id: 3,
+    role: "school_admin",
+    email: "school@example.com",
+    password: "1234",
+  },
+];
+export const fakerLoginData = {
+  datas: fakerLogin,
 };

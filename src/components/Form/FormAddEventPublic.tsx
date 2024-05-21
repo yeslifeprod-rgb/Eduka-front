@@ -337,7 +337,7 @@ export default function FormAddEventPublic({
                     }`}
                   />
                   <ErrorMessage
-                    name="starDate"
+                    name="endDate"
                     component="div"
                     className="text-red-500 text-sm mt-1"
                   />
