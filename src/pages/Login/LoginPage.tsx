@@ -8,25 +8,8 @@ import { getFakerUsersData } from "../../utils/Axios/axios";
 
 export default function Login() {
   const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
-  const [redirectTo, setRedirectTo] = useState<string>("");
   const [errorAuthentification, setErrorAuthentification] =
     useState<boolean>(false);
-  const [fakeLogin, setFakeLogin] = useState<LoginInterface[]>([]);
-
-  useEffect(() => {
-    const fetchFakeLoginData = async () => {
-      try {
-        const data = await getFakerUsersData();
-        if (data) {
-          setFakeLogin(data.datas);
-        }
-      } catch (error) {
-        console.error("Error fetching fake login data:", error);
-      }
-    };
-
-    fetchFakeLoginData();
-  }, []);
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -93,20 +76,7 @@ export default function Login() {
           "currentUser",
           JSON.stringify({ ...filteredUsers[0] })
         );
-        let redirectPath = "";
-        switch (filteredUsers[0].role) {
-          case "school_admin":
-            redirectPath = "/home_page_school";
-            break;
-          case "parent":
-            redirectPath = "/home_page_parent";
-            break;
-          case "teacher":
-            redirectPath = "/home_page_teacher";
-            break;
-          default:
-            break;
-        }
+
         setShouldNavigate(true);
       } else {
         console.log("Vous n'etes pas authorise");
@@ -120,10 +90,6 @@ export default function Login() {
       //Handle login error, display error message, etc.
     }
   };
-
-  if (shouldNavigate) {
-    return <Navigate to={redirectTo} />; //@ changer redirect path par redirect to
-  }
 
   return (
     <>
@@ -196,6 +162,7 @@ export default function Login() {
           </div>
         </Form>
       </Formik>
+      {shouldNavigate && <Navigate to="/home_page_parent" />}
     </>
   );
 }
