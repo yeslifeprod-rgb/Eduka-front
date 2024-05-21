@@ -12,4 +12,6 @@ export interface userInterface {
   address: string;
   createdAt: Date;
   children: Child[];
+  email: string;
+  password: string;
 }

@@ -1,4 +1,4 @@
-export default interface ProfilModifyInterface {
+export default interface ProfileModifyInterface {
     avatar: string;
     firstname:string;
     lastname:string;

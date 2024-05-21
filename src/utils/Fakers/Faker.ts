@@ -445,7 +445,7 @@ export const fakerEventsPublicData = {
 const fakerUsers: userInterface[] = [
   {
     id: 1,
-    first_name: fakerFR.name.firstName(),
+    first_name: "Ania",
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
     address: fakerFR.location.city(),
@@ -465,10 +465,12 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: 'ania@eduka.fr',
+    password: 'eduka2024'
   },
   {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
+    id: 2,
+    first_name: 'Julien',
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
     address: fakerFR.location.city(),
@@ -484,10 +486,13 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: 'julien@eduka.fr',
+    password: 'eduka2024'
+
   },
   {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
+    id: 3,
+    first_name: 'Sylvain',
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
     address: fakerFR.location.city(),
@@ -499,10 +504,12 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: 'sylvain@eduka.fr',
+    password: 'eduka2024'
   },
   {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
+    id: 4,
+    first_name: 'Ilyes',
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
     address: fakerFR.location.city(),
@@ -522,9 +529,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: 'ilyes@eduka.fr',
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 5,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -537,9 +546,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 6,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -556,9 +567,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 7,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -571,9 +584,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 8,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -586,9 +601,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 9,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -601,9 +618,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 10,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -616,9 +635,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 11,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -631,9 +652,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 12,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -654,9 +677,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 13,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -669,9 +694,29 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
+  },
+  
+  {
+    id: 14,
+    first_name: fakerFR.name.firstName(),
+    last_name: fakerFR.name.lastName(),
+    avatar: faker.image.avatarLegacy(),
+    address: fakerFR.location.city(),
+    phone: fakerFR.phone.number(),
+    createdAt: faker.date.past(),
+    children: [
+      {
+        first_name: fakerFR.name.firstName(),
+        last_name: fakerFR.name.lastName(),
+      },
+    ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 15,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -683,10 +728,16 @@ const fakerUsers: userInterface[] = [
         first_name: fakerFR.name.firstName(),
         last_name: fakerFR.name.lastName(),
       },
+      {
+        first_name: fakerFR.name.firstName(),
+        last_name: fakerFR.name.lastName(),
+      },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 16,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -698,14 +749,12 @@ const fakerUsers: userInterface[] = [
         first_name: fakerFR.name.firstName(),
         last_name: fakerFR.name.lastName(),
       },
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 17,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -718,9 +767,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 18,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -733,9 +784,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 19,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -748,9 +801,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 20,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -763,9 +818,11 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
   {
-    id: 1,
+    id: 21,
     first_name: fakerFR.name.firstName(),
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
@@ -778,21 +835,8 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
-  },
-  {
-    id: 1,
-    first_name: fakerFR.name.firstName(),
-    last_name: fakerFR.name.lastName(),
-    avatar: faker.image.avatarLegacy(),
-    address: fakerFR.location.city(),
-    phone: fakerFR.phone.number(),
-    createdAt: faker.date.past(),
-    children: [
-      {
-        first_name: fakerFR.name.firstName(),
-        last_name: fakerFR.name.lastName(),
-      },
-    ],
+    email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
+    password: 'eduka2024'
   },
 ];
 export const fakerUsersData = {
