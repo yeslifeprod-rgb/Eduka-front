@@ -150,7 +150,7 @@ export default function Login() {
                   color: "#0fa3b1",
                 },
               }}
-              inputProps={{ "aria-label": "controlled" }}
+              inputprops={{ "aria-label": "controlled" }}
               type="checkbox"
               id="rememberMe"
               name="rememberMe"
