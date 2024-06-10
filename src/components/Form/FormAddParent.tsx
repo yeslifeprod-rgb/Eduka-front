@@ -1,9 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { OrangeFullButton } from '../Button/CustomButton';
 import AddChildButton from '../Button/ButtonAddChild';
+
+import { FormUserFLEInterface } from '../../utils/Interface/FormUseStateParentInterface';
 import ButtonRemoveChild from '../Button/ButtonRemoveChild';
 import { FormChildInterface } from '../../utils/Interface/FormUseStateChildInterface';
-import { FormUserFLEInterface } from '../../utils/Interface/FormUseStateParentInterface';
+
 
 
 
@@ -32,7 +34,7 @@ export const FormAddParent = () => {
     
         if (name === 'lastName' || name === 'firstName' || name === 'email') {
             // met à jour les informations des parents dans l'état et efface les erreurs de formulaire pour ce champ.
-            setParents(prevParents => ({ ...prevParents, [name]: value }));
+            setParents((prevParents: any) => ({ ...prevParents, [name]: value }));
             setFormErrors(prevErrors => ({ ...prevErrors, [name]: '' }));
         } else {
             // Si le champ de formulaire modifié est un champ pour un enfant :
