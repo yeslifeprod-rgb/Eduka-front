@@ -1,6 +1,5 @@
-import Button from '@mui/material/Button';
-import { styled } from '@mui/system';
-
+import Button from "@mui/material/Button";
+import { styled } from "@mui/system";
 
 //Grand Bouton bleu
 export const GreatBlueButton = styled(Button)({
@@ -71,51 +70,33 @@ export const GreatOrangeBleuButton = styled(Button)({
   },
 }) as typeof Button;
 
-// Bouton full orange
-export const OrangeFullButton = styled(Button)`
-  color: white;
-  border: 2px solid #F7A072;
-  border-radius: 10px;
-  width: 300px; /* Taille par défaut pour les écrans de taille moyenne */
-  height: 40px;
-  background-color: #F7A072;
+//Bouton full orange
+export const OrangeFullButton = styled(Button)({
+  color: "white",
+  border: "2px solid #F7A072",
+  borderRadius: "10px",
+  width: "384px",
+  height: "40px",
+  backgroundColor: "#F7A072",
+  "&:hover": {
+    backgroundColor: "#F7A072",
+    borderColor: "#F7A072",
+  },
+}) as typeof Button;
 
-  &:hover {
-    background-color: #F7A072;
-    border-color: #F7A072;
-  }
-
-  @media (max-width: 640px) { /* sm breakpoint */
-    width: 100%;
-  }
-
-  @media (min-width: 641px) and (max-width: 1024px) { /* md breakpoint */
-    width: 384px;
-  }
-`;
-//Bouton BlueFullButton
-export const BlueFullButton = styled(Button)`
-  color: white;
-  border: 2px solid #0FA3B1;
-  border-radius: 10px;
-  width: 300px; /* Taille par défaut pour les écrans de taille moyenne */
-  height: 40px;
-  background-color: #0FA3B1;
-
-  &:hover {
-    background-color: #0FA3B1;
-    border-color: #0FA3B1;
-  }
-
-  @media (max-width: 640px) { /* sm breakpoint */
-    width: 100%;
-  }
-
-  @media (min-width: 641px) and (max-width: 1024px) { /* md breakpoint */
-    width: 384px;
-  }
-`;
-
+//Bouton full bleu
+export const BlueFullButton = styled(Button)({
+  color: "white",
+  border: "2px solid #0FA3B1",
+  borderRadius: "10px",
+  width: "384px",
+  height: "40px",
+  backgroundColor: "#0FA3B1",
+  "&:hover": {
+    backgroundColor: "#0FA3B1",
+    borderColor: "#0FA3B1",
+  },
+}) as typeof Button;
 
 //Bouton bleu ajouter un enfant
 export const ButtonAddChild = styled(Button)({
@@ -124,15 +105,33 @@ export const ButtonAddChild = styled(Button)({
   borderRadius: "5px",
   width: "180px",
   height: "40px",
-  textTransform: 'none',
-  '& .MuiSvgIcon-root': {
-    transition: 'color 0.3s',
+  textTransform: "none",
+  "& .MuiSvgIcon-root": {
+    transition: "color 0.3s",
   },
   "&:hover": {
     backgroundColor: "#0FA3B1",
     color: "white",
-    '& .MuiSvgIcon-root': {
-      color: 'white',
+    "& .MuiSvgIcon-root": {
+      color: "white",
+    },
+  },
+}) as typeof Button;
+export const ButtonAddChildOrange = styled(Button)({
+  color: "black",
+  border: "2px solid #F7A072",
+  borderRadius: "5px",
+  width: "180px",
+  height: "40px",
+  textTransform: "none",
+  "& .MuiSvgIcon-root": {
+    transition: "color 0.3s",
+  },
+  "&:hover": {
+    backgroundColor: "#F7A072",
+    color: "white",
+    "& .MuiSvgIcon-root": {
+      color: "white",
     },
   },
 }) as typeof Button;
@@ -144,15 +143,53 @@ export const ButtonAddDiscipline = styled(Button)({
   borderRadius: "5px",
   width: "190px",
   height: "40px",
-  textTransform: 'none',
-  '& .MuiSvgIcon-root': {
-    transition: 'color 0.3s',
+  textTransform: "none",
+  "& .MuiSvgIcon-root": {
+    transition: "color 0.3s",
   },
   "&:hover": {
     backgroundColor: "#0FA3B1",
     color: "white",
-    '& .MuiSvgIcon-root': {
-      color: 'white',
+    "& .MuiSvgIcon-root": {
+      color: "white",
+    },
+  },
+}) as typeof Button;
+
+export const ButtonAddTagsStyle = styled(Button)({
+  color: "black",
+  border: "2px solid #0FA3B1",
+  borderRadius: "5px",
+  width: "120px",
+  height: "40px",
+  textTransform: "none",
+  "& .MuiSvgIcon-root": {
+    transition: "color 0.3s",
+  },
+  "&:hover": {
+    backgroundColor: "#0FA3B1",
+    color: "white",
+    "& .MuiSvgIcon-root": {
+      color: "white",
+    },
+  },
+}) as typeof Button;
+
+export const ButtonAddTagsOrangeStyle = styled(Button)({
+  color: "black",
+  border: "2px solid #F7A072",
+  borderRadius: "5px",
+  width: "120px",
+  height: "40px",
+  textTransform: "none",
+  "& .MuiSvgIcon-root": {
+    transition: "color 0.3s",
+  },
+  "&:hover": {
+    backgroundColor: "#F7A072",
+    color: "white",
+    "& .MuiSvgIcon-root": {
+      color: "white",
     },
   },
 }) as typeof Button;
@@ -164,15 +201,15 @@ export const ButtonDeleteChild = styled(Button)({
   borderRadius: "5px",
   width: "180px",
   height: "40px",
-  textTransform: 'none',
-  '& .MuiSvgIcon-root': {
-    transition: 'color 0.3s',
+  textTransform: "none",
+  "& .MuiSvgIcon-root": {
+    transition: "color 0.3s",
   },
   "&:hover": {
     backgroundColor: "#F7A072",
     color: "white",
-    '& .MuiSvgIcon-root': {
-      color: 'white',
+    "& .MuiSvgIcon-root": {
+      color: "white",
     },
   },
 }) as typeof Button;
@@ -188,10 +225,22 @@ export const BlueSelectedButton = styled(Button)({
   "&.selected": {
     backgroundColor: "#0FA3B1",
     color: "white",
-    '&:hover': {
+    "&:hover": {
       backgroundColor: "#0FA3B1",
     },
-  }
+  },
 }) as typeof Button;
 
-
+//@dev AK add an icon
+export const OrangeFullButtonDeleteIcon = styled(Button)({
+  color: "white",
+  border: "2px solid #F7A072",
+  borderRadius: "10px",
+  width: "384px",
+  height: "40px",
+  backgroundColor: "#F7A072",
+  "&:hover": {
+    backgroundColor: "#F7A072",
+    borderColor: "#F7A072",
+  },
+}) as typeof Button;

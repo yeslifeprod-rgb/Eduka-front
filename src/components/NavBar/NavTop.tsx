@@ -19,7 +19,7 @@ export default function NavTop() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos]);
 
-  const { openModal } = useModal();
+  const { openModal, openTypeEvent } = useModal();
 
   return (
     <div className="lg:hidden">
@@ -35,10 +35,10 @@ export default function NavTop() {
           <img src="./public/logo.png" alt="eduka" />
         </section>
         <section>
-          <IconButton aria-label="filter" size="large">
-            <FilterAltIcon fontSize="inherit" onClick={openModal} />
+          <IconButton aria-label="filter" size="large" onClick={openModal}>
+            <FilterAltIcon fontSize="inherit" />
           </IconButton>
-          <IconButton aria-label="add" size="large">
+          <IconButton aria-label="add" size="large" onClick={openTypeEvent}>
             <ControlPointIcon fontSize="inherit" />
           </IconButton>
         </section>

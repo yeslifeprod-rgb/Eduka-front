@@ -37,7 +37,7 @@ export const ModalDiscipline: React.FC<ModalTestProps> = ({ onClose, selectedDis
     };
 
     return (
-        <Box className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-opacity-80 bg-black">
+        <Box className="fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center backdrop-blur-sm bg-opacity-20 bg-black">
             <section className="bg-white w-full max-w-md border-2 rounded-lg shadow-sm p-4">
                 <div className="flex items-center justify-between py-2">
                     <IconButton aria-label="delete" size="large" onClick={() => onClose(localSelectedDisciplines)}>

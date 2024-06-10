@@ -1,9 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import AddChildButton from "../Button/ButtonAddChild";
+import { FormChildInterface } from "../../services/interfaces/FormUseStateChildInterface";
+import { FormUserFLEInterface } from "../../services/interfaces/FormUseStateParentInterface";
+import { AddChildButton } from "../Button/ButtonAddChild";
+import ButtonRemoveChild from "../Button/ButtonRemoveChild";
 import { OrangeFullButton } from "../Button/CustomButton";
-
-import { FormChildInterface } from "../../utils/Interface/FormUseStateChildInterface";
-import { FormUserFLEInterface } from "../../utils/Interface/FormUseStateParentInterface";
 
 export const FormAddParent = () => {
   const [parents, setParents] = useState<FormUserFLEInterface>({
@@ -22,22 +22,18 @@ export const FormAddParent = () => {
 
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    //extraction du nom [name] et la valeur du champ de formulaire qui a déclenché l'événement de changement.
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
 
     if (name === "lastName" || name === "firstName" || name === "email") {
-      // met à jour les informations des parents dans l'état et efface les erreurs de formulaire pour ce champ.
-      setParents((prevParents: any) => ({ ...prevParents, [name]: value }));
+      setParents((prevParents) => ({ ...prevParents, [name]: value }));
       setFormErrors((prevErrors) => ({ ...prevErrors, [name]: "" }));
     } else {
-      // Si le champ de formulaire modifié est un champ pour un enfant :
-      //extraction de l'index de l'enfant de l'attribut [name] du champ de formulaire modifié.
       const childIndex = Number(name.split("_")[1]);
-      //Extraction du nom du champ de l'attribut [name] du champ de formulaire modifié.
       const childField = name.split("_")[0];
 
-      // Met à jour les informations de l'enfant correspondant dans l'état des enfants.
       setChildren((prevChildren) =>
         prevChildren.map((child, index) => {
           if (index === childIndex) {
@@ -47,7 +43,6 @@ export const FormAddParent = () => {
         })
       );
 
-      // Efface les erreurs de formulaire pour le champ d'enfant modifié.
       setFormErrors((prevErrors) => ({
         ...prevErrors,
         [`child_${childIndex}_${childField}`]: "",
@@ -60,7 +55,6 @@ export const FormAddParent = () => {
 
     const errors: { [key: string]: string } = {};
 
-    // Validation des champs du parent
     if (!parents.firstName.trim()) {
       errors.firstName = "Le prénom est requis.";
     } else if (parents.firstName.trim().length < 2) {
@@ -80,7 +74,6 @@ export const FormAddParent = () => {
       errors.email = "L'email est invalide.";
     }
 
-    // Validation des champs des enfants
     children.forEach((child, index) => {
       if (!child.name.trim()) {
         errors[`child_${index}_name`] = "Le nom de l'enfant est requis.";
@@ -135,9 +128,7 @@ export const FormAddParent = () => {
             onChange={handleChange}
             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
           />
-          {formErrors.lastName && (
-            <p className="text-custom-orange">{formErrors.lastName}</p>
-          )}
+          <p className="text-custom-orange">{formErrors.lastName}</p>
         </div>
         <div className="mb-4">
           <label htmlFor="firstName">Prénom</label>
@@ -147,9 +138,7 @@ export const FormAddParent = () => {
             onChange={handleChange}
             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
           />
-          {formErrors.firstName && (
-            <p className="text-custom-orange">{formErrors.firstName}</p>
-          )}
+          <p className="text-custom-orange">{formErrors.firstName}</p>
         </div>
         <div className="mb-4">
           <label htmlFor="email">Email</label>
@@ -159,9 +148,7 @@ export const FormAddParent = () => {
             onChange={handleChange}
             className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
           />
-          {formErrors.email && (
-            <p className="text-custom-orange">{formErrors.email}</p>
-          )}
+          <p className="text-custom-orange">{formErrors.email}</p>
         </div>
         {children.map((child, index) => (
           <div key={index}>
@@ -176,51 +163,54 @@ export const FormAddParent = () => {
                 onChange={handleChange}
                 className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
               />
-              {formErrors[`child_${index}_name`] && (
-                <p className="text-custom-orange">
-                  {formErrors[`child_${index}_name`]}
-                </p>
-              )}
+              <p className="text-custom-orange">
+                {formErrors[`child_${index}_name`]}
+              </p>
             </div>
             <div className="mb-4">
               <label htmlFor={`birthday${index + 1}`}>
                 Date de naissance de l'enfant {index + 1}
               </label>
               <input
-                type="text"
+                type="date"
                 name={`birthday_${index}`}
                 value={child.birthday}
                 onChange={handleChange}
                 className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
               />
-              {formErrors[`child_${index}_birthday`] && (
-                <p className="text-custom-orange">
-                  {formErrors[`child_${index}_birthday`]}
-                </p>
-              )}
+              <p className="text-custom-orange">
+                {formErrors[`child_${index}_birthday`]}
+              </p>
             </div>
             <div className="mb-4">
               <label htmlFor={`classChild${index + 1}`}>
                 Classe de l'enfant {index + 1}
               </label>
-              <input
-                type="text"
+              <select
                 name={`class_${index}`}
                 value={child.class}
                 onChange={handleChange}
                 className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
-              />
-              {formErrors[`child_${index}_class`] && (
-                <p className="text-custom-orange">
-                  {formErrors[`child_${index}_class`]}
-                </p>
+              >
+                <option value="">Sélectionnez une classe</option>
+                <option value="CP">CP</option>
+                <option value="CE1">CE1</option>
+                <option value="CE2">CE2</option>
+                <option value="CM1">CM1</option>
+                <option value="CM2">CM2</option>
+              </select>
+              <p className="text-custom-orange">
+                {formErrors[`child_${index}_class`]}
+              </p>
+              {index > 0 && (
+                <div
+                  className="flex justify-end"
+                  onClick={() => handleRemoveChild(index)}
+                >
+                  <ButtonRemoveChild />
+                </div>
               )}
             </div>
-            {index > 0 && (
-              <div onClick={() => handleRemoveChild(index)}>
-                <ButtonRemoveChild />
-              </div>
-            )}
           </div>
         ))}
         <div className="mt-6" onClick={handleAddChild}>

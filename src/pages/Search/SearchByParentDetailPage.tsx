@@ -11,7 +11,7 @@ export default function MessageDetailPage() {
       {user ? (
         <>
           <div className=" bg-white w-full flex justify-start items-center py-5 px-4 ">
-            <NavLink to="/search">
+            <NavLink to="/search_by_parent">
               <IconButton aria-label="delete" size="large">
                 <CloseIcon fontSize="inherit" />
               </IconButton>
@@ -28,8 +28,19 @@ export default function MessageDetailPage() {
                 </p>
               </section>
             </div>
-            <p>Téléphone: {` ${user.phone}`}</p>
             <p>Adresse : {` ${user.address}`}</p>
+            <p>Téléphone: {` ${user.phone}`}</p>
+            <p>Enfant(s) : </p>
+            {user.children.map(
+              (
+                child: { first_name: string; last_name: string },
+                index: number
+              ) => (
+                <div key={index}>
+                  <p>{`${child.first_name} ${child.last_name}`}</p>
+                </div>
+              )
+            )}
           </div>
         </>
       ) : (

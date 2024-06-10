@@ -1,7 +1,7 @@
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { ButtonAddChild } from './CustomButton';
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { ButtonAddChild, ButtonAddChildOrange } from "./CustomButton";
 
-export default function AddChildButton() {
+export function AddChildButton() {
   return (
     <ButtonAddChild
       variant="outlined"
@@ -9,5 +9,15 @@ export default function AddChildButton() {
     >
       Ajouter un enfant
     </ButtonAddChild>
+  );
+}
+export function AddChildButtonOrange() {
+  return (
+    <ButtonAddChildOrange
+      variant="outlined"
+      endIcon={<AddCircleIcon sx={{ color: "#F7A072" }} />}
+    >
+      Ajouter un enfant
+    </ButtonAddChildOrange>
   );
 }

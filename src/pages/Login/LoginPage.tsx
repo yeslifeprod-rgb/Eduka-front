@@ -1,10 +1,10 @@
-import Checkbox from "@mui/material/Checkbox";
-import axios from "axios";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import { BlueFullButton } from "../../components/Button/Button";
+import LoginInterface from "../../services/interfaces/Login";
+import { getFakerUsersData } from "../../utils/Axios/axios";
 
 export default function Login() {
   const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
@@ -12,8 +12,10 @@ export default function Login() {
     useState<boolean>(false);
 
   const validationSchema = Yup.object({
-    email: Yup.string().email("Invalid email address").required("Required"),
-    password: Yup.string().required("Required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("L'adresse email est requis"),
+    password: Yup.string().required("Le mot de passe est requis"),
   });
 
   const [initialValues, setInitialValues] = useState<LoginInterface>({
@@ -24,7 +26,7 @@ export default function Login() {
 
   // Check if credentials are stored in localStorage on component mount
   useEffect(() => {
-    const credentialsAsString = localStorage.getItem("credentials");
+    const credentialsAsString = localStorage.getItem("rememeberMeCredentials");
     const credentials = credentialsAsString
       ? JSON.parse(credentialsAsString)
       : undefined;
@@ -39,23 +41,41 @@ export default function Login() {
     }
   }, []);
 
+  const handleRememberMe = (values: LoginInterface) => {
+    if (values.rememberMe) {
+      localStorage.setItem("rememeberMeCredentials", JSON.stringify(values));
+    } else {
+      localStorage.removeItem("rememeberMeCredentials");
+    }
+  };
+
   const handleSubmit = async (values: LoginInterface) => {
     try {
-      const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/users"
-      );
+      //Sauvegarde ou detruis l'email et le mot de passe pour le cas "se souvenir de moi"
+      handleRememberMe(values);
 
-      const usersList = response.data;
+      const response = await getFakerUsersData();
+
+      const usersList = response.datas;
 
       const filteredUsers = usersList.filter((user: { email: string }) =>
         user.email.toLowerCase().includes(values.email.toLowerCase())
       );
       console.log(filteredUsers);
 
-      if (filteredUsers && filteredUsers.length === 1) {
+      if (
+        filteredUsers &&
+        filteredUsers.length === 1 &&
+        values.password === filteredUsers[0].password
+      ) {
         console.log("vous etes bien authentifie");
+        //Je suis authentifié
         sessionStorage.setItem("token", "true");
-        localStorage.setItem("credentials", JSON.stringify(values));
+        //J'enregistre les infos de l'utilisateur courant/connecté
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({ ...filteredUsers[0] })
+        );
 
         setShouldNavigate(true);
       } else {
@@ -64,17 +84,18 @@ export default function Login() {
         setErrorAuthentification(true);
       }
 
-      // Handle successful login here, such as setting user state or redirecting to another page
+      //Handle successful login here, such as setting user state or redirecting to another page
     } catch (error) {
       console.error("Login failed:", error);
-      // Handle login error, display error message, etc.
+      //Handle login error, display error message, etc.
     }
   };
+
   return (
     <>
       {errorAuthentification && (
         <>
-          <h2>I don't know you so go.</h2>
+          <h2>I don't know you.</h2>
         </>
       )}
       <Formik
@@ -118,18 +139,21 @@ export default function Login() {
               name="password"
             />
           </div>
-          <NavLink className="flex justify-end mt-10" to="#">
+          <NavLink className="flex justify-end mt-10" to="/change_password">
             Mot de passe oublié ?
           </NavLink>
           <div className="flex justify-end items-center mt-2">
-            <Checkbox
+            <Field
               sx={{
                 color: "#0fa3b1",
                 "&.Mui-checked": {
                   color: "#0fa3b1",
                 },
               }}
-              inputProps={{ "aria-label": "controlled" }}
+              inputprops={{ "aria-label": "controlled" }}
+              type="checkbox"
+              id="rememberMe"
+              name="rememberMe"
             />
             <label>Se souvenir de moi ?</label>
           </div>
