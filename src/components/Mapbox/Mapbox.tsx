@@ -33,29 +33,25 @@ const MapBoxComponent: React.FC<{ location: LocationType }> = ({ location }) => 
                     'fill-extrusion-opacity': 0.8 // Opacité des bâtiments
                 }
             });
-
-            // Récupérer les coordonnées géographiques de l'adresse spécifiée avec Axios
-            axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${mapboxgl.accessToken}`)
-                .then((response) => {
-                    const data = response.data;
-                    if (data.features && data.features.length > 0) {
-                        const coordinates = data.features[0].geometry.coordinates;
-                        console.log("Coordinates:", coordinates); // Debugging line
-
-                        // Centrer la carte sur l'emplacement spécifié
-                        map.setCenter(coordinates);
-                        map.setZoom(13); // Zoom sur l'emplacement spécifié
-
-                        // Ajouter un marqueur à l'emplacement spécifié
-                        new mapboxgl.Marker().setLngLat(coordinates).addTo(map);
-                    } else {
-                        console.error("Aucune coordonnée trouvée pour l'emplacement spécifié.");
-                    }
-                })
-                .catch((error) => {
-                    console.error("Erreur lors de la récupération des coordonnées :", error);
-                });
         });
+
+        // Récupérer les coordonnées géographiques de l'adresse spécifiée avec Axios
+        axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${mapboxgl.accessToken}`)
+            .then((response) => {
+                const data = response.data;
+                const coordinates = data.features[0].geometry.coordinates;
+                const center = [coordinates[0], coordinates[1]];
+
+                // Centrer la carte sur l'emplacement spécifié
+                map.setCenter(center);
+                map.setZoom(13); // Zoom sur l'emplacement spécifié
+
+                // Ajouter un marqueur à l'emplacement spécifié
+                new mapboxgl.Marker().setLngLat(center).addTo(map);
+            })
+            .catch((error) => {
+                console.error("Erreur lors de la récupération des coordonnées :", error);
+            });
 
         return () => {
             map.remove();
