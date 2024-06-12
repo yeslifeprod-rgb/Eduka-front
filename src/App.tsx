@@ -25,10 +25,12 @@ import NotFoundPage from "./utils/NotFoundPage";
 import PrivateRoute from "./utils/PrivateRoute";
 
 import { EditMyProfil } from "./pages/EditProfilBySchool/EditMyProfil";
-import { EditProfilBySchoolPage } from "./pages/EditProfilBySchool/EditProfilBySchoolPage";
 import ProfilModifyPage from "./pages/Profil/ProfileModifyPage";
 import ProfilePage from "./pages/Profil/ProfilePage";
 import EventPublicPage from "./pages/EventPublic/EventPublicPage";
+import EventPrivatePage from "./pages/EventPrivate/EventPrivatePage";
+
+
 
 function App() {
   return (
@@ -41,13 +43,12 @@ function App() {
             <Route path="/home_page_parent" element={<HomePageParent />} />
             <Route path="/home_page_school" element={<HomePageSchool />} />
             <Route path="/edit_my_profil" element={<EditMyProfil />} />
-            <Route
-              path="/edit_profil_by_school"
-              element={<EditProfilBySchoolPage />}
-            />
-            <Route path="/edit_profil_by_school" element={<EditProfilBySchoolPage />} />
+
 
             <Route path="/event_public_page/information" element={<EventPublicPage />} />
+
+
+            <Route path="/event_private_page/information" element={<EventPrivatePage />} />
 
             <Route path="/school_create_user" element={<SchoolCreateUser />} />
             <Route path="/parent_sign_up_page" element={<ParentSignUpPage />} />
