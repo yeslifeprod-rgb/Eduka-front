@@ -4,8 +4,9 @@ import { Button } from "@mui/material";
 import { BlueFullButton } from "../../components/Button/CustomButton";
 import NavToggleEvent from "./NavToggleEvent";
 import { FakePost } from "./Faker";
-import MapBoxComponent from "../../components/MapBox/Mapbox";
+
 import { NavLink } from "react-router-dom";
+import MapBoxComponent from "../../components/Mapbox/Mapbox";
 
 export default function EventPrivatePage() {
     const [responseText, setResponseText] = useState<string>("Vous n'avez pas encore répondu");
