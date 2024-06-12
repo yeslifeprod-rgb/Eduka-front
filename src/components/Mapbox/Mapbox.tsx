@@ -1,88 +1,68 @@
-import axios from "axios";
+import React, { useEffect } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import React, { useEffect } from "react";
+import axios from "axios";
 
-mapboxgl.accessToken =
-  "pk.eyJ1IjoieWVzbGlmZTEwIiwiYSI6ImNsdnV5amx3czFrN20ya29kcnIybXp4YzUifQ.w4zlwaAcEw8H-k8KO7JWow"; // Replace with your Mapbox access token
+// Définir un type pour la propriété location
+type LocationType = string;
 
-const MapBoxAddEvent: React.FC = () => {
-  useEffect(() => {
-    // Retrieve the address from local storage
-    const storedDataString = localStorage.getItem("storedDataEvent");
-    const address = storedDataString
-      ? JSON.parse(storedDataString).address
-      : "";
+mapboxgl.accessToken = 'pk.eyJ1IjoieWVzbGlmZTEwIiwiYSI6ImNsdnV5amx3czFrN20ya29kcnIybXp4YzUifQ.w4zlwaAcEw8H-k8KO7JWow'; // Remplacez par votre clé d'accès à Mapbox
 
-    if (!address) {
-      console.error("No address found in local storage");
-      return;
-    }
+const MapBoxComponent: React.FC<{ location: LocationType }> = ({ location }) => {
+    useEffect(() => {
+        const map = new mapboxgl.Map({
+            container: "map",
+            style: "mapbox://styles/mapbox/streets-v11", // Utilisation d'un style de carte avec les routes et les villes
+            center: [0, 0],
+            zoom: 1
+        });
 
-    const map = new mapboxgl.Map({
-      container: "map",
-      style: "mapbox://styles/mapbox/streets-v11", // Use a map style with streets and cities
-      center: [0, 0],
-      zoom: 1,
-    });
+        // Ajouter la couche 3D des bâtiments
+        map.on('load', () => {
+            map.addLayer({
+                'id': '3d-buildings',
+                'source': 'composite',
+                'source-layer': 'building',
+                'filter': ['==', 'extrude', 'true'],
+                'type': 'fill-extrusion',
+                'minzoom': 15,
+                'paint': {
+                    'fill-extrusion-color': '#aaa', // Couleur des bâtiments
+                    'fill-extrusion-height': ['get', 'height'], // Hauteur des bâtiments
+                    'fill-extrusion-base': ['get', 'minheight'], // Base des bâtiments
+                    'fill-extrusion-opacity': 0.8 // Opacité des bâtiments
+                }
+            });
 
-    // Add the 3D buildings layer
-    map.on("load", () => {
-      map.addLayer({
-        id: "3d-buildings",
-        source: "composite",
-        "source-layer": "building",
-        filter: ["==", "extrude", "true"],
-        type: "fill-extrusion",
-        minzoom: 15,
-        paint: {
-          "fill-extrusion-color": "#aaa", // Building color
-          "fill-extrusion-height": ["get", "height"], // Building height
-          "fill-extrusion-base": ["get", "minheight"], // Building base
-          "fill-extrusion-opacity": 0.8, // Building opacity
-        },
-      });
-    });
+            // Récupérer les coordonnées géographiques de l'adresse spécifiée avec Axios
+            axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${location}.json?access_token=${mapboxgl.accessToken}`)
+                .then((response) => {
+                    const data = response.data;
+                    if (data.features && data.features.length > 0) {
+                        const coordinates = data.features[0].geometry.coordinates;
+                        console.log("Coordinates:", coordinates); // Debugging line
 
-    // Get the geographic coordinates of the specified address with Axios
-    axios
-      .get(
-        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
-          address
-        )}.json?access_token=${mapboxgl.accessToken}`
-      )
-      .then((response) => {
-        const data = response.data;
-        if (data.features.length === 0) {
-          console.error("No features found for the specified address");
-          return;
-        }
-        const coordinates = data.features[0].geometry.coordinates;
-        const center = [coordinates[0], coordinates[1]];
+                        // Centrer la carte sur l'emplacement spécifié
+                        map.setCenter(coordinates);
+                        map.setZoom(13); // Zoom sur l'emplacement spécifié
 
-        // Center the map on the specified location
-        map.setCenter(center);
-        map.setZoom(13); // Zoom in on the specified location
+                        // Ajouter un marqueur à l'emplacement spécifié
+                        new mapboxgl.Marker().setLngLat(coordinates).addTo(map);
+                    } else {
+                        console.error("Aucune coordonnée trouvée pour l'emplacement spécifié.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Erreur lors de la récupération des coordonnées :", error);
+                });
+        });
 
-        // Add a marker at the specified location
-        new mapboxgl.Marker().setLngLat(center).addTo(map);
-      })
-      .catch((error) => {
-        console.error("Error retrieving coordinates:", error);
-      });
+        return () => {
+            map.remove();
+        };
+    }, [location]);
 
-    return () => {
-      map.remove();
-    };
-  }, []);
-
-  return (
-    <div
-      id="map"
-      className="my-5 rounded"
-      style={{ height: "400px", width: "100%" }}
-    ></div>
-  );
+    return <div id="map" style={{ height: "400px", width: "100%" }}></div>;
 };
 
-export default MapBoxAddEvent;
+export default MapBoxComponent;
