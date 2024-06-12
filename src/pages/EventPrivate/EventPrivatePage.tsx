@@ -3,10 +3,11 @@ import axios from 'axios';
 import { Button } from "@mui/material";
 import { BlueFullButton, OrangeFullButton } from "../../components/Button/CustomButton";
 import NavToggleEvent from "./NavToggleEvent";
-import MapBoxComponent from "../../components/MapBox/Mapbox";
+
 import { ModalChildren } from "../../components/ModalChildren/ModalChildren";
 import { FakePost } from "./Faker";
 import { NavLink } from "react-router-dom";
+import MapBoxComponent from "../../components/Mapbox/Mapbox";
 
 
 interface FormData {
