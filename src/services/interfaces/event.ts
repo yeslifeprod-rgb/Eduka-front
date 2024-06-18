@@ -17,6 +17,8 @@ export interface CardEventInterface {
   photo_profil?: string;
   address: string;
   tags?: string[] | null;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface EventInterface

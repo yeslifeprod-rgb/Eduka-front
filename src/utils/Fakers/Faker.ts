@@ -29,6 +29,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 48.8566,
+    longitude: 2.3522,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -39,6 +41,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.avatarLegacy(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 43.2965,
+    longitude: 5.3698,
   },
 
   {
@@ -50,6 +54,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 43.2965,
+    longitude: 5.3698,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -60,6 +66,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 45.764,
+    longitude: 4.8357,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -70,6 +78,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 43.6047,
+    longitude: 1.4442,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -80,6 +90,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 43.6047,
+    longitude: 1.4442,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -90,6 +102,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 43.7102,
+    longitude: 7.262,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -100,6 +114,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
 
   {
@@ -111,6 +127,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -121,6 +139,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -131,6 +151,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -141,6 +163,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -151,6 +175,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -161,6 +187,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
 
   {
@@ -172,6 +200,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -182,6 +212,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -192,6 +224,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -202,6 +236,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -212,6 +248,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: faker.address.latitude(),
+    longitude: faker.address.longitude(),
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -222,6 +260,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
 
   {
@@ -233,6 +273,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -243,6 +285,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -253,6 +297,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -263,6 +309,8 @@ const fakerEvents: CardEventInterface[] = [
     photo_profil: faker.image.avatarLegacy(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
 ];
 
@@ -280,6 +328,8 @@ const fakerUserEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 48.8566,
+    longitude: 2.3522,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -290,6 +340,8 @@ const fakerUserEvents: CardEventInterface[] = [
     photo_profil: faker.image.avatarLegacy(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 43.2965,
+    longitude: 5.3698,
   },
 
   {
@@ -301,6 +353,8 @@ const fakerUserEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 43.2965,
+    longitude: 5.3698,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -308,9 +362,11 @@ const fakerUserEvents: CardEventInterface[] = [
     description: faker.lorem.paragraphs(),
     date: faker.date.future(),
     image: faker.image.imageUrl(300, 300, "sports", true),
-    photo_profil: faker.image.avatarLegacy(),
+    photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 45.764,
+    longitude: 4.8357,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -321,6 +377,8 @@ const fakerUserEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 43.6047,
+    longitude: 1.4442,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -328,9 +386,11 @@ const fakerUserEvents: CardEventInterface[] = [
     description: faker.lorem.paragraphs(),
     date: faker.date.future(),
     image: faker.image.imageUrl(300, 300, "sports", true),
-    photo_profil: faker.image.avatarLegacy(),
+    photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 43.6047,
+    longitude: 1.4442,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -341,6 +401,8 @@ const fakerUserEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 43.7102,
+    longitude: 7.262,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -348,9 +410,11 @@ const fakerUserEvents: CardEventInterface[] = [
     description: faker.lorem.paragraphs(),
     date: faker.date.future(),
     image: faker.image.imageUrl(300, 300, "sports", true),
-    photo_profil: faker.image.avatarLegacy(),
+    photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
 
   {
@@ -362,6 +426,8 @@ const fakerUserEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -369,9 +435,11 @@ const fakerUserEvents: CardEventInterface[] = [
     description: faker.lorem.paragraphs(),
     date: faker.date.future(),
     image: faker.image.imageUrl(300, 300, "sports", true),
-    photo_profil: faker.image.avatarLegacy(),
+    photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -382,6 +450,8 @@ const fakerUserEvents: CardEventInterface[] = [
     photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["anniversaire", "Cagnotte"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
   {
     firstname_profil: faker.person.fullName(),
@@ -389,9 +459,108 @@ const fakerUserEvents: CardEventInterface[] = [
     description: faker.lorem.paragraphs(),
     date: faker.date.future(),
     image: faker.image.imageUrl(300, 300, "sports", true),
-    photo_profil: faker.image.avatarLegacy(),
+    photo_profil: faker.image.people(),
     address: fakerFR.location.city(),
     tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+    latitude: 47.2184,
+    longitude: -1.5536,
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
+  },
+
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+    latitude: 47.2184,
+    longitude: -1.5536,
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+    latitude: 47.2184,
+    longitude: -1.5536,
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+    latitude: faker.address.latitude(),
+    longitude: faker.address.longitude(),
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+    latitude: 47.2184,
+    longitude: -1.5536,
   },
 ];
 

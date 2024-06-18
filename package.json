@@ -24,6 +24,7 @@
     "@mui/material": "^5.15.15",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@mui/x-date-pickers": "^7.5.0",
+    "@turf/bbox": "^7.0.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "date-fns": "^3.6.0",
@@ -41,13 +42,14 @@
     "react-spinners": "^0.13.8",
     "styled-components": "^6.1.8",
     "use-places-autocomplete": "^4.0.1",
+    "viewport-mercator-project": "^7.0.4",
     "yup": "^1.4.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@types/faker": "^6.6.9",
-    "@types/mapbox__mapbox-gl-geocoder": "^5.0.0",
     "@types/mapbox-gl": "^3.1.0",
+    "@types/mapbox__mapbox-gl-geocoder": "^5.0.0",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
