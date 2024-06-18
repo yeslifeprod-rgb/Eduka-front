@@ -1,19 +1,31 @@
+import { format } from "date-fns";
 import { useEffect, useState } from "react";
+import CardEvent from "../../components/Card/EventCard";
 import { NavBarProfil } from "../../components/NavBar/NavBarProfil";
-import { getFakeEventsData, getProfilData, getUserData } from "../../utils/Axios/axios";
+import NavBottom from "../../components/NavBar/NavBottom";
+import NavTopLarge from "../../components/NavBar/NavTopLarge";
 import { ProfilInterface } from "../../services/interfaces/ProfilInterface";
 import { UserInterface } from "../../services/interfaces/UserInterface";
-import { format, formatDistanceToNow } from "date-fns";
-import { NavBarBottomFix } from "../../components/NavBar/NavBarBottomFix";
-import { EventsInterface } from "../../services/interfaces/EventsInterface";
-import { Avatar, Button, Card, IconButton } from "@mui/material";
-import { fr } from "date-fns/locale";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import {
+  CardEventInterface,
+  EventInterface,
+} from "../../services/interfaces/event";
+import {
+  getFakerUserByProfilEventsData,
+  getFakerUserParticipationProfilEventsData,
+  getProfilData,
+  getUserData,
+} from "../../utils/Axios/axios";
 
 export const ProfilPage = () => {
   const [profil, setProfil] = useState<ProfilInterface | null>(null);
   const [user, setUser] = useState<UserInterface | null>(null);
-  const [events, setEvents] = useState<EventsInterface[] | null>(null);
+  const [userByProfilEvents, setFakeUserByProfilEvents] = useState<
+    CardEventInterface[]
+  >([]);
+  const [userParticipationProfilEvents, setFakerUserParticipationProfilEvents] =
+    useState<CardEventInterface[]>([]);
+
   const defaultImageUrl =
     "https://thumbs.dreamstime.com/b/vecteur-d-ic%C3%B4ne-de-profil-avatar-par-d%C3%A9faut-image-sociale-utilisateur-m%C3%A9dias-social-182145777.jpg";
   const [selectedTab, setSelectedTab] = useState<string>("MyEvents");
@@ -32,7 +44,9 @@ export const ProfilPage = () => {
       try {
         const data = await getProfilData();
         if (data) {
-          const userProfil = data.datas.find((profil: ProfilInterface) => profil.user_id === "5678azdq");
+          const userProfil = data.datas.find(
+            (profil: ProfilInterface) => profil.user_id === "5678azdq"
+          );
           setProfil(userProfil || null);
         }
       } catch (error) {
@@ -44,7 +58,9 @@ export const ProfilPage = () => {
       try {
         const data = await getUserData();
         if (data) {
-          const userData = data.datas.find((user: UserInterface) => user.id === "5678azdq");
+          const userData = data.datas.find(
+            (user: UserInterface) => user.id === "5678azdq"
+          );
           setUser(userData || null);
         }
       } catch (error) {
@@ -52,20 +68,32 @@ export const ProfilPage = () => {
       }
     };
 
-    const fetchEvents = async () => {
+    // Récupérer les événements lors du chargement initial de la page
+    const fetchFakerUserByProfilEvents = async () => {
       try {
-        const data = await getFakeEventsData();
+        const data = await getFakerUserByProfilEventsData();
         if (data) {
-          setEvents(data.datas);
+          setFakeUserByProfilEvents(data.datas); // Mise à jour de fakeEvents
         }
       } catch (error) {
-        console.error("Error fetching events:", error);
+        console.error("Error fetching fake events:", error);
+      }
+    };
+    const fetchFakerUserParticipationProfilEvents = async () => {
+      try {
+        const data = await getFakerUserParticipationProfilEventsData();
+        if (data) {
+          setFakerUserParticipationProfilEvents(data.datas); // Mise à jour de fakeEvents
+        }
+      } catch (error) {
+        console.error("Error fetching fake events:", error);
       }
     };
 
     fetchProfil();
     fetchUser();
-    fetchEvents();
+    fetchFakerUserByProfilEvents();
+    fetchFakerUserParticipationProfilEvents();
   }, []);
 
   const handleMyEventsClick = () => {
@@ -78,14 +106,16 @@ export const ProfilPage = () => {
     console.log("Je suis dans Participations");
   };
 
-  const userEvents = events?.filter((event) => event.user_id === "7r8a1e4b9v");
-
   return (
     <>
+      <NavTopLarge />
       <NavBarProfil />
       {profil && user && (
-        <div className="flex items-center gap-5 justify-center mt-5 sm:mt-10 lg:mt-16">
-          <img src={profil.photo ? profil.photo : defaultImageUrl} alt="Profil" style={{
+        <div className="flex bg-white flex-col items-center gap-5 justify-center pt-5 sm:pt-10 lg:pt-16">
+          <img
+            src={profil.photo ? profil.photo : defaultImageUrl}
+            alt="Profil"
+            style={{
               width: "100px",
               height: "100px",
               borderRadius: "50%",
@@ -103,119 +133,48 @@ export const ProfilPage = () => {
         </div>
       )}
       <nav
-        className={`flex justify-between items-end text-sm text-gray-500 bg-white dark:text-gray-400 md:px-6 pt-8 border-gray-100 shadow-sm ${isFixed ? "z-50 fixed top-0 left-0 right-0" : ""
-          }`}
+        className={`flex justify-between items-end text-sm text-gray-500 bg-white dark:text-gray-400 md:px-6 pt-8 border-gray-100 shadow-sm ${
+          isFixed ? "z-50 fixed top-0 left-0 right-0" : ""
+        }`}
       >
-        <section className="grid grid-cols-2 w-full text-center h-8">
+        <section className="grid grid-cols-2 w-full text-center h-8 lg:flex">
           <a
-            className={`nav-toggle-link mx-4 px-4 ${selectedTab === "MyEvents" ? "toggle_is_active" : ""
-              }`}
+            className={`nav-toggle-link mx-4 px-4 ${
+              selectedTab === "MyEvents" ? "toggle_is_active" : ""
+            }`}
             onClick={handleMyEventsClick}
           >
             Mes événements
           </a>
           <a
-            className={`nav-toggle-link mx-4 px-4 ${selectedTab === "Participations" ? "toggle_is_active" : ""
-              }`}
+            className={`nav-toggle-link mx-4 px-4 ${
+              selectedTab === "Participations" ? "toggle_is_active" : ""
+            }`}
             onClick={handleParticipationsClick}
           >
             Participations
           </a>
         </section>
       </nav>
-      {selectedTab === "MyEvents" && userEvents && (
-        <section className="mt-8 grid lg:grid-cols-3 sm:grid-cols-2 gap-4">
-          {userEvents.map((event, index) => (
-            <div key={index} className="relative shadow-md m-2 p-2">
-              <div className="flex gap-3 pb-2">
-                <img
-                  className="hidden lg:block w-32 h-32 object-cover rounded-lg shadow-md"
-                  src={event.image}
-                  alt=""
-                />
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-                    {event.title}
-                  </h3>
-                  <p className="text-sm text-gray-700 dark:text-gray-400 overflow-hidden pr-8 h-10 lg:h-20 ">
-                    {event.description}
-                  </p>
-                </div>
-              </div>
-              <div className="flex justify-between items-center text-sm text-gray-700">
-                <div className="flex items-center">
-                  <IconButton aria-label="delete" size="small">
-                    <Avatar
-                      alt="Cindy Baker"
-                      src={profil?.photo || defaultImageUrl}
-                      sx={{ width: 24, height: 24 }}
-                    />
-                  </IconButton>
-                  <p>de {event.name}</p>
-                </div>
-                <p>{formatDistanceToNow(new Date(event.created_at), { locale: fr, addSuffix: true }).replace("environ", "")}</p>
-                <div className="hidden lg:block">
-                  <Button variant="contained" style={{ backgroundColor: "#0fa3b1", color: "#fff", fontSize: 12 }}>
-                    Voir
-                  </Button>
-                </div>
-              </div>
-              <div className="absolute top-1/2 right-3 transform -translate-y-1/2 lg:hidden">
-                <IconButton aria-label="delete" size="small">
-                  <ArrowForwardIosIcon fontSize="inherit" />
-                </IconButton>
-              </div>
-            </div>
-          ))}
-        </section>
+      {selectedTab === "MyEvents" && (
+        <div className="flex justify-center mx-2">
+          <section className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4">
+            {userByProfilEvents.map((event, index) => (
+              <CardEvent key={index} event={event as EventInterface} />
+            ))}
+          </section>
+        </div>
       )}
-      {selectedTab === "Participations" && events && (
-        <section className="mt-8 grid lg:grid-cols-3 sm:grid-cols-2 gap-4">
-          {events.map((event, index) => (
-            <Card key={index} variant="outlined" className="relative shadow-md m-2 p-2">
-              <div className="flex gap-3 pb-2">
-                <img
-                  className="hidden lg:block w-32 h-32 object-cover rounded-lg shadow-md"
-                  src={event.image}
-                  alt=""
-                />
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-lg font-bold tracking-tight text-gray-900 dark:text-white">
-                    {event.title}
-                  </h3>
-                  <p className="text-sm text-gray-700 dark:text-gray-400 overflow-hidden pr-8 h-10 lg:h-20 ">
-                    {event.description}
-                  </p>
-                </div>
-              </div>
-              <div className="flex justify-between items-center text-sm text-gray-700">
-                <div className="flex items-center">
-                  <IconButton aria-label="delete" size="small">
-                    <Avatar
-                      alt="Cindy Baker"
-                      src={profil?.photo || defaultImageUrl}
-                      sx={{ width: 24, height: 24 }}
-                    />
-                  </IconButton>
-                  <p>de {event.name}</p>
-                </div>
-                <p>{formatDistanceToNow(new Date(event.created_at), { locale: fr, addSuffix: true }).replace("environ", "")}</p>
-                <div className="hidden lg:block">
-                  <Button variant="contained" style={{ backgroundColor: "#0fa3b1", color: "#fff", fontSize: 12 }}>
-                    Voir
-                  </Button>
-                </div>
-              </div>
-              <div className="absolute top-1/2 right-3 transform -translate-y-1/2 lg:hidden">
-                <IconButton aria-label="delete" size="small">
-                  <ArrowForwardIosIcon fontSize="inherit" />
-                </IconButton>
-              </div>
-            </Card>
-          ))}
-        </section>
+      {selectedTab === "Participations" && (
+        <div className="flex justify-center mx-2">
+          <section className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4">
+            {userParticipationProfilEvents.map((event, index) => (
+              <CardEvent key={index} event={event as EventInterface} />
+            ))}
+          </section>
+        </div>
       )}
-      <NavBarBottomFix />
+      <NavBottom />
     </>
   );
 };

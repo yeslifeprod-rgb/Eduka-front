@@ -15,7 +15,7 @@ export const NavBarProfil = () => {
   };
 
   return (
-    <div className=" flex justify-between items-center py-5 px-4 border-b-2 ">
+    <div className=" flex justify-between bg-white items-center py-5 px-4 border-b-2 ">
       <IconButton
         aria-label="delete"
         size="large"

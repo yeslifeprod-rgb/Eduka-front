@@ -48,10 +48,10 @@ export default function TypeEventPage() {
   return (
     <Box>
       {isTypeEventOpen && (
-        <section className="absolute top-0 left-0 right-0 bottom-0 bg-opacity-20 bg-black backdrop-filter backdrop-blur-sm  z-30"></section>
+        <section className="absolute top-0 left-0 right-0 bottom-0 bg-opacity-20 bg-black backdrop-filter backdrop-blur-sm  z-30 "></section>
       )}
       {isTypeEventOpen && (
-        <section className="absolute bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md  border rounded-lg shadow-sm m-auto ">
+        <section className="absolute bg-white top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 w-full max-w-md  border rounded-lg shadow-sm m-auto">
           <article className=" py-2 px-2">
             <IconButton
               className="py-2"
@@ -61,12 +61,12 @@ export default function TypeEventPage() {
             >
               <CloseIcon fontSize="inherit" />
             </IconButton>
-            <h3 className=" text-gray-900 mx-auto text-centerr">
+            <h3 className=" text-gray-900 mx-auto text-center">
               Souhaitez-vous que cet évènement soit public ou privé ?
             </h3>
           </article>
 
-          <article className="grid grid-cols-1 justify-center gap-4 m-10">
+          <article className="grid grid-cols-1 justify-items-center gap-4 m-10 ">
             {typeEvents.map((event, index) => (
               <div key={event}>
                 {index % 2 === 0 ? ( // Utilisation de l'indice pour alterner entre bleu et orange

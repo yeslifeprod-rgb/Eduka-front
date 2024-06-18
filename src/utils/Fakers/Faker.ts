@@ -466,12 +466,12 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
-    email: 'ania@eduka.fr',
-    password: 'eduka2024'
+    email: "ania@eduka.fr",
+    password: "eduka2024",
   },
   {
     id: 2,
-    first_name: 'Julien',
+    first_name: "Julien",
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
     address: fakerFR.location.city(),
@@ -487,13 +487,12 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
-    email: 'julien@eduka.fr',
-    password: 'eduka2024'
-
+    email: "julien@eduka.fr",
+    password: "eduka2024",
   },
   {
     id: 3,
-    first_name: 'Sylvain',
+    first_name: "Sylvain",
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
     address: fakerFR.location.city(),
@@ -505,12 +504,12 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
-    email: 'sylvain@eduka.fr',
-    password: 'eduka2024'
+    email: "sylvain@eduka.fr",
+    password: "eduka2024",
   },
   {
     id: 4,
-    first_name: 'Ilyes',
+    first_name: "Ilyes",
     last_name: fakerFR.name.lastName(),
     avatar: faker.image.avatarLegacy(),
     address: fakerFR.location.city(),
@@ -530,8 +529,8 @@ const fakerUsers: userInterface[] = [
         last_name: fakerFR.name.lastName(),
       },
     ],
-    email: 'ilyes@eduka.fr',
-    password: 'eduka2024'
+    email: "ilyes@eduka.fr",
+    password: "eduka2024",
   },
   {
     id: 5,
@@ -548,7 +547,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 6,
@@ -569,7 +568,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 7,
@@ -586,7 +585,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 8,
@@ -603,7 +602,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 9,
@@ -620,7 +619,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 10,
@@ -637,7 +636,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 11,
@@ -654,7 +653,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 12,
@@ -679,7 +678,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 13,
@@ -696,9 +695,9 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
-  
+
   {
     id: 14,
     first_name: fakerFR.name.firstName(),
@@ -714,7 +713,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 15,
@@ -735,7 +734,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 16,
@@ -752,7 +751,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 17,
@@ -769,7 +768,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 18,
@@ -786,7 +785,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 19,
@@ -803,7 +802,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 20,
@@ -820,7 +819,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
   {
     id: 21,
@@ -837,7 +836,7 @@ const fakerUsers: userInterface[] = [
       },
     ],
     email: `${faker.internet.userName()}@${faker.internet.domainName()}`,
-    password: 'eduka2024'
+    password: "eduka2024",
   },
 ];
 export const fakerUsersData = {
@@ -956,4 +955,384 @@ const fakerLogin: LoginInterface = [
 ];
 export const fakerLoginData = {
   datas: fakerLogin,
+};
+
+const fakerUserByProfilEvents: CardEventInterface[] = [
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.avatarLegacy(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.avatarLegacy(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+];
+
+export const fakerUserByProfilEventsData = {
+  datas: fakerUserByProfilEvents,
+};
+
+const fakerUserParticipationProfilEvents: CardEventInterface[] = [
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.avatarLegacy(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.avatarLegacy(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.avatarLegacy(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.avatarLegacy(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.avatarLegacy(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "children", true),
+    photo_profil: faker.image.people(),
+    address: fakerFR.location.city(),
+    tags: ["anniversaire", "Cagnotte"],
+  },
+  {
+    firstname_profil: faker.person.fullName(),
+    title: faker.lorem.words(),
+    description: faker.lorem.paragraphs(),
+    date: faker.date.future(),
+    image: faker.image.imageUrl(300, 300, "sports", true),
+    photo_profil: faker.image.avatarLegacy(),
+    address: fakerFR.location.city(),
+    tags: ["sortie", "pierre"],
+  },
+];
+
+export const fakerUserParticipationProfilEventsData = {
+  datas: fakerUserParticipationProfilEvents,
 };
