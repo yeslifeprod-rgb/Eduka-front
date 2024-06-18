@@ -75,8 +75,8 @@ export const OrangeFullButton = styled(Button)({
   color: "white",
   border: "2px solid #F7A072",
   borderRadius: "10px",
-  width: "384px",
-  height: "40px",
+  width: "350px",
+  height: "50px",
   backgroundColor: "#F7A072",
   "&:hover": {
     backgroundColor: "#F7A072",
@@ -89,8 +89,8 @@ export const BlueFullButton = styled(Button)({
   color: "white",
   border: "2px solid #0FA3B1",
   borderRadius: "10px",
-  width: "384px",
-  height: "40px",
+  width: "350px",
+  height: "50px",
   backgroundColor: "#0FA3B1",
   "&:hover": {
     backgroundColor: "#0FA3B1",

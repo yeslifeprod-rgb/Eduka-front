@@ -2,9 +2,11 @@ import React, { ChangeEvent, FormEvent, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {
   BlueFullButton,
-  OrangeFullButton,
+  OrangeButton,
 } from "../../components/Button/CustomButton";
 
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { Box, Typography } from "@mui/material";
 import { FaTimes } from "react-icons/fa";
 import { AddChildButton } from "../../components/Button/ButtonAddChild";
 import ChildForm from "./ChildForm";
@@ -167,8 +169,8 @@ export const EditMyProfil: React.FC = () => {
     setShowDeleteModal(false);
     setShowSuccessModal(true);
     setTimeout(() => {
-      navigate("/parent_sign_up_page");
-    }, 1000);
+      navigate("/");
+    }, 3000);
   };
 
   const handleOpenAddSubjectModal = () => {
@@ -252,30 +254,26 @@ export const EditMyProfil: React.FC = () => {
         />
         <div className="mt-6 mb-4 flex flex-col items-center gap-5">
           <BlueFullButton type="submit">VALIDER</BlueFullButton>
-          <OrangeFullButton onClick={() => setShowDeleteModal(true)}>
+          <OrangeButton onClick={() => setShowDeleteModal(true)}>
             Supprimer le profil
-          </OrangeFullButton>
+          </OrangeButton>
         </div>
       </form>
 
       {showDeleteModal && (
-        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-            <p className="mb-4">
+        <div className="fixed top-0 left-0 w-full h-full bg-opacity-20 bg-black backdrop-filter backdrop-blur-sm flex justify-center items-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+            <p className="mb-2">
               Êtes-vous sûr de vouloir supprimer votre profil ?
             </p>
-            <div className="flex justify-between">
-              <OrangeFullButton
-                className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg"
-                onClick={handleDeleteProfile}
-              >
-                Supprimer
-              </OrangeFullButton>
-              <div className="w-4"></div>
-              <BlueFullButton
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded-lg"
-                onClick={() => setShowDeleteModal(false)}
-              >
+            <p className="mb-4 text-gray-600 text-sm">
+              Toutes vos données seront perdues
+            </p>
+            <div className="flex flex-col gap-4 ">
+              <OrangeButton onClick={handleDeleteProfile}>
+                Supprimer votre profil
+              </OrangeButton>
+              <BlueFullButton onClick={() => setShowDeleteModal(false)}>
                 Annuler
               </BlueFullButton>
             </div>
@@ -284,18 +282,41 @@ export const EditMyProfil: React.FC = () => {
       )}
 
       {showSuccessModal && (
-        <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-            <p className="mb-4">Profil supprimé avec succès!</p>
-            <BlueFullButton
-              className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg"
-              onClick={() => setShowSuccessModal(false)}
-            >
-              OK
-            </BlueFullButton>
-          </div>
-        </div>
+        <Box className="fixed top-0 left-0 right-0 bottom-0 bg-opacity-20 bg-black backdrop-filter backdrop-blur-sm  z-[8000]">
+          <Typography
+            className="absolute bg-white p-8 text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[9999] w-full max-w-md  border rounded-lg shadow-sm m-auto "
+            id="modal-modal-title"
+            component="p"
+          >
+            L'événement est bien enregistré!
+            <div className="flex justify-center mt-5">
+              <TaskAltIcon transform="scale-150" fontSize="large" />
+            </div>
+          </Typography>
+        </Box>
       )}
     </div>
   );
 };
+
+{
+  /* <Modal
+  open={showSuccessModal}
+  onClose={handleCloseModal}
+  aria-labelledby="modal-modal-title"
+  aria-describedby="modal-modal-description"
+>
+  <Box className="absolute top-0 left-0 right-0 bottom-0 bg-opacity-20 bg-black backdrop-filter backdrop-blur-sm  z-[8000]">
+    <Typography
+      className="absolute bg-white p-8 text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[9999] w-full max-w-md  border rounded-lg shadow-sm m-auto "
+      id="modal-modal-title"
+      component="p"
+    >
+      L'événement est bien enregistré!
+      <div className="flex justify-center mt-5">
+        <TaskAltIcon transform="scale-150" fontSize="large" />
+      </div>
+    </Typography>
+  </Box>
+</Modal>; */
+}
