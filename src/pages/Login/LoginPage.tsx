@@ -1,12 +1,18 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
-import { NavLink, Navigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { BlueFullButton } from "../../components/Button/Button";
+import { signin } from "../../services/api/auth";
 import LoginInterface from "../../services/interfaces/Login";
-import { getFakerUsersData } from "../../utils/Axios/axios";
+
+interface AuthSignin {
+  email: string;
+  password: string;
+}
 
 export default function Login() {
+  const navigate = useNavigate();
   const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
   const [errorAuthentification, setErrorAuthentification] =
     useState<boolean>(false);
@@ -54,35 +60,41 @@ export default function Login() {
       //Sauvegarde ou detruis l'email et le mot de passe pour le cas "se souvenir de moi"
       handleRememberMe(values);
 
-      const response = await getFakerUsersData();
-
-      const usersList = response.datas;
-
-      const filteredUsers = usersList.filter((user: { email: string }) =>
-        user.email.toLowerCase().includes(values.email.toLowerCase())
-      );
-      console.log(filteredUsers);
-
-      if (
-        filteredUsers &&
-        filteredUsers.length === 1 &&
-        values.password === filteredUsers[0].password
-      ) {
-        console.log("vous etes bien authentifie");
-        //Je suis authentifié
-        sessionStorage.setItem("token", "true");
-        //J'enregistre les infos de l'utilisateur courant/connecté
-        localStorage.setItem(
-          "currentUser",
-          JSON.stringify({ ...filteredUsers[0] })
-        );
-
-        setShouldNavigate(true);
-      } else {
-        console.log("Vous n'etes pas authorise");
-        setShouldNavigate(false);
-        setErrorAuthentification(true);
+      const response = await signin(values);
+      if (response) {
+        // set token and refresh token in local storage
+        localStorage.setItem("accessToken", response.token);
+        localStorage.setItem("refreshToken", response.refresh_token);
+        navigate("/");
       }
+
+      // const usersList = response.datas;
+
+      // const filteredUsers = usersList.filter((user: { email: string }) =>
+      //   user.email.toLowerCase().includes(values.email.toLowerCase())
+      // );
+      // console.log(filteredUsers);
+
+      // if (
+      //   filteredUsers &&
+      //   filteredUsers.length === 1 &&
+      //   values.password === filteredUsers[0].password
+      // ) {
+      //   console.log("vous etes bien authentifie");
+      //   //Je suis authentifié
+      //   sessionStorage.setItem("token", "true");
+      //   //J'enregistre les infos de l'utilisateur courant/connecté
+      //   localStorage.setItem(
+      //     "currentUser",
+      //     JSON.stringify({ ...filteredUsers[0] })
+      //   );
+
+      //   setShouldNavigate(true);
+      // } else {
+      //   console.log("Vous n'etes pas authorise");
+      //   setShouldNavigate(false);
+      //   setErrorAuthentification(true);
+      // }
 
       //Handle successful login here, such as setting user state or redirecting to another page
     } catch (error) {
