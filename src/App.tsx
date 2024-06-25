@@ -25,8 +25,8 @@ import NotFoundPage from "./utils/NotFoundPage";
 import PrivateRoute from "./utils/PrivateRoute";
 
 import { EditMyProfil } from "./pages/EditProfilBySchool/EditMyProfil";
-import EventPrivatePage from "./pages/EventPrivate/EventPrivatePage";
 import EventPublicPage from "./pages/EventPublic/EventPublicPage";
+import EventPrivatePage from "./pages/Profil/EventPrivatePage";
 import ProfilModifyPage from "./pages/Profil/ProfileModifyPage";
 import ProfilePage from "./pages/Profil/ProfilePage";
 

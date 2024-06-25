@@ -288,7 +288,7 @@ export const EditMyProfil: React.FC = () => {
             id="modal-modal-title"
             component="p"
           >
-            L'événement est bien enregistré!
+            Votre compte est bien supprimé !
             <div className="flex justify-center mt-5">
               <TaskAltIcon transform="scale-150" fontSize="large" />
             </div>
