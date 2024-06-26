@@ -80,17 +80,17 @@ const Login: React.FC = () => {
               id="password"
               name="password"
             />
-            {errorAuthentification && (
-              <p className="text-red-500">
-                l'email et password ne correspondent pas
-              </p>
-            )}
             <ErrorMessage
               component="div"
               className="text-red-500"
               name="password"
             />
           </div>
+          {errorAuthentification && (
+            <p className="text-red-500">
+              l'email et password ne correspondent pas
+            </p>
+          )}
           <NavLink className="flex justify-end mt-10" to="/change_password">
             Mot de passe oublié ?
           </NavLink>
