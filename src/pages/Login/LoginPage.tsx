@@ -1,127 +1,62 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useEffect, useState } from "react";
-import { NavLink, Navigate, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import { BlueFullButton } from "../../components/Button/Button";
 import { signin } from "../../services/api/auth";
 import LoginInterface from "../../services/interfaces/Login";
 
-interface AuthSignin {
-  email: string;
-  password: string;
-}
-
-export default function Login() {
-  const navigate = useNavigate();
+const Login: React.FC = () => {
   const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
   const [errorAuthentification, setErrorAuthentification] =
     useState<boolean>(false);
 
-  const validationSchema = Yup.object({
-    email: Yup.string()
-      .email("Invalid email address")
-      .required("L'adresse email est requis"),
-    password: Yup.string().required("Le mot de passe est requis"),
-  });
-
-  const [initialValues, setInitialValues] = useState<LoginInterface>({
+  const initialValues: LoginInterface = {
     email: "",
     password: "",
     rememberMe: false,
-  });
-
-  // Check if credentials are stored in localStorage on component mount
-  useEffect(() => {
-    const credentialsAsString = localStorage.getItem("rememeberMeCredentials");
-    const credentials = credentialsAsString
-      ? JSON.parse(credentialsAsString)
-      : undefined;
-
-    if (credentials) {
-      // Update initial values based on localstorage
-      setInitialValues({
-        email: credentials.email,
-        password: credentials.password,
-        rememberMe: credentials.rememberMe,
-      });
-    }
-  }, []);
-
-  const handleRememberMe = (values: LoginInterface) => {
-    if (values.rememberMe) {
-      localStorage.setItem("rememeberMeCredentials", JSON.stringify(values));
-    } else {
-      localStorage.removeItem("rememeberMeCredentials");
-    }
   };
 
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("L'adresse email est requise"),
+    password: Yup.string().required("Le mot de passe est requis"),
+  });
+
   const handleSubmit = async (values: LoginInterface) => {
+    console.log("handleSubmit called with values:", values);
     try {
-      //Sauvegarde ou detruis l'email et le mot de passe pour le cas "se souvenir de moi"
-      handleRememberMe(values);
-
       const response = await signin(values);
-      if (response) {
-        // set token and refresh token in local storage
-        localStorage.setItem("accessToken", response.token);
-        localStorage.setItem("refreshToken", response.refresh_token);
-        navigate("/");
+      console.log("API response:", response);
+
+      if (response && response.access_token) {
+        localStorage.setItem("accessToken", response.access_token);
+        if (values.rememberMe) {
+          localStorage.setItem("rememberMeCredentials", JSON.stringify(values));
+        } else {
+          localStorage.removeItem("rememberMeCredentials");
+        }
+        setShouldNavigate(true);
+      } else {
+        setShouldNavigate(false);
+        setErrorAuthentification(true);
       }
-
-      // const usersList = response.datas;
-
-      // const filteredUsers = usersList.filter((user: { email: string }) =>
-      //   user.email.toLowerCase().includes(values.email.toLowerCase())
-      // );
-      // console.log(filteredUsers);
-
-      // if (
-      //   filteredUsers &&
-      //   filteredUsers.length === 1 &&
-      //   values.password === filteredUsers[0].password
-      // ) {
-      //   console.log("vous etes bien authentifie");
-      //   //Je suis authentifié
-      //   sessionStorage.setItem("token", "true");
-      //   //J'enregistre les infos de l'utilisateur courant/connecté
-      //   localStorage.setItem(
-      //     "currentUser",
-      //     JSON.stringify({ ...filteredUsers[0] })
-      //   );
-
-      //   setShouldNavigate(true);
-      // } else {
-      //   console.log("Vous n'etes pas authorise");
-      //   setShouldNavigate(false);
-      //   setErrorAuthentification(true);
-      // }
-
-      //Handle successful login here, such as setting user state or redirecting to another page
     } catch (error) {
       console.error("Login failed:", error);
-      //Handle login error, display error message, etc.
+      setErrorAuthentification(true);
     }
   };
 
   return (
     <>
-      {errorAuthentification && (
-        <>
-          <h2>I don't know you.</h2>
-        </>
-      )}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
-        enableReinitialize
       >
         <Form className="grid grid-col items-center justify-center mt-20">
-          <img
-            className="h-48 m-auto"
-            src="./public/logo_LoginPage.png"
-            alt="eduka"
-          />
+          <img className="h-48 m-auto" src="logo_LoginPage.png" alt="eduka" />
           <h2 className="mt-10">Veuillez rentrer vos informations :</h2>
           <div className="mt-10">
             <label htmlFor="email">Email</label>
@@ -145,6 +80,11 @@ export default function Login() {
               id="password"
               name="password"
             />
+            {errorAuthentification && (
+              <p className="text-red-500">
+                l'email et password ne correspondent pas
+              </p>
+            )}
             <ErrorMessage
               component="div"
               className="text-red-500"
@@ -155,19 +95,10 @@ export default function Login() {
             Mot de passe oublié ?
           </NavLink>
           <div className="flex justify-end items-center mt-2">
-            <Field
-              sx={{
-                color: "#0fa3b1",
-                "&.Mui-checked": {
-                  color: "#0fa3b1",
-                },
-              }}
-              inputprops={{ "aria-label": "controlled" }}
-              type="checkbox"
-              id="rememberMe"
-              name="rememberMe"
-            />
-            <label>Se souvenir de moi ?</label>
+            <Field type="checkbox" id="rememberMe" name="rememberMe" />
+            <label className="ml-2" htmlFor="rememberMe">
+              Se souvenir de moi ?
+            </label>
           </div>
           <div className="mt-8">
             <BlueFullButton type="submit">Se Connecter</BlueFullButton>
@@ -177,4 +108,6 @@ export default function Login() {
       {shouldNavigate && <Navigate to="/home_page_parent" />}
     </>
   );
-}
+};
+
+export default Login;

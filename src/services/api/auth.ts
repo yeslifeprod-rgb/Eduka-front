@@ -9,27 +9,18 @@ interface AuthSignin {
 
 export async function signin(body: AuthSignin) {
   try {
-    const { data } = await api.post(`auth/signin`, body);
+    const { data } = await api.post(`auth/signInJulien`, body);
+    console.log("API response:", data);
     return data;
   } catch (error) {
+    console.error("Signin failed:", error);
     return {
       error: error,
     };
   }
 }
-
-export async function refreshToken() {
-  const refreshToken = localStorage.getItem("refreshToken");
-  const headers = { Authorization: "Bearer " + refreshToken };
-
-  try {
-    const response = await api.get(`posts/${id}`, body);
-    // simulation of success api response
-    return {
-      datas: body,
-      status: 200,
-    };
-  } catch (error) {
-    return error;
-  }
-}
+export const isAuthenticated = () => {
+  const token = localStorage.getItem("accessToken");
+  console.log("Token:", token);
+  return !!token; // Utilisez !! pour convertir en booléen
+};
