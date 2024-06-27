@@ -28,9 +28,7 @@ export function useApi(): AxiosInstance {
     (error) => {
       // Gestion globale des erreurs
       if (error.response && error.response.status === 401) {
-        // Par exemple, rediriger vers la page de login si 401 Unauthorized
         localStorage.removeItem("access_token");
-        window.location.href = "/login"; // ou utilisez un hook de navigation si dans un composant React
       }
       return Promise.reject(error);
     }

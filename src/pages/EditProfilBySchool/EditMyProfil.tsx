@@ -32,7 +32,7 @@ export const EditMyProfil: React.FC = () => {
     fakeData.parents
   );
   const [children, setChildren] = useState<FormChildInterface[]>(
-    fakeData.child
+    fakeData.children
   );
   const [formErrors, setFormErrors] = useState<{ [key: string]: string }>({});
   const [showDeleteModal, setShowDeleteModal] = useState(false);

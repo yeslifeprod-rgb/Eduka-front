@@ -7,7 +7,7 @@ import { signin } from "../../services/api/auth";
 import LoginInterface from "../../services/interfaces/Login";
 
 const Login: React.FC = () => {
-  const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
+  const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
   const [errorAuthentification, setErrorAuthentification] =
     useState<boolean>(false);
 
@@ -32,14 +32,16 @@ const Login: React.FC = () => {
 
       if (response && response.access_token) {
         localStorage.setItem("accessToken", response.access_token);
+        if (response.refresh_token) {
+          localStorage.setItem("refreshToken", response.refresh_token);
+        }
         if (values.rememberMe) {
           localStorage.setItem("rememberMeCredentials", JSON.stringify(values));
         } else {
           localStorage.removeItem("rememberMeCredentials");
         }
-        setShouldNavigate(true);
+        setRedirectUrl(response.redirect_url);
       } else {
-        setShouldNavigate(false);
         setErrorAuthentification(true);
       }
     } catch (error) {
@@ -48,8 +50,13 @@ const Login: React.FC = () => {
     }
   };
 
+  if (redirectUrl) {
+    return <Navigate to={redirectUrl} />;
+  }
+
   return (
     <>
+      {errorAuthentification && <h2>Vous n'êtes pas autorisé.</h2>}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -86,11 +93,6 @@ const Login: React.FC = () => {
               name="password"
             />
           </div>
-          {errorAuthentification && (
-            <p className="text-red-500">
-              l'email et password ne correspondent pas
-            </p>
-          )}
           <NavLink className="flex justify-end mt-10" to="/change_password">
             Mot de passe oublié ?
           </NavLink>
@@ -105,7 +107,6 @@ const Login: React.FC = () => {
           </div>
         </Form>
       </Formik>
-      {shouldNavigate && <Navigate to="/home_page_parent" />}
     </>
   );
 };
