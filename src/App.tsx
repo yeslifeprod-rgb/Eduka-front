@@ -8,7 +8,7 @@ import EventsPage from "./pages/Event/EventsPage";
 import EventsUserPage from "./pages/Event/EventsUserPage";
 import HomePageParent from "./pages/Home/HomePageParent";
 import { HomePageSchool } from "./pages/Home/HomePageSchool";
-import { ChangePassword } from "./pages/Login/ChangePasswordPage";
+
 import LoginPage from "./pages/Login/LoginPage";
 import NotificationPage from "./pages/Notification/NotificationPage";
 import { ProfilPage } from "./pages/Profil/ProfilPage";
@@ -29,6 +29,7 @@ import EventPublicPage from "./pages/EventPublic/EventPublicPage";
 import EventPrivatePage from "./pages/Profil/EventPrivatePage";
 import ProfilModifyPage from "./pages/Profil/ProfileModifyPage";
 import ProfilePage from "./pages/Profil/ProfilePage";
+import ChangePassword from "./pages/Login/ChangePassword";
 
 function App() {
   return (
