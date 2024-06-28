@@ -59,7 +59,6 @@ const LoginPage: React.FC = () => {
 
   return (
     <>
-      {errorAuthentification && <h2>Vous n'êtes pas autorisé.</h2>}
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -96,6 +95,9 @@ const LoginPage: React.FC = () => {
               name="password"
             />
           </div>
+          {errorAuthentification && (
+            <p className="text-red-500">Vous n'êtes pas autorisé.</p>
+          )}
           <NavLink className="flex justify-end mt-10" to="/change_password">
             Mot de passe oublié ?
           </NavLink>

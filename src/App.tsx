@@ -68,6 +68,8 @@ function App() {
               <Route path="/all_events" element={<EventsPage />} />
               <Route path="/participation" element={<ProfilePage />} />
               <Route path="/add_event_page" element={<AddEventPage />} />
+              <Route path="/profil" element={<ProfilPage />} />
+              <Route path="/profil" element={<ProfilModifyPage />} />
             </Route>
             {/* Routes for School */}
             <Route element={<RoleBasedRoute roles={["SCHOOL"]} />}>
@@ -92,8 +94,6 @@ function App() {
                 path="/search_by_school"
                 element={<SearchBySchoolPage />}
               />
-              <Route path="/profil" element={<ProfilPage />} />
-              <Route path="/profil" element={<ProfilModifyPage />} />
             </Route>
             {/* Routes for Teacher */}
             <Route element={<RoleBasedRoute roles={["TEACHER"]} />}>

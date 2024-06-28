@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { ReactNode, createContext, useContext, useState } from "react";
 
 interface UserContextType {
   user: User | null;
@@ -35,5 +35,5 @@ export interface User {
   created_at: string;
   updated_at: string;
   refreshToken: string;
-  roles: string;
+  role: string;
 }
