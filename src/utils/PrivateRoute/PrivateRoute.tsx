@@ -1,30 +1,29 @@
 import React from "react";
-import { Navigate, Route, RouteProps } from "react-router-dom";
-import { useAuth } from "../../services/Context/AuthContext";
+import { Navigate, Outlet } from "react-router-dom";
+import { useUser } from "../../services/Context/UserContext";
 
-type PrivateRouteProps = RouteProps & {
-  element: React.ReactNode;
-  roles: string[];
-};
-
-const PrivateRoute: React.FC<PrivateRouteProps> = ({
-  element,
-  roles,
-  ...rest
-}) => {
-  const { user } = useAuth();
+const PrivateRoute: React.FC = () => {
+  const { user } = useUser();
 
   if (!user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/" />;
   }
 
-  // Vérifie si l'utilisateur a l'un des rôles requis pour accéder à la route
-  if (!roles.some((role) => user.roles.includes(role))) {
-    return <Navigate to="/forbidden" />;
+  return <Outlet />;
+};
+
+interface RoleBasedRouteProps {
+  roles: string[];
+}
+
+export const RoleBasedRoute: React.FC<RoleBasedRouteProps> = ({ roles }) => {
+  const { user } = useUser();
+
+  if (!user || !roles.includes(user.roles)) {
+    return <Navigate to="/" />;
   }
 
-  // Rendre la route avec l'élément fourni
-  return <Route {...rest} element={element} />;
+  return <Outlet />;
 };
 
 export default PrivateRoute;

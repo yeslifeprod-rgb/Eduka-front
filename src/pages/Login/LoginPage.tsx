@@ -3,13 +3,15 @@ import { useState } from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import { BlueFullButton } from "../../components/Button/Button";
+import { useUser } from "../../services/Context/UserContext";
 import { signin } from "../../services/api/auth";
 import LoginInterface from "../../services/interfaces/Login";
 
-const Login: React.FC = () => {
+const LoginPage: React.FC = () => {
   const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
   const [errorAuthentification, setErrorAuthentification] =
     useState<boolean>(false);
+  const { setUser } = useUser();
 
   const initialValues: LoginInterface = {
     email: "",
@@ -19,22 +21,23 @@ const Login: React.FC = () => {
 
   const validationSchema = Yup.object({
     email: Yup.string()
-      .email("Invalid email address")
+      .email("Adresse email invalide")
       .required("L'adresse email est requise"),
     password: Yup.string().required("Le mot de passe est requis"),
   });
 
   const handleSubmit = async (values: LoginInterface) => {
-    console.log("handleSubmit called with values:", values);
+    console.log("handleSubmit appelé avec les valeurs :", values);
     try {
       const response = await signin(values);
-      console.log("API response:", response);
+      console.log("Réponse API :", response);
 
       if (response && response.access_token) {
         localStorage.setItem("accessToken", response.access_token);
         if (response.refresh_token) {
           localStorage.setItem("refreshToken", response.refresh_token);
         }
+        setUser(response.user);
         if (values.rememberMe) {
           localStorage.setItem("rememberMeCredentials", JSON.stringify(values));
         } else {
@@ -45,7 +48,7 @@ const Login: React.FC = () => {
         setErrorAuthentification(true);
       }
     } catch (error) {
-      console.error("Login failed:", error);
+      console.error("Échec de la connexion :", error);
       setErrorAuthentification(true);
     }
   };
@@ -111,4 +114,4 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
