@@ -22,5 +22,5 @@ export async function signin(body: AuthSignin) {
 export const isAuthenticated = () => {
   const token = localStorage.getItem("accessToken");
   console.log("Token:", token);
-  return !!token; // Utilisez !! pour convertir en booléen
+  return !!token; //  !! pour convertir en booléen
 };

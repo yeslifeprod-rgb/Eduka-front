@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import NavBottom from "../../components/NavBar/NavBottom";
 import NavTopLarge from "../../components/NavBar/NavTopLarge";
 import ParsonalDataProfile from "../../components/PersonalData/PersonalDataProfile";
+import React from "react";
 
 export default function ProfilePage() {
   const [avatar, setAvatar] = useState<string | undefined>(undefined);

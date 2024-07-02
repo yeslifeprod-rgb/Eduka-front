@@ -22,7 +22,6 @@ import SearchBySchoolPage from "./pages/Search/SearchBySchoolPage";
 import { HomePageTeacher } from "./pages/Teacher/HomePageTeacher";
 import { ModalProvider } from "./services/Context/ModalContext";
 import NotFoundPage from "./utils/NotFoundPage";
-
 import { EditMyProfil } from "./pages/EditProfilBySchool/EditMyProfil";
 import EventPublicPage from "./pages/EventPublic/EventPublicPage";
 import ChangePassword from "./pages/Login/ChangePassword";
@@ -30,6 +29,7 @@ import EventPrivatePage from "./pages/Profil/EventPrivatePage";
 import ProfilModifyPage from "./pages/Profil/ProfileModifyPage";
 import ProfilePage from "./pages/Profil/ProfilePage";
 import { UserProvider } from "./services/Context/UserContext";
+import { Roles } from "./utils/Enum/Roles";
 import PrivateRoute, {
   RoleBasedRoute,
 } from "./utils/PrivateRoute/PrivateRoute";
@@ -43,7 +43,7 @@ function App() {
           <Route path="/change_password" element={<ChangePassword />} />
           <Route element={<PrivateRoute />}>
             {/* Routes for Parent */}
-            <Route element={<RoleBasedRoute roles={["PARENT"]} />}>
+            <Route element={<RoleBasedRoute roles={[Roles.PARENT]} />}>
               <Route path="/home_page_parent" element={<HomePageParent />} />
               <Route path="/edit_my_profil" element={<EditMyProfil />} />
               <Route
@@ -72,7 +72,7 @@ function App() {
               <Route path="/profil" element={<ProfilModifyPage />} />
             </Route>
             {/* Routes for School */}
-            <Route element={<RoleBasedRoute roles={["SCHOOL"]} />}>
+            <Route element={<RoleBasedRoute roles={[Roles.SCHOOL]} />}>
               <Route path="/home_page_school" element={<HomePageSchool />} />
               <Route
                 path="/school_create_user"
