@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { ReactNode, createContext, useContext, useState } from "react";
+import { User } from "../interfaces/Login";
 
 interface UserContextType {
   user: User | null;
@@ -11,6 +12,7 @@ export const UserProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [user, setUser] = useState<User | null>(null);
+  console.log("🚀 ~ user context:", user);
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
@@ -26,14 +28,3 @@ export const useUser = (): UserContextType => {
   }
   return context;
 };
-
-export interface User {
-  id: string;
-  email: string;
-  password: string;
-  status: string;
-  created_at: string;
-  updated_at: string;
-  refreshToken: string;
-  roles: string;
-}

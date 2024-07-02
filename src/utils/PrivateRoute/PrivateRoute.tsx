@@ -18,8 +18,7 @@ interface RoleBasedRouteProps {
 
 export const RoleBasedRoute: React.FC<RoleBasedRouteProps> = ({ roles }) => {
   const { user } = useUser();
-
-  if (!user || !roles.includes(user.roles)) {
+  if (!user || !roles.includes(user.role)) {
     return <Navigate to="/" />;
   }
 

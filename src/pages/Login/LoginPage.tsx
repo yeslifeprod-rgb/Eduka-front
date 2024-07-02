@@ -1,5 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useState } from "react";
+import React, { useState } from "react";
 import { NavLink, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import { BlueFullButton } from "../../components/Button/Button";
@@ -52,7 +52,7 @@ const LoginPage: React.FC = () => {
       setErrorAuthentification(true);
     }
   };
-
+  console.log("redirectUrl :", redirectUrl);
   if (redirectUrl) {
     return <Navigate to={redirectUrl} />;
   }
