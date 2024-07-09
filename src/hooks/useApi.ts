@@ -11,7 +11,7 @@ export function useApi(): AxiosInstance {
   api.interceptors.request.use(
     (config) => {
       // Aller dans le local storage pour récupérer le token
-      const token = localStorage.getItem("access_token");
+      const token = localStorage.getItem("accessToken");
       // et l'injecter dans la requête si présent
       if (token) {
         config.headers["Authorization"] = `Bearer ${token}`;
@@ -28,7 +28,7 @@ export function useApi(): AxiosInstance {
     (error) => {
       // Gestion globale des erreurs
       if (error.response && error.response.status === 401) {
-        localStorage.removeItem("access_token");
+        localStorage.removeItem("accessToken");
       }
       return Promise.reject(error);
     }

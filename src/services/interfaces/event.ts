@@ -1,3 +1,5 @@
+import { GeoJSONSource } from "mapbox-gl";
+
 export interface TypeInterface {
   type: string;
 }
@@ -9,13 +11,13 @@ export interface TagsInterface {
   tags: string[];
 }
 export interface CardEventInterface {
-  firstname_profil: string;
+  firstname: string;
   title: string;
-  date: Date;
+  start_date: string;
   description: string;
-  image: string | null;
-  photo_profil?: string;
-  address: string;
+  event_picture?: string;
+  profil_picture?: string;
+  city: string;
   tags?: string[] | null;
   latitude?: number;
   longitude?: number;
@@ -34,4 +36,26 @@ export interface EventInterface
   jackpotLimitDate?: Date;
   choices?: string[] | null;
   childrenList?: string[] | null;
+}
+
+export interface FormattedEventCardInterface {
+  id: string;
+  title: string;
+  description: string;
+  start_date: Date;
+  end_date: string;
+  guest_limit: number;
+  is_public: boolean;
+  category: string;
+  user_id: string;
+  status: string;
+  tags: string[];
+  city: string;
+  location: GeoJSONSource;
+  lastname: string;
+  firstname: string;
+  profil_picture: string;
+  event_picture: string;
+  latitude: number;
+  longitude: number;
 }

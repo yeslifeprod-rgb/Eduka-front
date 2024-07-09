@@ -12,11 +12,11 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useRef } from "react";
-import { EventInterface } from "../../services/interfaces/event";
+import { FormattedEventCardInterface } from "../../services/interfaces/event";
 import { formatRelativeDate } from "../../utils/CalculRelative/FormatRelativeDate";
 
 interface CardEventPropsInterface {
-  event: EventInterface;
+  event: FormattedEventCardInterface;
 }
 export default function CardEvent(props: CardEventPropsInterface) {
   const { event } = props;
@@ -40,7 +40,7 @@ export default function CardEvent(props: CardEventPropsInterface) {
       <CardActionArea>
         <CardMedia
           component="img"
-          image={event.image}
+          image={event.event_picture}
           style={{ height: 300 }}
         />
 
@@ -50,9 +50,9 @@ export default function CardEvent(props: CardEventPropsInterface) {
           </Typography>
           <div className="flex justify-between py-2 text-sm text-gray-700">
             <p>
-              <LocationOnIcon /> {event.address}
+              <LocationOnIcon /> {event.city}
             </p>
-            <p>{formatRelativeDate(event.date)}</p>
+            <p>{formatRelativeDate(event.start_date)}</p>
           </div>
           <p
             ref={textRef}
@@ -66,11 +66,11 @@ export default function CardEvent(props: CardEventPropsInterface) {
               <IconButton size="small">
                 <Avatar
                   alt="Cindy Baker"
-                  src={event.photo_profil}
+                  src={event.profil_picture}
                   sx={{ width: 24, height: 24 }}
                 />
               </IconButton>
-              <p>de {event.firstname_profil}</p>
+              <p>de {event.firstname}</p>
             </div>
           </section>
         </CardContent>

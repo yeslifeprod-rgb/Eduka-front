@@ -1,8 +1,4 @@
 import React, { ReactNode, createContext, useContext, useState } from "react";
-<<<<<<< HEAD
-=======
-import { User } from "../interfaces/Login";
->>>>>>> tr-00-cablage-login
 
 interface UserContextType {
   user: User | null;

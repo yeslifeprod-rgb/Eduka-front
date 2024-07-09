@@ -29,6 +29,7 @@
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "date-fns": "^3.6.0",
+    "diacritic": "^0.0.2",
     "faker": "^6.6.6",
     "flowbite-react": "^0.8.0",
     "formik": "^2.4.6",

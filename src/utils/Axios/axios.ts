@@ -1,4 +1,17 @@
 import {
+  fakerEventTagsData,
+  fakerEventsData,
+  fakerEventsPrivateData,
+  fakerEventsPublicData,
+  fakerLoginData,
+  fakerOnChangeData,
+  fakerTypeEventsData,
+  fakerUserByProfilEventsData,
+  fakerUserEventsData,
+  fakerUserParticipationProfilEventsData,
+  fakerUsersData,
+} from "../Fakers/Faker";
+import {
   FakeEventsData,
   FakeProfilData,
   FakeSchoolNameData,
@@ -6,19 +19,6 @@ import {
   FakedisciplineData,
   receivedMessagesChatData,
 } from "../Fakers/Fakers";
-import {
-  fakerEventTagsData,
-  fakerEventsData,
-  fakerTypeEventsData,
-  fakerUserEventsData,
-  fakerEventsPrivateData,
-  fakerEventsPublicData,
-  fakerUsersData,
-  fakerOnChangeData,
-  fakerLoginData,
-  fakerUserByProfilEventsData,
-  fakerUserParticipationProfilEventsData,
-} from "../Fakers/Faker";
 
 export const getFakerEventsData = async () => {
   try {

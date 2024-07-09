@@ -6,48 +6,49 @@ import Map, { Marker, Popup } from "react-map-gl";
 import { fitBounds } from "viewport-mercator-project";
 import CardEvent from "../../components/Card/EventCard";
 import ModalFilterTags from "../../components/Modals/ModalFilterTags";
-import {
-  CardEventInterface,
-  EventInterface,
-} from "../../services/interfaces/event";
-import { getFakerEventsData } from "../../utils/Axios/axios";
+import { fetchPublicEvents } from "../../services/api/events";
+import { FormattedEventCardInterface } from "../../services/interfaces/event";
 import markerIconUrl from "/public/markerIcon.svg";
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoieWVzbGlmZTEwIiwiYSI6ImNsdnV5amx3czFrN20ya29kcnIybXp4YzUifQ.w4zlwaAcEw8H-k8KO7JWow";
 
 export default function EventsPage() {
-  const [fakeEvents, setFakeEvents] = useState<CardEventInterface[]>([]);
-  const [filteredEvents, setFilteredEvents] = useState<CardEventInterface[]>(
-    []
-  );
+  const [events, setEvents] = useState<FormattedEventCardInterface[]>([]);
+  const [filteredEvents, setFilteredEvents] = useState<
+    FormattedEventCardInterface[]
+  >([]);
   const [viewport, setViewport] = useState({
     latitude: 48.8566,
     longitude: 2.3522,
     zoom: 4,
   });
-  const [selectedEvent, setSelectedEvent] = useState<CardEventInterface | null>(
-    null
-  );
+  const [selectedEvent, setSelectedEvent] =
+    useState<FormattedEventCardInterface | null>(null);
 
   useEffect(() => {
-    const fetchFakeEvents = async () => {
+    const fetchEvents = async () => {
       try {
-        const data = await getFakerEventsData();
+        const data = await fetchPublicEvents();
         if (data) {
-          setFakeEvents(data.datas);
-          updateEvents(data.datas);
-          adjustViewport(data.datas);
+          const formattedEvents = data.events.map((event: any) => ({
+            ...event,
+            latitude: event.location.lat,
+            longitude: event.location.long,
+          }));
+          setEvents(formattedEvents);
+          updateEvents(formattedEvents);
+          adjustViewport(formattedEvents);
         }
       } catch (error) {
         console.error("Error fetching fake events:", error);
       }
     };
 
-    fetchFakeEvents();
+    fetchEvents();
   }, []);
 
-  const adjustViewport = (events: CardEventInterface[]) => {
+  const adjustViewport = (events: FormattedEventCardInterface[]) => {
     const features: FeatureCollection<Point> = {
       type: "FeatureCollection",
       features: events.map((event) => ({
@@ -73,16 +74,25 @@ export default function EventsPage() {
     setViewport({ longitude, latitude, zoom });
   };
 
-  const updateEvents = (events: CardEventInterface[]) => {
+  // Fonction pour supprimer les accents et normaliser une chaîne de caractères
+  const removeAccents = (str: string): string => {
+    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
+  const updateEvents = (events: FormattedEventCardInterface[]) => {
     const storedTags = localStorage.getItem("selectedTags");
     if (storedTags) {
       const selectedTags = JSON.parse(storedTags);
       if (Array.isArray(selectedTags) && selectedTags.length === 0) {
         setFilteredEvents(events);
       } else {
-        const updatedEvents = events.filter(
-          (event) =>
-            event.tags && event.tags.some((tag) => selectedTags.includes(tag))
+        const updatedEvents = events.filter((event) =>
+          event.tags.some((tag) =>
+            selectedTags.some(
+              (selectedTag: string) =>
+                removeAccents(tag.toLowerCase()) ===
+                removeAccents(selectedTag.toLowerCase())
+            )
+          )
         );
         setFilteredEvents(updatedEvents);
       }
@@ -93,11 +103,16 @@ export default function EventsPage() {
 
   const handleCategorySelection = (selectedTags: string[]) => {
     if (selectedTags.length === 0) {
-      setFilteredEvents(fakeEvents);
+      setFilteredEvents(events);
     } else {
-      const updatedEvents = fakeEvents.filter(
-        (event) =>
-          event.tags && event.tags.some((tag) => selectedTags.includes(tag))
+      const updatedEvents = events.filter((event) =>
+        event.tags.some((tag) =>
+          selectedTags.some(
+            (selectedTag: string) =>
+              removeAccents(tag.toLowerCase()) ===
+              removeAccents(selectedTag.toLowerCase())
+          )
+        )
       );
       setFilteredEvents(updatedEvents);
     }
@@ -105,9 +120,9 @@ export default function EventsPage() {
 
   return (
     <div className="  flex flex-col-reverse gap-4 justify-center mx-2 mt-4 lg:grid grid-cols-3 ">
-      <section className="col-span-2 grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+      <section className="col-span-2  max-w-screen-xl mx-auto grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
         {filteredEvents.map((event, index) => (
-          <CardEvent key={index} event={event as EventInterface} />
+          <CardEvent key={index} event={event as FormattedEventCardInterface} />
         ))}
         <ModalFilterTags updateEvents={handleCategorySelection} />
       </section>
@@ -151,7 +166,7 @@ export default function EventsPage() {
               >
                 <div>
                   <img
-                    src={selectedEvent.image}
+                    src={selectedEvent.event_picture}
                     alt={selectedEvent.title}
                     style={{ width: "100%", height: "100%" }}
                   />
