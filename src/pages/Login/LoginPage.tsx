@@ -64,10 +64,10 @@ const LoginPage: React.FC = () => {
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
-        <Form className="grid grid-col items-center justify-center mt-20">
+        <Form className="grid grid-col items-center justify-center mt-10 ">
           <img className="h-48 m-auto" src="logo_LoginPage.png" alt="eduka" />
-          <h2 className="mt-10">Veuillez rentrer vos informations :</h2>
-          <div className="mt-10">
+          <h2 className="mt-5">Veuillez rentrer vos informations :</h2>
+          <div className="mt-5">
             <label htmlFor="email">Email</label>
             <Field
               className="block w-full p-4 ps-6 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
@@ -81,7 +81,7 @@ const LoginPage: React.FC = () => {
               name="email"
             />
           </div>
-          <div className="mt-10">
+          <div className="mt-5">
             <label htmlFor="password">Mot de Passe</label>
             <Field
               className="block w-full p-4 ps-6 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
@@ -98,7 +98,7 @@ const LoginPage: React.FC = () => {
           {errorAuthentification && (
             <p className="text-red-500">Vous n'êtes pas autorisé.</p>
           )}
-          <NavLink className="flex justify-end mt-10" to="/change_password">
+          <NavLink className="flex justify-end mt-5" to="/send_email">
             Mot de passe oublié ?
           </NavLink>
           <div className="flex justify-end items-center mt-2">
@@ -107,7 +107,7 @@ const LoginPage: React.FC = () => {
               Se souvenir de moi ?
             </label>
           </div>
-          <div className="mt-8">
+          <div className="mt-5">
             <BlueFullButton type="submit">Se Connecter</BlueFullButton>
           </div>
         </Form>

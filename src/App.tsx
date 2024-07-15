@@ -9,9 +9,16 @@ import EventsUserPage from "./pages/Event/EventsUserPage";
 import HomePageParent from "./pages/Home/HomePageParent";
 import { HomePageSchool } from "./pages/Home/HomePageSchool";
 
+import { EditMyProfil } from "./pages/EditProfilBySchool/EditMyProfil";
+import EventPublicPage from "./pages/EventPublic/EventPublicPage";
+import ChangePasswordPage from "./pages/Login/ChangePasswordPage";
 import LoginPage from "./pages/Login/LoginPage";
+import SendEmailPage from "./pages/Login/SendEmailPage";
 import NotificationPage from "./pages/Notification/NotificationPage";
+import EventPrivatePage from "./pages/Profil/EventPrivatePage";
 import { ProfilPage } from "./pages/Profil/ProfilPage";
+import ProfilModifyPage from "./pages/Profil/ProfileModifyPage";
+import ProfilePage from "./pages/Profil/ProfilePage";
 import { ParentSignUpPage } from "./pages/Schools/ParentSignUpPage";
 import { ParentTeacherSignUp } from "./pages/Schools/ParentTeacherSignUpPage";
 import { SchoolCreateUser } from "./pages/Schools/SchoolCreateUserPage";
@@ -21,15 +28,9 @@ import SearchByParentPage from "./pages/Search/SearchByParentPage";
 import SearchBySchoolPage from "./pages/Search/SearchBySchoolPage";
 import { HomePageTeacher } from "./pages/Teacher/HomePageTeacher";
 import { ModalProvider } from "./services/Context/ModalContext";
-import NotFoundPage from "./utils/NotFoundPage";
-import { EditMyProfil } from "./pages/EditProfilBySchool/EditMyProfil";
-import EventPublicPage from "./pages/EventPublic/EventPublicPage";
-import ChangePassword from "./pages/Login/ChangePassword";
-import EventPrivatePage from "./pages/Profil/EventPrivatePage";
-import ProfilModifyPage from "./pages/Profil/ProfileModifyPage";
-import ProfilePage from "./pages/Profil/ProfilePage";
 import { UserProvider } from "./services/Context/UserContext";
 import { Roles } from "./utils/Enum/Roles";
+import NotFoundPage from "./utils/NotFoundPage";
 import PrivateRoute, {
   RoleBasedRoute,
 } from "./utils/PrivateRoute/PrivateRoute";
@@ -40,7 +41,8 @@ function App() {
       <ModalProvider>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/change_password" element={<ChangePassword />} />
+          <Route path="/change_password" element={<ChangePasswordPage />} />
+          <Route path="/send_email" element={<SendEmailPage />} />
           <Route element={<PrivateRoute />}>
             {/* Routes for Parent */}
             <Route element={<RoleBasedRoute roles={[Roles.PARENT]} />}>
