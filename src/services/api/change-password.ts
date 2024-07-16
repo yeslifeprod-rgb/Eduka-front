@@ -3,13 +3,13 @@ import { useApi } from "../../hooks/useApi";
 const api = useApi();
 
 interface PasswordRequest {
-  userId: string;
+  resetToken: string;
   newPassword: string;
 }
 
-export async function ChangePassword(body: PasswordRequest) {
+export async function ResetPassword(body: PasswordRequest) {
   try {
-    const { data } = await api.post(`user/change-password`, body);
+    const { data } = await api.put(`user/reset-password`, body);
     console.log("API response:", data);
     return data;
   } catch (error) {

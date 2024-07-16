@@ -30,7 +30,6 @@ const LoginPage: React.FC = () => {
     console.log("handleSubmit appelé avec les valeurs :", values);
     try {
       const response = await signin(values);
-      console.log("Réponse API :", response);
 
       if (response && response.access_token) {
         localStorage.setItem("accessToken", response.access_token);
