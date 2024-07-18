@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json ./
 
 # Installer les dépendances
-RUN npm install
+RUN NODE_ENV=development npm i
 
 # Copier le reste des fichiers de l'application
 COPY . .
@@ -16,7 +16,6 @@ COPY . .
 
 ARG BASE_BACK_URL
 ENV VITE_API_BASE_URL=${BASE_BACK_URL:-"https://gptriome-back.alt-tools.tech"} 
-#@dev
 
 # Build l'application => T => JS
 RUN npm run build
