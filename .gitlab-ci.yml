@@ -10,3 +10,4 @@ build-test:
     - docker push  registry.alt-tools.tech/gptriome/front:$CI_COMMIT_BRANCH
   rules:
     - when: manual
+
