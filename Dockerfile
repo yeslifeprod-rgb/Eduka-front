@@ -1,23 +1,30 @@
-# Use an official Node.js image with Node.js 18.x
-FROM node:18-alpine
+# Utiliser une image Node.js comme base
+FROM node:20.15.1-slim as build
 
-# Set the working directory
-WORKDIR /usr/src/app
+# Définir le répertoire de travail
+WORKDIR /app
 
-# Copy package.json and package-lock.json to the container
-COPY package*.json ./
+# Copier les fichiers package.json
+COPY package.json ./
 
-# Install dependencies
+# Installer les dépendances
 RUN npm install
 
-# Copy the rest of the application code
+# Copier le reste des fichiers de l'application
 COPY . .
 
-# Build your application (replace with your build command)
+
+ARG BASE_BACK_URL
+ENV VITE_API_BASE_URL=${BASE_BACK_URL:-"https://gptriome-back.alt-tools.tech"} 
+#@dev
+
+# Build l'application => T => JS
 RUN npm run build
 
-# Expose port 80
-EXPOSE 80
 
-# Command to run your application
+FROM nginx:stable 
+
+COPY --from=build /app/dist /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
+
 CMD ["nginx", "-g", "daemon off;"]
