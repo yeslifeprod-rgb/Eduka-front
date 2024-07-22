@@ -1,5 +1,5 @@
 # Utiliser une image Node.js comme base
-FROM node:20.15.1-alpine as build
+FROM --platform=linux/amd64 node:20.15.1-alpine as build
 
 # Définir le répertoire de travail
 WORKDIR /app
