@@ -13,7 +13,6 @@ RUN npm install
 # Copier le reste des fichiers de l'application
 COPY . .
 
-
 ARG BASE_BACK_URL
 ENV VITE_API_BASE_URL=${BASE_BACK_URL:-"https://gptriome-back.alt-tools.tech"} 
 
@@ -23,8 +22,7 @@ RUN ls -al
 # Build l'application => T => JS
 RUN npm run build
 
-
-FROM nginx:stable 
+FROM --platform=linux/amd64 nginx:stable 
 
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
