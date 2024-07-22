@@ -8,6 +8,7 @@ import {
 import NavToggleEvent from "../EventPrivate/NavToggleEvent";
 
 import { NavLink } from "react-router-dom";
+
 import MapBoxComponent from "../../components/Mapbox/Mapbox";
 import { ModalChildren } from "../../components/ModalChildren/ModalChildren";
 import { FakePost } from "../EventPrivate/Faker";

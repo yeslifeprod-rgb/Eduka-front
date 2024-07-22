@@ -9,7 +9,6 @@ import { getFakerEventTagsData } from "../../utils/Axios/axios";
 import CounterInput from "../../utils/CounterInput";
 import ButtonAddChoice from "../Button/ButtonAddChoice";
 
-import AddressField from "../../utils/AddressField/AdressField";
 import { ButtonAddTags } from "../Button/ButtonAddTags";
 import { BlueFullButton } from "../Button/CustomButton";
 import ModalAddTags from "../Modals/ModalAddTags";
@@ -343,7 +342,7 @@ export default function FormAddEventPublic({
                   />
                 </div>
               )}
-              {category !== "Sondage" && category !== "Cagnotte" && (
+              {/* {category !== "Sondage" && category !== "Cagnotte" && (
                 <div className="mb-4">
                   {category === "Covoiturage" ? (
                     <label htmlFor="address">Lieu de covoiturage</label>
@@ -366,7 +365,7 @@ export default function FormAddEventPublic({
                     className="text-red-500 text-sm mt-1"
                   />
                 </div>
-              )}
+              )} */}
               {/* Limite de participants */}
               {category === "Sortie loisirs" && (
                 <div className="mb-4 flex flex-col">

@@ -14,7 +14,6 @@ import ButtonAddChoice from "../Button/ButtonAddChoice";
 import { faker } from "@faker-js/faker/locale/fr";
 
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import AddressField from "../../utils/AddressField/AdressField";
 import { AddChildButtonOrange } from "../Button/ButtonAddChild";
 import { ButtonAddTagsOrange } from "../Button/ButtonAddTags";
 import ModalAddTagsPrivate from "../Modals/ModalAddTagsPrivate";
@@ -391,7 +390,7 @@ export default function FormAddEventPrivate({
                   />
                 </div>
               )}
-              {category !== "Sondage" && category !== "Cagnotte" && (
+              {/* {category !== "Sondage" && category !== "Cagnotte" && (
                 <div className="mb-4">
                   {category === "Covoiturage" ? (
                     <label htmlFor="address">Lieu de covoiturage</label>
@@ -414,7 +413,7 @@ export default function FormAddEventPrivate({
                     className="text-red-500 text-sm mt-1"
                   />
                 </div>
-              )}
+              )} */}
               {category !== "Sondage" && (
                 <div className="mb-4">
                   {category === "Covoiturage" ? (
