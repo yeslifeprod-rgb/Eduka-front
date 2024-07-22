@@ -22,9 +22,14 @@ RUN ls -al
 # Build l'application => T => JS
 RUN npm run build
 
-FROM --platform=linux/amd64 nginx:stable 
+# Utiliser Nginx comme serveur de production
+FROM --platform=linux/amd64 nginx:stable
 
+# Copier le répertoire de construction
 COPY --from=build /app/dist /usr/share/nginx/html
+
+# Copier la configuration Nginx personnalisée
 COPY nginx.conf /etc/nginx/nginx.conf
 
+# Démarrer Nginx
 CMD ["nginx", "-g", "daemon off;"]
