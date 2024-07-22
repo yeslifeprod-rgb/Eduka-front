@@ -1,17 +1,29 @@
+import React, { useEffect } from 'react';
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { CircleLoader } from "react-spinners";
 
-export const ModalLogOut = () => {
-  console.log("modal du logOut");
-  
+interface ModalLogOutProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+const ModalLogOut: React.FC<ModalLogOutProps> = ({ open, onClose }) => {
   const navigate = useNavigate();
 
-  const redirectToLoginPage = () => {
-    navigate("/");
-  };
+  useEffect(() => {
+    if (open) {
+      const timer = setTimeout(() => {
+        onClose();
+        navigate("/");
+      }, 4000);
 
-setTimeout(redirectToLoginPage, 4000);
+      // Cleanup the timer if the component is unmounted or open is changed
+      return () => clearTimeout(timer);
+    }
+  }, [open, navigate, onClose]);
+
+  if (!open) return null;
 
   return (
     <Box className="z-50 fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center">
@@ -29,3 +41,5 @@ setTimeout(redirectToLoginPage, 4000);
     </Box>
   );
 };
+
+export default ModalLogOut;

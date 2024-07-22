@@ -8,7 +8,7 @@ import { ProfilInterface } from "../../services/interfaces/ProfilInterface";
 import { UserInterface } from "../../services/interfaces/UserInterface";
 import {
   CardEventInterface,
-  EventInterface,
+  FormattedEventCardInterface,
 } from "../../services/interfaces/event";
 import {
   getFakerUserByProfilEventsData,
@@ -160,7 +160,10 @@ export const ProfilPage = () => {
         <div className="flex justify-center mx-2">
           <section className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4">
             {userByProfilEvents.map((event, index) => (
-              <CardEvent key={index} event={event as EventInterface} />
+              <CardEvent
+                key={index}
+                event={event as FormattedEventCardInterface}
+              />
             ))}
           </section>
         </div>
@@ -169,7 +172,10 @@ export const ProfilPage = () => {
         <div className="flex justify-center mx-2">
           <section className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4">
             {userParticipationProfilEvents.map((event, index) => (
-              <CardEvent key={index} event={event as EventInterface} />
+              <CardEvent
+                key={index}
+                event={event as FormattedEventCardInterface}
+              />
             ))}
           </section>
         </div>

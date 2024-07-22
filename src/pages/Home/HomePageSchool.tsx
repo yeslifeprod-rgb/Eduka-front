@@ -1,13 +1,13 @@
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   GreatBlueButton,
   GreatOrangeButton,
 } from "../../components/Button/CustomButton";
-import { useEffect, useState } from "react";
 import { getSchoolNameData } from "../../utils/Axios/axios";
 
 export const HomePageSchool = () => {
-  const [SchoolName, setSchoolName] = useState<string>([]);
+  const [SchoolName, setSchoolName] = useState<string>("");
   useEffect(() => {
     const fetchReceivedMessages = async () => {
       try {
@@ -22,7 +22,7 @@ export const HomePageSchool = () => {
 
     fetchReceivedMessages();
   }, []);
-  
+
   return (
     <>
       <nav>

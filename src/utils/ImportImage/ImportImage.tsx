@@ -17,7 +17,7 @@ export default function ImageUploader() {
         // Mettre à jour le storedDataEvent avec l'URL de l'image
         const storedDataString = localStorage.getItem("storedDataEvent");
         if (storedDataString) {
-          const storedDataEvent: StoredDataEvent = JSON.parse(storedDataString);
+          const storedDataEvent = JSON.parse(storedDataString);
           storedDataEvent.image = imageDataUrl;
           localStorage.setItem(
             "storedDataEvent",

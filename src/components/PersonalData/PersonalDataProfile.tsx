@@ -1,5 +1,4 @@
-import React from "react";
-import  { formatToFrenchDate } from "../../utils/CalculRelative/FormatRelativeDate";
+import { formatToFrenchDate } from "../../utils/CalculRelative/FormatRelativeDate";
 
 interface PersonalDataProfileInterface {
   avatar?: string;
@@ -13,9 +12,7 @@ export default function PersonalDataProfile({
   lastname,
   registerAtDate,
 }: PersonalDataProfileInterface) {
-  
-
-    return (
+  return (
     <div className="grid grid-col items-center justify-center mt-20 vh-100">
       <img
         src={avatar}

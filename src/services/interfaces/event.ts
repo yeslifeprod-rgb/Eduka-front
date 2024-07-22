@@ -13,9 +13,9 @@ export interface TagsInterface {
 export interface CardEventInterface {
   firstname: string;
   title: string;
-  start_date: string;
+  start_date: Date;
   description: string;
-  event_picture?: string;
+  event_picture?: string | null;
   profil_picture?: string;
   city: string;
   tags?: string[] | null;
@@ -36,6 +36,7 @@ export interface EventInterface
   jackpotLimitDate?: Date;
   choices?: string[] | null;
   childrenList?: string[] | null;
+  address?: string;
 }
 
 export interface FormattedEventCardInterface {

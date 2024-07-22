@@ -195,16 +195,15 @@ export default function FormAddEventPrivate({
       storedDataEvent.id = data.id;
       storedDataEvent.created_at = data.created_at;
       storedDataEvent.childrenList = data.childrenList;
-      storedDataEvent.address = data.address;
 
       if (image) {
-        storedDataEvent.image = image;
+        storedDataEvent.event_picture = image;
       }
       localStorage.setItem("storedDataEvent", JSON.stringify(storedDataEvent));
     } else {
       const newData: EventInterface = {
         ...data,
-        image: image ? image : null,
+        event_picture: image ? image : null,
         choices: data.choices, // Inclure les choix dans newData
         childrenList: data.childrenList,
       };
@@ -251,7 +250,8 @@ export default function FormAddEventPrivate({
               const storedDataEvent = JSON.parse(storedDataString);
               storedAddress = storedDataEvent.address;
             }
-            const eventData: EventInterface = {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const eventData: any = {
               ...values,
               tags: selectedTags,
               maxParticipants: counterValue,

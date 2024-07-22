@@ -3,6 +3,7 @@ import {
   config,
   useConfirmAddress,
 } from "@mapbox/search-js-react";
+import { FeatureCollection } from "geojson";
 import { useCallback, useEffect, useState } from "react";
 import MapBoxAddEvent from "../../components/Mapbox/Mapbox";
 
@@ -37,7 +38,7 @@ export default function AddressField() {
   });
 
   const handleRetrieve = useCallback(
-    (res: any) => {
+    (res: FeatureCollection) => {
       const feature = res.features[0];
       if (feature) {
         setFeature(feature);
@@ -50,39 +51,38 @@ export default function AddressField() {
     [setFeature, setErrorMessage]
   );
 
-  const handleSubmit = useCallback(
-    async (e) => {
-      e.preventDefault();
-      if (feature) {
-        const result = await showConfirm();
-        console.log(result);
-        if (result.type === "nochange") submitForm();
-      } else {
-        setErrorMessage("l'adresse n'est pas assez précise"); // Set error message if invalid address
-      }
-    },
-    [showConfirm, feature]
-  );
+  const handleSubmit = useCallback(async () => {
+    if (feature) {
+      const result = await showConfirm();
+      console.log(result);
+      if (result.type === "nochange") submitForm();
+    } else {
+      setErrorMessage("l'adresse n'est pas assez précise"); // Set error message if invalid address
+    }
+  }, [showConfirm, feature]);
 
   const submitForm = useCallback(() => {
     if (feature) {
-      const storedDataString = localStorage.getItem("storedDataEvent");
-      if (storedDataString) {
-        const storedDataEvent = JSON.parse(storedDataString);
-        const updatedStoredDataEvent = {
-          ...storedDataEvent,
-          address: feature.properties.place_name,
-        };
-        localStorage.setItem(
-          "storedDataEvent",
-          JSON.stringify(updatedStoredDataEvent)
-        );
-      } else {
-        const newData = {
-          ...data,
-          address: feature.properties.place_name,
-        };
-        localStorage.setItem("storedDataEvent", JSON.stringify(newData));
+      if (feature.properties) {
+        const storedDataString = localStorage.getItem("storedDataEvent");
+        if (storedDataString) {
+          const storedDataEvent = JSON.parse(storedDataString);
+          const updatedStoredDataEvent = {
+            ...storedDataEvent,
+            address: feature.properties.place_name,
+          };
+          localStorage.setItem(
+            "storedDataEvent",
+            JSON.stringify(updatedStoredDataEvent)
+          );
+        } else {
+          const data = {};
+          const newData = {
+            ...data,
+            address: feature.properties.place_name,
+          };
+          localStorage.setItem("storedDataEvent", JSON.stringify(newData));
+        }
       }
     }
     setValidatedAddress(null);
@@ -92,7 +92,9 @@ export default function AddressField() {
     }, 2500);
 
     // Set validated address
-    setValidatedAddress(feature ? feature.properties.place_name : null); // Définit l'adresse validée si feature est défini, sinon null
+    setValidatedAddress(
+      feature?.properties ? feature.properties.place_name : null
+    ); // Définit l'adresse validée si feature est défini, sinon null
   }, [feature]);
 
   const resetForm = useCallback(() => {
@@ -122,7 +124,11 @@ export default function AddressField() {
             {/* Input form */}
 
             {validatedAddress === null && (
-              <AddressAutofill accessToken={token} onRetrieve={handleRetrieve}>
+              <AddressAutofill
+                accessToken={token}
+                onRetrieve={handleRetrieve}
+                // Assurez-vous que les enfants requis sont fournis
+              >
                 <input
                   className={`input-custom ${
                     eventType === "Public" ? "" : "input-custom-orange"
@@ -204,7 +210,7 @@ export default function AddressField() {
       {validatedAddress && <p className="text-sm my-4">{validatedAddress}</p>}
 
       {/* Render MapBoxComponent only when address is validated */}
-      {validatedAddress && <MapBoxAddEvent address={validatedAddress} />}
+      {validatedAddress && <MapBoxAddEvent location={validatedAddress} />}
     </>
   );
 }

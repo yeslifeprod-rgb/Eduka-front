@@ -30,7 +30,7 @@ export const HomePageTeacher = () => {
         const data = await getProfilData();
         if (data) {
           const userProfile = data.datas.find((profile) => profile.user_id === "5678azdq");
-          setProfil(userProfile);
+          setProfil(userProfile as ProfilInterface);
         }
       } catch (error) {
         console.error("Error fetching profil:", error);

@@ -1,15 +1,14 @@
+import CloseIcon from "@mui/icons-material/Close";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { Box, IconButton, Modal, Typography } from "@mui/material";
 import { ErrorMessage, Field, Form, Formik } from "formik";
+import { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import {
   BlueFullButton,
   OrangeFullButtonDeleteIcon,
 } from "../../components/Button/CustomButton";
-import ProfilModifyInterface from "../../services/interfaces/ProfileModify";
-import { useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { Box, IconButton, Modal, Typography } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import ProfileModifyInterface from "../../services/interfaces/ProfileModify";
 
 const validationSchema = Yup.object().shape({

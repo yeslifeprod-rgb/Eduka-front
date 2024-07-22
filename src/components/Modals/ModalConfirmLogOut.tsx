@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
-import { BlueButton, OrangeButton } from "../Button/CustomButton";
 import { useState } from "react";
-import { ModalLogOut } from "./ModalLogOut";
+import { BlueButton, OrangeButton } from "../Button/CustomButton";
+import ModalLogOut from "./ModalLogOut";
 
 export const ModalConfirmLogOut = ({ onClose }: { onClose: () => void }) => {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -29,7 +29,7 @@ export const ModalConfirmLogOut = ({ onClose }: { onClose: () => void }) => {
         </div>
       </section>
       {showLogoutModal && (
-        <ModalLogOut onClose={handleCloseModals} />
+        <ModalLogOut open={showLogoutModal} onClose={handleCloseModals} />
       )}
     </Box>
   );

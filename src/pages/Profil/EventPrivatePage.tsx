@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BlueFullButton,
   OrangeFullButton,
@@ -12,10 +12,14 @@ import MapBoxComponent from "../../components/Mapbox/Mapbox";
 import { ModalChildren } from "../../components/ModalChildren/ModalChildren";
 import { FakePost } from "../EventPrivate/Faker";
 
-interface FormData {}
+interface FormData {
+  id: number;
+  name: string;
+  description: string;
+}
 
 export default function EventPrivatePage() {
-  const [formData, setFormData] = useState<FormData>({});
+  const [formData, setFormData] = useState<FormData | null>(null);
   const [isPresent, setIsPresent] = useState<boolean>(false);
   const [responseText, setResponseText] = useState<string>(
     "Vous n'avez pas encore répondu"
@@ -38,16 +42,19 @@ export default function EventPrivatePage() {
     fetchData();
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      console.log("Données soumises avec succès :", formData);
-      setResponseText(isPresent ? "Je suis présent" : "Je suis absent");
-    } catch (error) {
-      console.error("Erreur lors de la soumission du formulaire :", error);
-    }
-  };
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   try {
+  //     console.log("Données soumises avec succès :", formData);
+  //     setResponseText(isPresent ? "Je suis présent" : "Je suis absent");
+  //   } catch (error) {
+  //     console.error("Erreur lors de la soumission du formulaire :", error);
+  //   }
+  // };
 
+  if (!formData) {
+    console.error("Impossible de charger les données de l'événement");
+  }
   const handlePresentClick = () => {
     setIsPresent(true);
     setResponseText("Vous êtes présent");
