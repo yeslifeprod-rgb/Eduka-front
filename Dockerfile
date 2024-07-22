@@ -23,7 +23,7 @@ RUN ls -al
 RUN npm run build
 
 # Utiliser Nginx comme serveur de production
-FROM --platform=linux/amd64 nginx:stable
+FROM  nginx:stable
 
 # Copier le répertoire de construction
 COPY --from=build /app/dist /usr/share/nginx/html
