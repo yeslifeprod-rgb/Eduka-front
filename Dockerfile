@@ -13,23 +13,18 @@ RUN npm install
 # Copier le reste des fichiers de l'application
 COPY . .
 
+
 ARG BASE_BACK_URL
-ENV VITE_API_BASE_URL=${BASE_BACK_URL:-"https://gptriome-back.alt-tools.tech"} 
+ENV VITE_API_BASE_URL=${BASE_BACK_URL:-"https://aquildev-chantier-back.alt-tools.tech"}
 
-# Afficher le contenu du répertoire pour le débogage (facultatif)
-RUN ls -al
-
-# Build l'application => T => JS
+# Build l'application => TS => JS
 RUN npm run build
 
-# Utiliser Nginx comme serveur de production
-FROM --platform=linux/amd64 nginx:stable
 
-# Copier le répertoire de construction
+FROM nginx:stable 
+
 COPY --from=build /app/dist /usr/share/nginx/html
-
-# Copier la configuration Nginx personnalisée
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# Démarrer Nginx
 CMD ["nginx", "-g", "daemon off;"]
+
