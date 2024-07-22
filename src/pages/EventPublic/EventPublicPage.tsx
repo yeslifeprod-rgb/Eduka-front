@@ -6,7 +6,7 @@ import { FakePost } from "./Faker";
 import NavToggleEvent from "./NavToggleEvent";
 
 import { NavLink } from "react-router-dom";
-import MapBoxComponent from "../../components/Mapbox/Mapbox";
+import MapBoxComponent from "../../components/Mapbox/Mapbox2";
 
 export default function EventPrivatePage() {
   const [responseText, setResponseText] = useState<string>(
