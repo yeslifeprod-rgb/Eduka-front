@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 ARG BASE_BACK_URL
-ENV VITE_API_BASE_URL=${BASE_BACK_URL:-"https://gptriome-back.alt-tools.tech"} 
+ENV VITE_API_BASE_URL=${BASE_BACK_URL:-"http://192.168.0.9:3215/"} 
 
 # Afficher le contenu du répertoire pour le débogage (facultatif)
 RUN ls -al
