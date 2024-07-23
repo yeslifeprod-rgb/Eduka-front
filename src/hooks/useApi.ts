@@ -31,6 +31,7 @@ api.interceptors.response.use(
     // Handle unauthorized (401) responses
     if (error.response && error.response.status === 401) {
       const refreshToken = localStorage.getItem("refreshToken");
+      console.log("🚀 ~ refreshToken:", refreshToken);
 
       // Only refresh once to prevent infinite loop if refresh token is expired
       if (!isRefreshing) {
@@ -39,13 +40,15 @@ api.interceptors.response.use(
         try {
           // Perform refresh token request
           const response = await axios.post(
-            `${import.meta.env.VITE_API_BASE_URL}/refresh_token`,
+            `${import.meta.env.VITE_API_BASE_URL}auth/refresh_token`,
             {
               refreshToken,
             }
           );
+          console.log("🚀 ~ response:", response);
 
           const newAccessToken = response.data.accessToken;
+          console.log("🚀 ~ newAccessToken:", newAccessToken);
 
           // Update access token in localStorage
           localStorage.setItem("accessToken", newAccessToken);
@@ -57,7 +60,7 @@ api.interceptors.response.use(
           localStorage.removeItem("accessToken");
           localStorage.removeItem("refreshToken");
           // Redirect to login or handle as needed
-          // Example: window.location.href = '/login';
+          window.location.href = "/";
           return Promise.reject(refreshError);
         } finally {
           isRefreshing = false;
