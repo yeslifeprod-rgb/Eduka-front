@@ -41,10 +41,14 @@ api.interceptors.response.use(
           // Perform refresh token request
           const response = await axios.post(
             `${import.meta.env.VITE_API_BASE_URL}auth/refresh_token`,
+            null, // Body is not needed
             {
-              refreshToken,
+              headers: {
+                Authorization: `Bearer ${refreshToken}`,
+              },
             }
           );
+
           console.log("🚀 ~ response:", response);
 
           const newAccessToken = response.data.accessToken;
