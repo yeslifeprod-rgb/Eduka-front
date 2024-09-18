@@ -1,5 +1,3 @@
-import { GeoJSONSource } from "mapbox-gl";
-
 export interface TypeInterface {
   type: string;
 }
@@ -52,11 +50,19 @@ export interface FormattedEventCardInterface {
   status: string;
   tags: string[];
   city: string;
-  location: GeoJSONSource;
-  lastname: string;
-  firstname: string;
-  profil_picture: string;
-  event_picture: string;
+  address: {
+    city: string;
+    location: {
+      lat: number;
+      long: number;
+    };
+  };
+  user: {
+    lastname: string;
+    firstname: string;
+    profil_picture: string;
+  };
+  picture: string;
   latitude: number;
   longitude: number;
 }

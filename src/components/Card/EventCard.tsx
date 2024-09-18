@@ -40,7 +40,7 @@ export default function CardEvent(props: CardEventPropsInterface) {
       <CardActionArea>
         <CardMedia
           component="img"
-          image={event.event_picture}
+          image={event.picture}
           style={{ height: 300 }}
         />
 
@@ -50,7 +50,7 @@ export default function CardEvent(props: CardEventPropsInterface) {
           </Typography>
           <div className="flex justify-between py-2 text-sm text-gray-700">
             <p>
-              <LocationOnIcon /> {event.city}
+              <LocationOnIcon /> {event.address.city}
             </p>
             <p>{formatRelativeDate(event.start_date)}</p>
           </div>
@@ -66,11 +66,11 @@ export default function CardEvent(props: CardEventPropsInterface) {
               <IconButton size="small">
                 <Avatar
                   alt="Cindy Baker"
-                  src={event.profil_picture}
+                  src={event.user.profil_picture}
                   sx={{ width: 24, height: 24 }}
                 />
               </IconButton>
-              <p>de {event.firstname}</p>
+              <p>de {event.user.firstname}</p>
             </div>
           </section>
         </CardContent>

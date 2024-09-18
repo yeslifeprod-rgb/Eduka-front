@@ -9,6 +9,8 @@ import { getFakerEventTagsData } from "../../utils/Axios/axios";
 import CounterInput from "../../utils/CounterInput";
 import ButtonAddChoice from "../Button/ButtonAddChoice";
 
+import { createEvent } from "../../services/api/add_event";
+import { uploadImage } from "../../services/api/upload_image";
 import { ButtonAddTags } from "../Button/ButtonAddTags";
 import { BlueFullButton } from "../Button/CustomButton";
 import ModalAddTags from "../Modals/ModalAddTags";
@@ -133,7 +135,7 @@ export default function FormAddEventPublic({
     }
   }, []); // Cette fonction ne dépend d'aucune variable, elle ne sera donc exécutée qu'une fois au montage du composant.
 
-  const saveToLocalStorage = (data: EventInterface) => {
+  const saveToLocalStorage = async (data: EventInterface) => {
     const storedDataString = localStorage.getItem("storedDataEvent");
     if (storedDataString) {
       const storedDataEvent: EventInterface = JSON.parse(storedDataString);
@@ -161,21 +163,27 @@ export default function FormAddEventPublic({
       };
       localStorage.setItem("storedDataEvent", JSON.stringify(newData));
     }
+    console.log("Event created successfully:", data);
+    const result = await createEvent(data);
+    console.log("Event created successfully:", result);
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-
-    reader.onload = (event) => {
-      if (event.target?.result) {
-        const imageDataUrl = event.target.result.toString();
-        setImage(imageDataUrl);
-      }
-    };
-    reader.readAsDataURL(file);
+    try {
+      const result = await uploadImage(file);
+      const serverUrl = import.meta.env.VITE_API_BASE_URL;
+      const imagePath = result.filePath.startsWith("/")
+        ? result.filePath.slice(1)
+        : result.filePath; // Supprime le slash initial si présent
+      setImage(`${serverUrl}${imagePath}`);
+      console.log(image);
+      // Assurez-vous que `filePath` est le bon champ retourné par le serveur
+    } catch (error) {
+      console.error("Erreur:", error);
+    }
   };
 
   return (

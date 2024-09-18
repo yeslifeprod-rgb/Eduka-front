@@ -31,11 +31,13 @@ export default function EventsPage() {
       try {
         const data = await fetchPublicEvents();
         if (data) {
-          const formattedEvents = data.events.map((event: any) => ({
-            ...event,
-            latitude: event.location.lat,
-            longitude: event.location.long,
-          }));
+          const formattedEvents = data.events.map(
+            (event: FormattedEventCardInterface) => ({
+              ...event,
+              latitude: event.address.location.lat,
+              longitude: event.address.location.long,
+            })
+          );
           setEvents(formattedEvents);
           updateEvents(formattedEvents);
           adjustViewport(formattedEvents);
@@ -166,7 +168,7 @@ export default function EventsPage() {
               >
                 <div>
                   <img
-                    src={selectedEvent.event_picture}
+                    src={selectedEvent.picture}
                     alt={selectedEvent.title}
                     style={{ width: "100%", height: "100%" }}
                   />

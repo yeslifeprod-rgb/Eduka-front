@@ -1,6 +1,6 @@
-import { useApi } from "../../hooks/useApi";
+import { useApi as UseApi } from "../../hooks/useApi";
 
-const api = useApi();
+const api = UseApi();
 
 interface EmailRequest {
   email: string;
