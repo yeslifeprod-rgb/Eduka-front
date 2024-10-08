@@ -24,7 +24,7 @@ export const AddEventPage = () => {
         <div></div>
       </div>
       <div className="mt-32 grid grid-col items-center justify-center">
-        {storedDataEvent?.type === "Public" ? (
+        {storedDataEvent?.is_public === true ? (
           <FormAddEventPublic onSubmit={() => {}} />
         ) : (
           <FormAddEventPrivate onSubmit={() => {}} />

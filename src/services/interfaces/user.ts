@@ -16,3 +16,10 @@ export interface userInterface {
   password: string;
   role?: string;
 }
+
+export interface userCardInterface {
+  id: number;
+  firstname: string;
+  lastname: string;
+  profil_picture: string;
+}

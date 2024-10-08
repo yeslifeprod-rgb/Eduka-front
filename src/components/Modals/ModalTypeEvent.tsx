@@ -15,15 +15,15 @@ export default function TypeEventPage() {
   } = useModal();
   const [typeEvents, setTypeEvents] = useState<string[]>([]);
 
-  const handleButtonClick = (type: string) => {
+  const handleButtonClick = (is_public: boolean) => {
     const storedDataEvent: TypeInterface = {
-      type: type,
+      is_public: is_public,
     };
 
     localStorage.setItem("storedDataEvent", JSON.stringify(storedDataEvent));
     closeTypeEvent();
 
-    if (type === "Public") {
+    if (is_public === true) {
       openCategoryPublicEvent();
     } else {
       openCategoryPrivateEvent();
@@ -70,11 +70,11 @@ export default function TypeEventPage() {
             {typeEvents.map((event, index) => (
               <div key={event}>
                 {index % 2 === 0 ? ( // Utilisation de l'indice pour alterner entre bleu et orange
-                  <BlueButton onClick={() => handleButtonClick(event)}>
+                  <BlueButton onClick={() => handleButtonClick(true)}>
                     {event}
                   </BlueButton>
                 ) : (
-                  <OrangeButton onClick={() => handleButtonClick(event)}>
+                  <OrangeButton onClick={() => handleButtonClick(false)}>
                     {event}
                   </OrangeButton>
                 )}

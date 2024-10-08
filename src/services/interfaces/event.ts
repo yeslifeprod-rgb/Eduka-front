@@ -1,5 +1,5 @@
 export interface TypeInterface {
-  type: string;
+  is_public: boolean;
 }
 export interface CategoryInterface extends TypeInterface {
   category: string;
@@ -35,6 +35,25 @@ export interface EventInterface
   choices?: string[] | null;
   childrenList?: string[] | null;
   address?: string;
+}
+
+export interface AddEventInterface {
+  title: string;
+  description: string;
+  start_date: Date;
+  end_date: string;
+  photo: string;
+  guest_limit: number;
+  is_public: boolean;
+  category: string;
+  status: string;
+  tags: string[];
+  city: string;
+  address: string;
+  location: JSON;
+  user_id: string;
+  picture: string;
+  choices: string[];
 }
 
 export interface FormattedEventCardInterface {

@@ -3,22 +3,22 @@ import UserCard from "../../components/Card/UserCard";
 import NavBottom from "../../components/NavBar/NavBottom";
 import NavTopLarge from "../../components/NavBar/NavTopLarge";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import { userInterface } from "../../services/interfaces/user";
-import { getFakerUsersData } from "../../utils/Axios/axios";
+import { fetchParentsProfiles } from "../../services/api/get_parents_profiles";
+import { userCardInterface } from "../../services/interfaces/user";
 
 export default function SearchByParentPage() {
-  const [usersData, setUsersData] = useState<userInterface[]>([]);
+  const [usersData, setUsersData] = useState<userCardInterface[]>([]);
   const [searchResults, setSearchResults] =
-    useState<userInterface[]>(usersData);
+    useState<userCardInterface[]>(usersData);
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // Récupérer les données des types d'événements via Axios
-        const data = await getFakerUsersData();
+        const data = await fetchParentsProfiles();
         if (data) {
-          setUsersData(data.datas);
+          setUsersData(data.profiles);
         }
       } catch (error) {
         console.error("Error fetching type events:", error);
@@ -32,9 +32,9 @@ export default function SearchByParentPage() {
     setSearchResults([...usersData]);
   }, [usersData]);
 
-  const searchUsers = (query: string) => {
-    const filteredUsers = usersData.filter((user) => {
-      const fullName = `${user.first_name} ${user.last_name}`;
+  const searchUsers = async (query: string) => {
+    const filteredUsers = await usersData.filter((user) => {
+      const fullName = `${user.firstname} ${user.lastname}`;
       return fullName.toLowerCase().includes(query.toLowerCase());
     });
     setSearchResults(filteredUsers);

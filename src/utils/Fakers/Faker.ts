@@ -571,19 +571,19 @@ export const fakerTypeEventsData = {
 };
 
 const fakeEventTags: string[] = [
-  "Cagnotte",
-  "Sport",
-  "Parc",
-  "Sortie",
-  "Fête",
-  "Musique",
-  "Association",
-  "Cours",
-  "Sondage",
-  "Covoiturage",
-  "Musée",
-  "Devoir",
-  "foot",
+  "CAGNOTTE",
+  "SPORT",
+  "PARC",
+  "SORTIE",
+  "FETE",
+  "MUSIQUE",
+  "ASSOCIATION",
+  "COURS",
+  "SONDAGE",
+  "COVOITURAGE",
+  "MUSEE",
+  "DEVOIR",
+  "FOOT",
 ];
 export const fakerEventTagsData = {
   datas: fakeEventTags,
@@ -1098,7 +1098,7 @@ export const fakerOnChangeData = {
   datas: fakerOnChange,
 };
 
-const fakerLogin: LoginInterface [] = [
+const fakerLogin: LoginInterface[] = [
   {
     id: 1,
     role: "teacher",

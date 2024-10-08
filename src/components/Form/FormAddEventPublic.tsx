@@ -4,13 +4,17 @@ import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { EventInterface } from "../../services/interfaces/event";
+import {
+  AddEventInterface,
+  EventInterface,
+} from "../../services/interfaces/event";
 import { getFakerEventTagsData } from "../../utils/Axios/axios";
 import CounterInput from "../../utils/CounterInput";
 import ButtonAddChoice from "../Button/ButtonAddChoice";
 
 import { createEvent } from "../../services/api/add_event";
 import { uploadImage } from "../../services/api/upload_image";
+import AddressField from "../../utils/AddressField/AdressField";
 import { ButtonAddTags } from "../Button/ButtonAddTags";
 import { BlueFullButton } from "../Button/CustomButton";
 import ModalAddTags from "../Modals/ModalAddTags";
@@ -40,11 +44,11 @@ export default function FormAddEventPublic({
     description: Yup.string()
       .min(2, "La description doit contenir au moins 2 caractères")
       .required("La description est requise"),
-    startDate:
+    start_date:
       category !== "Sondage" && category !== "Cagnotte"
         ? Yup.string().required("La date de début est requise")
         : Yup.string(),
-    endDate:
+    end_date:
       category !== "Sondage"
         ? Yup.string().required("La date de fin est requise")
         : Yup.string(),
@@ -119,53 +123,27 @@ export default function FormAddEventPublic({
       console.log("Aucune donnée trouvée dans le localStorage.");
     }
   }, []); // Cette fonction ne dépend d'aucune variable, elle ne sera donc exécutée qu'une fois au montage du composant.
-  useEffect(() => {
-    // Récupérer les données du localStorage
-    const storedDataString = localStorage.getItem("storedDataEvent");
-
-    // Vérifier si des données ont été trouvées dans le localStorage
-    if (storedDataString) {
-      // Convertir les données en objet JavaScript
-      const storedDataEvent = JSON.parse(storedDataString);
-
-      // Afficher les données dans la console
-      console.log("Données récupérées du localStorage :", storedDataEvent);
-    } else {
-      console.log("Aucune donnée trouvée dans le localStorage.");
-    }
-  }, []); // Cette fonction ne dépend d'aucune variable, elle ne sera donc exécutée qu'une fois au montage du composant.
-
-  const saveToLocalStorage = async (data: EventInterface) => {
+  const saveToLocalStorage = async (data: AddEventInterface) => {
     const storedDataString = localStorage.getItem("storedDataEvent");
     if (storedDataString) {
-      const storedDataEvent: EventInterface = JSON.parse(storedDataString);
+      console.log(data.guest_limit);
+      const storedDataEvent: AddEventInterface = JSON.parse(storedDataString);
       storedDataEvent.title = data.title;
       storedDataEvent.description = data.description;
-      storedDataEvent.startDate = data.startDate;
-      storedDataEvent.endDate = data.endDate;
-      storedDataEvent.address = data.address;
-      storedDataEvent.maxParticipants = data.maxParticipants;
-      storedDataEvent.jackpotLink = data.jackpotLink;
-      storedDataEvent.tags = data.tags; // Inclure les tags sélectionnés
-      storedDataEvent.choices = data.choices; // Inclure les choix de sondage
-      storedDataEvent.id = data.id;
-      storedDataEvent.created_at = data.created_at;
+      storedDataEvent.start_date = data.start_date || data.end_date;
+      storedDataEvent.end_date = data.end_date;
+      storedDataEvent.guest_limit = counterValue;
+      storedDataEvent.tags = data.tags;
 
       if (image) {
-        storedDataEvent.event_picture = image;
+        storedDataEvent.photo = image;
       }
       localStorage.setItem("storedDataEvent", JSON.stringify(storedDataEvent));
-    } else {
-      const newData: EventInterface = {
-        ...data,
-        event_picture: image ? image : null,
-        choices: data.choices, // Inclure les choix dans newData
-      };
-      localStorage.setItem("storedDataEvent", JSON.stringify(newData));
+
+      console.log("avant fetch Event created successfully:", storedDataEvent);
+      const result = await createEvent(storedDataEvent);
+      console.log("Result Event created successfully in fetch:", result);
     }
-    console.log("Event created successfully:", data);
-    const result = await createEvent(data);
-    console.log("Event created successfully:", result);
   };
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -193,8 +171,8 @@ export default function FormAddEventPublic({
           initialValues={{
             title: "",
             description: "",
-            startDate: "",
-            endDate: "",
+            start_date: "",
+            end_date: "",
             address: "",
             jackpotLink: "",
             tags: [] as string[],
@@ -213,8 +191,7 @@ export default function FormAddEventPublic({
             const eventData: any = {
               ...values,
               tags: selectedTags,
-              maxParticipants: counterValue,
-              created_at: new Date(),
+              guess_limit: counterValue,
               id: id,
               choices: choices,
               address: values.address || storedAddress,
@@ -224,11 +201,9 @@ export default function FormAddEventPublic({
               ...eventData,
               tags: selectedTags,
               choices: choices,
-              maxParticipants: counterValue,
-              created_at: new Date(),
+              guess_limit: counterValue,
             });
             saveToLocalStorage(eventData);
-
             setShowModal(true);
             setTimeout(() => {
               setShowModal(false);
@@ -308,17 +283,17 @@ export default function FormAddEventPublic({
                     <label htmlFor="startDate">Date de début</label>
                   )}
                   <Field
-                    id="startDate"
-                    name="startDate"
+                    id="start_date"
+                    name="start_date"
                     type="datetime-local"
                     className={`block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue ${
-                      errors.startDate && touched.startDate
+                      errors.start_date && touched.start_date
                         ? "border-red-500"
                         : "border-gray-300"
                     }`}
                   />
                   <ErrorMessage
-                    name="starDate"
+                    name="star_date"
                     component="div"
                     className="text-red-500 text-sm mt-1"
                   />
@@ -327,30 +302,30 @@ export default function FormAddEventPublic({
               {category !== "Sondage" && (
                 <div className="mb-4">
                   {category === "Covoiturage" ? (
-                    <label htmlFor="endDate">Heure d'arrivée</label>
+                    <label htmlFor="end_date">Heure d'arrivée</label>
                   ) : category === "Cagnotte" ? (
-                    <label htmlFor="endDate">Date limite de la cagnotte</label>
+                    <label htmlFor="end_date">Date limite de la cagnotte</label>
                   ) : (
-                    <label htmlFor="endDate">Date de fin</label>
+                    <label htmlFor="end_date">Date de fin</label>
                   )}
                   <Field
-                    id="endDate"
-                    name="endDate"
+                    id="end_date"
+                    name="end_date"
                     type="datetime-local"
                     className={`block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-blue focus:border-custom-blue ${
-                      errors.endDate && touched.endDate
+                      errors.end_date && touched.end_date
                         ? "border-red-500"
                         : "border-gray-300"
                     }`}
                   />
                   <ErrorMessage
-                    name="endDate"
+                    name="end_date"
                     component="div"
                     className="text-red-500 text-sm mt-1"
                   />
                 </div>
               )}
-              {/* {category !== "Sondage" && category !== "Cagnotte" && (
+              {category !== "Sondage" && category !== "Cagnotte" && (
                 <div className="mb-4">
                   {category === "Covoiturage" ? (
                     <label htmlFor="address">Lieu de covoiturage</label>
@@ -373,7 +348,7 @@ export default function FormAddEventPublic({
                     className="text-red-500 text-sm mt-1"
                   />
                 </div>
-              )} */}
+              )}
               {/* Limite de participants */}
               {category === "Sortie loisirs" && (
                 <div className="mb-4 flex flex-col">

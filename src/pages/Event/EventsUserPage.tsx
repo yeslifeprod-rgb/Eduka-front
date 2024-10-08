@@ -123,7 +123,7 @@ export default function EventsPage() {
 
   return (
     <div className="  flex flex-col-reverse gap-4 justify-center mx-2 mt-4 lg:grid grid-cols-3 ">
-      <section className="col-span-2  max-w-screen-xl mx-auto grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 ">
+      <section className="col-span-2  max-w-screen-xl  mx-auto grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 ">
         {filteredEvents.map((event, index) => (
           <CardEvent key={index} event={event as FormattedEventCardInterface} />
         ))}

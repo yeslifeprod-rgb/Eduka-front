@@ -37,6 +37,8 @@ const LoginPage: React.FC = () => {
           localStorage.setItem("refreshToken", response.refresh_token);
         }
         setUser(response.user);
+        console.log("Connexion réussie :", response.user);
+        localStorage.setItem("user", JSON.stringify(response.user));
         if (values.rememberMe) {
           localStorage.setItem("rememberMeCredentials", JSON.stringify(values));
         } else {

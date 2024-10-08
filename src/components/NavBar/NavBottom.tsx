@@ -9,15 +9,13 @@ export default function NavBottom() {
   const [avatar, setAvatar] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    const credentialsAsString = localStorage.getItem("currentUser");
+    const credentialsAsString = localStorage.getItem("user");
     const credentials = credentialsAsString
       ? JSON.parse(credentialsAsString)
       : undefined;
 
-    if (credentials) {
-      if (credentials.avatar) {
-        setAvatar(credentials.avatar);
-      }
+    if (credentials && credentials.photo) {
+      setAvatar(credentials.photo); // Utilise 'photo' à la place de 'avatar'
     }
   }, []);
 
@@ -42,11 +40,7 @@ export default function NavBottom() {
         </IconButton>
       </NavLink>
       <NavLink to="/profil" className="nav-link-avatar">
-        <Avatar
-          alt="Cindy Baker"
-          src={avatar}
-          className="nav-avatar"
-        />
+        <Avatar alt="avatar" src={avatar} className="nav-avatar" />
       </NavLink>
     </nav>
   );

@@ -22,15 +22,13 @@ export default function NavTopLarge() {
   }, [prevScrollPos]);
 
   useEffect(() => {
-    const credentialsAsString = localStorage.getItem("currentUser");
+    const credentialsAsString = localStorage.getItem("user");
     const credentials = credentialsAsString
       ? JSON.parse(credentialsAsString)
       : undefined;
 
-    if (credentials) {
-      if (credentials.avatar) {
-        setAvatar(credentials.avatar);
-      }
+    if (credentials && credentials.photo) {
+      setAvatar(credentials.photo); // Utilise 'photo' à la place de 'avatar'
     }
   }, []);
 
@@ -48,7 +46,10 @@ export default function NavTopLarge() {
           <img src="./public/logo.png" alt="eduka" />
         </section>
         <section className="hidden  text-gray-600 lg:flex justify-end items-center gap-8">
-          <NavLink to="/home_page_parent" className="nav-link flex  items-center gap-2">
+          <NavLink
+            to="/home_page_parent"
+            className="nav-link flex  items-center gap-2"
+          >
             <HomeIcon className="nav-icon" sx={{ width: 32, height: 32 }} />
 
             <p className="nav-icon">Accueil</p>
@@ -72,11 +73,7 @@ export default function NavTopLarge() {
             <p className="nav-icon">Rechercher</p>
           </NavLink>
           <NavLink to="/profil" className="nav-link-avatar">
-            <Avatar
-              alt="Cindy Baker"
-              src={avatar}
-              className="nav-avatar"
-            />
+            <Avatar alt="Cindy Baker" src={avatar} className="nav-avatar" />
           </NavLink>
         </section>
         {/* <section>

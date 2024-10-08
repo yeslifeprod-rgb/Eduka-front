@@ -35,13 +35,15 @@ export default function CardEvent(props: CardEventPropsInterface) {
     <Card
       sx={{ maxWidth: 400 }}
       variant="outlined"
-      className="relative shadow-md m-auto"
+      className="relative shadow-md "
     >
       <CardActionArea>
         <CardMedia
           component="img"
-          image={event.picture}
-          style={{ height: 300 }}
+          image={
+            event.picture ? event.picture : "https://source.unsplash.com/random"
+          }
+          style={{ height: 200, width: "100%", objectFit: "cover" }}
         />
 
         <CardContent>
@@ -50,7 +52,8 @@ export default function CardEvent(props: CardEventPropsInterface) {
           </Typography>
           <div className="flex justify-between py-2 text-sm text-gray-700">
             <p>
-              <LocationOnIcon /> {event.address.city}
+              <LocationOnIcon />{" "}
+              {event.address?.city ? event.address.city : "Non défini"}
             </p>
             <p>{formatRelativeDate(event.start_date)}</p>
           </div>
@@ -65,7 +68,7 @@ export default function CardEvent(props: CardEventPropsInterface) {
             <div className="flex items-center">
               <IconButton size="small">
                 <Avatar
-                  alt="Cindy Baker"
+                  alt="profil_picture"
                   src={event.user.profil_picture}
                   sx={{ width: 24, height: 24 }}
                 />
