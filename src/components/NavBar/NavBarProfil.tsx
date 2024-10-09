@@ -3,16 +3,9 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { IconButton } from "@mui/material";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { ModalConfirmLogOut } from "../Modals/ModalConfirmLogOut";
+import { useModal } from "../../services/Context/ModalContext";
 
 export const NavBarProfil = () => {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const handleClickModalLogOut = () => {
-    setIsModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
   const [visible, setVisible] = useState<boolean>(true);
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
 
@@ -26,6 +19,7 @@ export const NavBarProfil = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [prevScrollPos]);
+  const { openLogOut } = useModal();
 
   return (
     <div
@@ -35,11 +29,7 @@ export const NavBarProfil = () => {
           : "transform -translate-y-full z-0"
       }`}
     >
-      <IconButton
-        aria-label="delete"
-        size="large"
-        onClick={handleClickModalLogOut}
-      >
+      <IconButton aria-label="delete" size="large" onClick={openLogOut}>
         <LogoutOutlinedIcon
           style={{
             color: "#5f6369",
@@ -54,7 +44,6 @@ export const NavBarProfil = () => {
           style={{ color: "#5f6369", fontSize: "2.5rem" }}
         />
       </NavLink>
-      {isModalOpen && <ModalConfirmLogOut onClose={handleCloseModal} />}
     </div>
   );
 };

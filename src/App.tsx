@@ -16,9 +16,9 @@ import LoginPage from "./pages/Login/LoginPage";
 import SendEmailPage from "./pages/Login/SendEmailPage";
 import NotificationPage from "./pages/Notification/NotificationPage";
 import EventPrivatePage from "./pages/Profil/EventPrivatePage";
-import { ProfilPage } from "./pages/Profil/ProfilPage";
-import ProfilModifyPage from "./pages/Profil/ProfileModifyPage";
+
 import ProfilePage from "./pages/Profil/ProfilePage";
+import ProfilPage from "./pages/Profil/ProfilPage";
 import { ParentSignUpPage } from "./pages/Schools/ParentSignUpPage";
 import { ParentTeacherSignUp } from "./pages/Schools/ParentTeacherSignUpPage";
 import { SchoolCreateUser } from "./pages/Schools/SchoolCreateUserPage";
@@ -71,7 +71,7 @@ function App() {
               <Route path="/participation" element={<ProfilePage />} />
               <Route path="/add_event_page" element={<AddEventPage />} />
               <Route path="/profil" element={<ProfilPage />} />
-              <Route path="/profil" element={<ProfilModifyPage />} />
+              {/* <Route path="/profil" element={<ProfilModifyPage />} /> */}
             </Route>
             {/* Routes for School */}
             <Route element={<RoleBasedRoute roles={[Roles.SCHOOL]} />}>

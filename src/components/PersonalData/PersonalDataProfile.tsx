@@ -1,27 +1,52 @@
+import { useEffect, useState } from "react";
+import { fetchPersonalDataProfile } from "../../services/api/user";
 import { formatToFrenchDate } from "../../utils/CalculRelative/FormatRelativeDate";
 
-interface PersonalDataProfileInterface {
-  avatar?: string;
-  firstname?: string;
-  lastname?: string;
-  registerAtDate: string;
-}
-export default function PersonalDataProfile({
-  avatar,
-  firstname,
-  lastname,
-  registerAtDate,
-}: PersonalDataProfileInterface) {
+export default function PersonalDataProfile() {
+  const [profile, setProfile] = useState({
+    profile_picture: "",
+    firstname: "",
+    lastname: "",
+    registerAtDate: "",
+  });
+
+  useEffect(() => {
+    const fetchProfileData = async () => {
+      try {
+        const data = await fetchPersonalDataProfile();
+        if (data) {
+          console.log("🚀 ~ fetchProfileData ~ data:", data);
+
+          setProfile({
+            profile_picture: data.profil_picture,
+            firstname: data.firstname,
+            lastname: data.lastname,
+            registerAtDate: data.created_at,
+          });
+        }
+      } catch (error) {
+        console.error("Error fetching personal data profile:", error);
+      }
+    };
+
+    fetchProfileData();
+  }, []);
+  console.log("🚀 ~ PersonalDataProfile ~ profile:", profile);
   return (
-    <div className="grid grid-col items-center justify-center mt-20 vh-100">
+    <div className="flex gap-4 items-center justify-center pt-20 bg-white ">
       <img
-        src={avatar}
+        src={profile.profile_picture}
         alt="photo"
-        className="w-35 h-35 rounded-full mb-8 md:mb-0 my-4 md:my-0"
+        className="w-28 h-28 rounded-full "
       />
-      <p>{firstname}</p>
-      <p>{lastname}</p>
-      <p>{formatToFrenchDate(registerAtDate)}</p>
+      <div>
+        <h3 className="text-xl ">
+          {profile.firstname} {profile.lastname}
+        </h3>
+        <p className="text-sm text-gray-800">
+          date de création : {formatToFrenchDate(profile.registerAtDate)}
+        </p>
+      </div>
     </div>
   );
 }

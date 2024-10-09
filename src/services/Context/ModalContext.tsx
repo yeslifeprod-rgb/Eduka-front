@@ -16,6 +16,9 @@ interface ModalContextType {
   isAddTagsEventOpen: boolean;
   openAddTagsEvent: () => void;
   closeAddTagsEvent: () => void;
+  isLogOutOpen: boolean;
+  openLogOut: () => void;
+  closeLogOut: () => void;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -40,7 +43,7 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isCategoryPublicEventOpen, setIsCategoryPublicEventOpen] =
     useState(false);
   const [isAddTagsEventOpen, setIsAddTagsEventOpen] = useState(false);
-
+  const [isLogOutOpen, setIsLogOutOpen] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
   };
@@ -73,6 +76,12 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({
   const closeAddTagsEvent = () => {
     setIsAddTagsEventOpen(false);
   };
+  const openLogOut = () => {
+    setIsLogOutOpen(true);
+  };
+  const closeLogOut = () => {
+    setIsLogOutOpen(false);
+  };
 
   return (
     <ModalContext.Provider
@@ -92,6 +101,9 @@ export const ModalProvider: React.FC<{ children: React.ReactNode }> = ({
         isAddTagsEventOpen,
         openAddTagsEvent,
         closeAddTagsEvent,
+        isLogOutOpen,
+        openLogOut,
+        closeLogOut,
       }}
     >
       {children}
