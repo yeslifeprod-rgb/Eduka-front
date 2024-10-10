@@ -1,19 +1,19 @@
 export interface Child {
-  first_name: string;
-  last_name: string;
+  name: string;
+  birthday: string;
+  class: string;
 }
 
 export interface userInterface {
   id: number;
-  first_name: string;
-  last_name: string;
-  avatar: string;
+  firstname: string;
+  lastname: string;
+  profil_picture: string;
   phone: string;
-  address: string;
-  createdAt: Date;
+  created_at: Date;
+  address: {address_line_1: string; city: string; zip_code: string};
   children: Child[];
-  email: string;
-  password: string;
+  email?: string;
   role?: string;
 }
 
