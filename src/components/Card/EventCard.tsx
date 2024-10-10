@@ -39,7 +39,9 @@ export default function CardEvent(props: CardEventPropsInterface) {
         <CardMedia
           component="img"
           image={
-            event.picture ? event.picture : "https://source.unsplash.com/random"
+            event.picture
+              ? event.picture
+              : "https://www.istockphoto.com/photo/happy-children-playing-together-in-park-gm1330261325-413735656?utm_source=pixabay&utm_medium=affiliate&utm_campaign=SRP_image_sponsored&utm_content=https%3A%2F%2Fpixabay.com%2Fimages%2Fsearch%2Fsortie%2520extrascolaire%2F&utm_term=sortie+extrascolaire"
           }
           style={{ height: 200, width: "100%", objectFit: "cover" }}
         />

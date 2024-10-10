@@ -11,7 +11,6 @@ export default function MessageDetailPage() {
   useEffect(() => {
     const fetchData = async () => {
       if (id) {
-        // Vérifier que l'ID n'est pas undefined
         try {
           // Récupérer les détails du profil utilisateur
           const data = await fetchDetailProfiles(id);
