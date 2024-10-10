@@ -10,13 +10,25 @@ export default function PersonalDataProfile() {
     registerAtDate: "",
   });
 
+  const [visible, setVisible] = useState<boolean>(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+
+  useEffect(() => {
+    const handleScroll = (): void => {
+      const currentScrollPos = window.scrollY;
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [prevScrollPos]);
+
   useEffect(() => {
     const fetchProfileData = async () => {
       try {
         const data = await fetchPersonalDataProfile();
         if (data) {
-          console.log("🚀 ~ fetchProfileData ~ data:", data);
-
           setProfile({
             profile_picture: data.profil_picture,
             firstname: data.firstname,
@@ -31,9 +43,15 @@ export default function PersonalDataProfile() {
 
     fetchProfileData();
   }, []);
-  console.log("🚀 ~ PersonalDataProfile ~ profile:", profile);
+
   return (
-    <div className="flex gap-4 items-center justify-center pt-20 bg-white ">
+    <div
+      className={`flex gap-4 items-center justify-center pt-10 bg-white  ${
+        visible
+          ? "transform translate-y-0 z-10"
+          : "transform -translate-y-full z-0"
+      }`}
+    >
       <img
         src={profile.profile_picture}
         alt="photo"
