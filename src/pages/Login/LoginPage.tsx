@@ -4,7 +4,8 @@ import { NavLink, Navigate } from "react-router-dom";
 import * as Yup from "yup";
 import { BlueFullButton } from "../../components/Button/Button";
 import LoginInterface from "../../services/interfaces/Login";
-import { getFakerUsersData } from "../../utils/Axios/axios";
+import {useApi} from "../../hooks/useApi";
+import {jwtDecode} from 'jwt-decode';
 
 export default function Login() {
   const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
@@ -23,6 +24,8 @@ export default function Login() {
     password: "",
     rememberMe: false,
   });
+
+  const api = useApi();
 
   // Check if credentials are stored in localStorage on component mount
   useEffect(() => {
@@ -54,27 +57,20 @@ export default function Login() {
       //Sauvegarde ou detruis l'email et le mot de passe pour le cas "se souvenir de moi"
       handleRememberMe(values);
 
-      const response = await getFakerUsersData();
+      const response = await api.post("/auth/signin",{"email":values.email,"password":values.password})
 
-      const usersList = response.datas;
+      const myToken = response.data.access_token;
 
-      const filteredUsers = usersList.filter((user: { email: string }) =>
-        user.email.toLowerCase().includes(values.email.toLowerCase())
-      );
-      console.log(filteredUsers);
-
-      if (
-        filteredUsers &&
-        filteredUsers.length === 1 &&
-        values.password === filteredUsers[0].password
-      ) {
+      if (myToken) {
         console.log("vous etes bien authentifie");
         //Je suis authentifié
-        sessionStorage.setItem("token", "true");
+        sessionStorage.setItem("token", myToken);
+
+        const decoded = jwtDecode(myToken);
         //J'enregistre les infos de l'utilisateur courant/connecté
         localStorage.setItem(
           "currentUser",
-          JSON.stringify({ ...filteredUsers[0] })
+          JSON.stringify(decoded)
         );
 
         setShouldNavigate(true);
