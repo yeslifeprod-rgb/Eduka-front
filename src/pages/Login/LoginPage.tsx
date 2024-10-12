@@ -1,14 +1,16 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useEffect, useState } from "react";
-import { NavLink, Navigate } from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import * as Yup from "yup";
 import { BlueFullButton } from "../../components/Button/Button";
 import LoginInterface from "../../services/interfaces/Login";
 import {useApi} from "../../hooks/useApi";
 import {jwtDecode} from 'jwt-decode';
+import {User} from "../../utils/PrivateRoute.tsx";
 
 export default function Login() {
-  const [shouldNavigate, setShouldNavigate] = useState<boolean>(false);
+
+  const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
   const [errorAuthentification, setErrorAuthentification] =
     useState<boolean>(false);
 
@@ -25,6 +27,7 @@ export default function Login() {
     rememberMe: false,
   });
 
+  const navigate = useNavigate(); // Call the hook to get the navigate function
   const api = useApi();
 
   // Check if credentials are stored in localStorage on component mount
@@ -44,6 +47,13 @@ export default function Login() {
     }
   }, []);
 
+  useEffect(() => {
+    // Redirect to Parent or School Welcome page according to the user's role
+    if (redirectUrl) {
+      navigate(redirectUrl); // Use the navigate function to redirect
+    }
+  }, [redirectUrl, navigate]); // Include navigate in the dependency array
+
   const handleRememberMe = (values: LoginInterface) => {
     if (values.rememberMe) {
       localStorage.setItem("rememeberMeCredentials", JSON.stringify(values));
@@ -61,22 +71,41 @@ export default function Login() {
 
       const myToken = response.data.access_token;
 
-      if (myToken) {
+      if (myToken) {//eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwidXNlcm5hbWUiOiJhbmlhQGVkdWthLmZyIiwicm9sZXMiOlsiUEFSRU5UIl0sImlhdCI6MTcyODc2MzA1MiwiZXhwIjoxNzI4NzY0ODUyfQ.mXxgwV_9joFyu-yrifxLhbVhSsW41x-ITSuZxUkSO1k
         console.log("vous etes bien authentifie");
         //Je suis authentifié
-        sessionStorage.setItem("token", myToken);
+        sessionStorage.setItem("accessToken", myToken);
 
-        const decoded = jwtDecode(myToken);
+        const payload = jwtDecode(myToken);
+        console.log(payload);
+        //Je fais correspondre le champ sub à id de l'interface User
+        const user:User = {
+          id: payload.sub,
+          role: payload.roles[0],
+          email: payload.email,
+          status: payload.status,
+          created_at:payload.created_at,
+          updated_at:payload.updated_at
+        }
+
         //J'enregistre les infos de l'utilisateur courant/connecté
         localStorage.setItem(
-          "currentUser",
-          JSON.stringify(decoded)
+          "user",
+          JSON.stringify(user)
         );
 
-        setShouldNavigate(true);
+        //Redirect either to Parent or School page depending of authenticated user role.
+        setRedirectUrl('/');
+        if (payload.roles.includes('PARENT')) {
+          setRedirectUrl('/home_page_parent');
+        }
+        if (payload.roles.includes('SCHOOL')) {
+          setRedirectUrl('/home_page_school');
+        }
+
       } else {
         console.log("Vous n'etes pas authorise");
-        setShouldNavigate(false);
+        setRedirectUrl(null);
         setErrorAuthentification(true);
       }
 
@@ -86,6 +115,7 @@ export default function Login() {
       //Handle login error, display error message, etc.
     }
   };
+
 
   return (
     <>
@@ -158,7 +188,7 @@ export default function Login() {
           </div>
         </Form>
       </Formik>
-      {shouldNavigate && <Navigate to="/home_page_parent" />}
+
     </>
   );
 }

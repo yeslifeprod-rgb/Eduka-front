@@ -16,7 +16,7 @@ import SearchByParentPage from "./pages/Search/SearchByParentPage";
 import SearchBySchoolPage from "./pages/Search/SearchBySchoolPage";
 import { TeacherSignUpPage } from "./pages/Schools/TeacherSignUpPage";
 import { ModalProvider } from "./services/Context/ModalContext";
-import PrivateRoute from "./utils/PrivateRoute";
+import PrivateRoute, {RoleBasedRoute} from "./utils/PrivateRoute";
 import NotFoundPage from "./utils/NotFoundPage";
 import { ChatPage } from "./pages/Chat/ChatPage";
 import { ChangePassword } from "./pages/Login/ChangePasswordPage";
@@ -34,8 +34,14 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/change_password" element={<ChangePassword />} />
           <Route element={<PrivateRoute />}>
-            <Route path="/home_page_parent" element={<HomePageParent />} />
-            <Route path="/home_page_school" element={<HomePageSchool />} />
+            {/* Routes for Parent */}
+            <Route element={<RoleBasedRoute roles={['PARENT']} />}>
+              <Route path="/home_page_parent" element={<HomePageParent />} />
+            </Route>
+            {/* Routes for School */}
+            <Route element={<RoleBasedRoute roles={['SCHOOL']} />}>
+              <Route path="/home_page_school" element={<HomePageSchool />} />
+            </Route>
             <Route path="/edit_profil_by_school" element={<EditProfilBySchoolPage />} />
             <Route path="/school_create_user" element={<SchoolCreateUser />} />
             <Route path="/parent_sign_up_page" element={<ParentSignUpPage />} />
