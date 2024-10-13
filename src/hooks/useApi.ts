@@ -18,7 +18,7 @@ export function useApi() {
   
   api.interceptors.request.use((config) => {
     // Aller dans le local storage pour recuperer le token
-    const token = localStorage.getItem("accessToken");
+    const token = sessionStorage.getItem("accessToken");
     //  et l'injecter dans la requete
     token ? config.headers["Authorization"] = "Bearer " + token: '';
     return config;
