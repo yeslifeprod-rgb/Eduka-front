@@ -41,7 +41,7 @@ export default function NavBottom() {
           <SearchIcon className="nav-icon" sx={{ width: 32, height: 32 }} />
         </IconButton>
       </NavLink>
-      <NavLink to="/profil" className="nav-link-avatar">
+      <NavLink to="/edit_my_parent_profil" className="nav-link-avatar">
         <Avatar
           alt="Cindy Baker"
           src={avatar}

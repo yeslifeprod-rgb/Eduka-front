@@ -22,7 +22,7 @@ import { ChatPage } from "./pages/Chat/ChatPage";
 import { ChangePassword } from "./pages/Login/ChangePasswordPage";
 import { ProfilPage } from "./pages/Profil/ProfilPage";
 import { HomePageTeacher } from "./pages/Teacher/HomePageTeacher";
-
+import { EditMyParentProfil } from "./pages/Profil/EditMyParentProfil";
 import ProfilModifyPage from "./pages/Profil/ProfileModifyPage";
 import ProfilePage from "./pages/Profil/ProfilePage";
 
@@ -37,6 +37,7 @@ function App() {
             {/* Routes for Parent */}
             <Route element={<RoleBasedRoute roles={['PARENT']} />}>
               <Route path="/home_page_parent" element={<HomePageParent />} />
+              <Route path="/edit_my_parent_profil" element={<EditMyParentProfil />} />
             </Route>
             {/* Routes for School */}
             <Route element={<RoleBasedRoute roles={['SCHOOL']} />}>
