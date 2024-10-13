@@ -13,3 +13,14 @@ export const fetchDetailProfile = async () => {
         throw error;
     }
 };
+
+export const updateProfile = async (id: string, profileData: any) => {
+    const api = UseApi();
+    try {
+        const response = await api.put(`/user/profile/${id}`, profileData);
+        return response.data;
+    } catch (error) {
+        console.error("Error updating profile:", error);
+        throw error;
+    }
+};

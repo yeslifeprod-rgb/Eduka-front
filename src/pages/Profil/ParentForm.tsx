@@ -1,50 +1,47 @@
-import React, { ChangeEvent } from 'react';
+import React from "react";
+import { Field, ErrorMessage } from "formik";
 
 interface ParentFormProps {
-    parent: {
-        firstname: string;
-        lastname: string;
-        email: string;
-    };
-    formErrors: { [key: string]: string };
-    handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    parent: any;
+    formErrors: any;
+    touched: any;
+    handleChange: (e: React.ChangeEvent<any>) => void;
 }
 
-const ParentForm: React.FC<ParentFormProps> = ({ parent, formErrors, handleChange }) => {
+const ParentForm: React.FC<ParentFormProps> = ({ formErrors, touched }) => {
     return (
-        <div className="p-4 sm:p-6 md:p-8">
-            <div className="mb-4">
-                <label htmlFor="lastName">Nom</label>
-                <input
+        <div>
+            <div className="mt-10">
+                <label htmlFor="firstname">Prénom</label>
+                <Field
+                    id="firstname"
+                    name="firstname"
                     type="text"
-                    name="lastName"
-                    value={parent.lastname}
-                    onChange={handleChange}
-                    className="block w-full p-2 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
+                    className="block w-full p-4 ps-6 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                 />
-                {formErrors.lastName && <p className="text-red-500">{formErrors.lastName}</p>}
+                <ErrorMessage name="firstname" component="div" className="text-red-500" />
             </div>
-            <div className="mb-4">
-                <label htmlFor="firstName">Prénom</label>
-                <input
+
+            <div className="mt-6">
+                <label htmlFor="lastname">Nom</label>
+                <Field
+                    id="lastname"
+                    name="lastname"
                     type="text"
-                    name="firstName"
-                    value={parent.firstname}
-                    onChange={handleChange}
-                    className="block w-full p-2 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
+                    className="block w-full p-4 ps-6 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                 />
-                {formErrors.firstName && <p className="text-red-500">{formErrors.firstName}</p>}
+                <ErrorMessage name="lastname" component="div" className="text-red-500" />
             </div>
-            <div className="mb-4">
+
+            <div className="mt-6">
                 <label htmlFor="email">Email</label>
-                <input
-                    type="email"
+                <Field
+                    id="email"
                     name="email"
-                    value={parent.email}
-                    onChange={handleChange}
-                    className="block w-full p-2 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
+                    type="email"
+                    className="block w-full p-4 ps-6 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-custom-orange focus:border-custom-orange"
                 />
-                {formErrors.email && <p className="text-red-500">{formErrors.email}</p>}
+                <ErrorMessage name="email" component="div" className="text-red-500" />
             </div>
         </div>
     );
