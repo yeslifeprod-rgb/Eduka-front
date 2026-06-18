@@ -54,28 +54,6 @@ Cette section résume simplement les contributions visibles dans l’historique 
 | baptiste | Support front : intégration, ajustements et maintenance. | `4` | `main`, `debuggage`, `develop`, `devops` | `2` |
 | Ange-BC | Contribution ponctuelle front. | `1` | `main`, `debuggage`, `develop`, `devops` | `1` |
 
-### Fonctionnalités / branches clés
-
-| Branche | Fonctionnalité lisible | Contributeurs principaux |
-|---|---|---|
-| `develop` | Authentification et rôles | Julien, Sylvain, Ilyes |
-| `devops` | Authentification et rôles | Julien, Sylvain, Ilyes |
-| `debuggage` | Authentification et rôles | Julien, Sylvain, Ilyes |
-| `installation-cypress` | Authentification et rôles | Julien, Sylvain, Ilyes |
-| `tr-00-cablage-login` | Authentification et rôles | Julien, Sylvain, Ilyes |
-| `tr-000-dev_mapbox_card` | Authentification et rôles | Julien, Sylvain, Ilyes |
-| `recup-travail-by-julien` | Authentification et rôles | Julien, Sylvain, Ania |
-| `tr-cablage-Login` | Authentification et rôles | Julien, Sylvain, Ania |
-| `tr-238-front-home-page-teacher` | Authentification et rôles | Julien, Sylvain, Ania |
-| `trombinoscope-ecole` | Authentification et rôles | Julien, Ania, Sylvain |
-| `tr-112-formulaire_creation` | Authentification et rôles | Julien, Sylvain, Ania |
-| `tr-232-myEvents` | Authentification et rôles | Sylvain, Julien, Ania |
-| `tr-264-EditProfilBySchool-V2` | Authentification et rôles | Julien, Sylvain, Ilyes |
-| `tr-205-change-password` | Authentification et rôles | Julien, Sylvain, Ania |
-| `tr-278-PageEvènementPrivé/tr-125-ModalChoixEnfant` | Authentification et rôles | Julien, Sylvain, Ilyes |
-| `tr-132-front-chat` | Authentification et rôles | Julien, Sylvain, Ania |
-| `tr-112-PageEventPublic-Ilyes` | Authentification et rôles | Julien, Sylvain, Ania |
-| `tr-112-PageEventPublic` | Authentification et rôles | Julien, Sylvain, Ania |
 
 ### Merges Git détectés
 
