@@ -41,18 +41,18 @@ Cette section résume simplement les contributions visibles dans l’historique 
 - Historique analysé : **144 commits**
 - Merges détectés : **15**
 
-> Note : la présence de chaque personne dépend de l’auteur Git enregistré dans l’historique. Si un travail a été commit avec une autre identité GitLab, il apparaît sous cette identité.
+> Note : les chiffres viennent de l’auteur Git enregistré dans l’historique. Une merge request GitLab ou un merge peut apparaître sous la personne qui a validé le merge, même si le travail vient d’une autre branche.
 
 ### Contributeurs
 
-| Personne | Rôle visible dans le projet | Branches principales | Merges |
-|---|---|---|---:|
-| Julien | Front-end principal : pages, parcours utilisateur, intégration UI et évolutions fonctionnelles. | `main`, `develop`, `devops`, `debuggage` | `3` |
-| Sylvain | Fonctionnalités front : écrans, composants et améliorations applicatives. | `main`, `debuggage`, `develop`, `devops` | `3` |
-| Ania | UI, corrections et participation aux fonctionnalités front. | `main`, `tr-cablage-Login`, `debuggage`, `develop` | `3` |
-| Ilyes | Documentation, mise en forme GitHub et maintenance du dépôt. | `main`, `debuggage`, `develop`, `devops` | `3` |
-| baptiste | Support front : intégration, ajustements et maintenance. | `main`, `debuggage`, `develop`, `devops` | `2` |
-| Ange-BC | Contribution ponctuelle front. | `main`, `debuggage`, `develop`, `devops` | `1` |
+| Personne | Rôle visible dans le projet | Commits | Branches principales | Merges Git |
+|---|---|---:|---|---:|
+| Julien | Front-end principal : pages, parcours utilisateur, intégration UI et évolutions fonctionnelles. | `82` | `main`, `develop`, `devops`, `debuggage` | `3` |
+| Sylvain | Fonctionnalités front : écrans, composants et améliorations applicatives. | `21` | `main`, `debuggage`, `develop`, `devops` | `3` |
+| Ania | UI, corrections et participation aux fonctionnalités front. | `18` | `main`, `tr-cablage-Login`, `debuggage`, `develop` | `3` |
+| Ilyes | Front-end / intégration : pages événement, choix enfant, maintenance et mise en forme GitHub. | `18` | `main`, `debuggage`, `develop`, `devops` | `3` |
+| baptiste | Support front : intégration, ajustements et maintenance. | `4` | `main`, `debuggage`, `develop`, `devops` | `2` |
+| Ange-BC | Contribution ponctuelle front. | `1` | `main`, `debuggage`, `develop`, `devops` | `1` |
 
 ### Fonctionnalités / branches clés
 
@@ -77,7 +77,7 @@ Cette section résume simplement les contributions visibles dans l’historique 
 | `tr-112-PageEventPublic-Ilyes` | Authentification et rôles | Julien, Sylvain, Ania |
 | `tr-112-PageEventPublic` | Authentification et rôles | Julien, Sylvain, Ania |
 
-### Merges importants
+### Merges Git détectés
 
 | Date | Auteur | Branche / sujet |
 |---|---|---|
