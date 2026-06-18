@@ -50,7 +50,7 @@ Cette section résume simplement les contributions visibles dans l’historique 
 | Julien | Front-end principal : pages, parcours utilisateur, intégration UI et évolutions fonctionnelles. | `main`, `develop`, `devops`, `debuggage` | `3` |
 | Sylvain | Fonctionnalités front : écrans, composants et améliorations applicatives. | `main`, `debuggage`, `develop`, `devops` | `3` |
 | Ania | UI, corrections et participation aux fonctionnalités front. | `main`, `tr-cablage-Login`, `debuggage`, `develop` | `3` |
-| Yesdevjr | Documentation, mise en forme GitHub et maintenance du dépôt. | `main`, `debuggage`, `develop`, `devops` | `3` |
+| Ilyes | Documentation, mise en forme GitHub et maintenance du dépôt. | `main`, `debuggage`, `develop`, `devops` | `3` |
 | baptiste | Support front : intégration, ajustements et maintenance. | `main`, `debuggage`, `develop`, `devops` | `2` |
 | Ange-BC | Contribution ponctuelle front. | `main`, `debuggage`, `develop`, `devops` | `1` |
 
@@ -58,21 +58,21 @@ Cette section résume simplement les contributions visibles dans l’historique 
 
 | Branche | Fonctionnalité lisible | Contributeurs principaux |
 |---|---|---|
-| `develop` | Authentification et rôles | Julien, Sylvain, Yesdevjr |
-| `devops` | Authentification et rôles | Julien, Sylvain, Yesdevjr |
-| `debuggage` | Authentification et rôles | Julien, Sylvain, Yesdevjr |
-| `installation-cypress` | Authentification et rôles | Julien, Sylvain, Yesdevjr |
-| `tr-00-cablage-login` | Authentification et rôles | Julien, Sylvain, Yesdevjr |
-| `tr-000-dev_mapbox_card` | Authentification et rôles | Julien, Sylvain, Yesdevjr |
+| `develop` | Authentification et rôles | Julien, Sylvain, Ilyes |
+| `devops` | Authentification et rôles | Julien, Sylvain, Ilyes |
+| `debuggage` | Authentification et rôles | Julien, Sylvain, Ilyes |
+| `installation-cypress` | Authentification et rôles | Julien, Sylvain, Ilyes |
+| `tr-00-cablage-login` | Authentification et rôles | Julien, Sylvain, Ilyes |
+| `tr-000-dev_mapbox_card` | Authentification et rôles | Julien, Sylvain, Ilyes |
 | `recup-travail-by-julien` | Authentification et rôles | Julien, Sylvain, Ania |
 | `tr-cablage-Login` | Authentification et rôles | Julien, Sylvain, Ania |
 | `tr-238-front-home-page-teacher` | Authentification et rôles | Julien, Sylvain, Ania |
 | `trombinoscope-ecole` | Authentification et rôles | Julien, Ania, Sylvain |
 | `tr-112-formulaire_creation` | Authentification et rôles | Julien, Sylvain, Ania |
 | `tr-232-myEvents` | Authentification et rôles | Sylvain, Julien, Ania |
-| `tr-264-EditProfilBySchool-V2` | Authentification et rôles | Julien, Sylvain, Yesdevjr |
+| `tr-264-EditProfilBySchool-V2` | Authentification et rôles | Julien, Sylvain, Ilyes |
 | `tr-205-change-password` | Authentification et rôles | Julien, Sylvain, Ania |
-| `tr-278-PageEvènementPrivé/tr-125-ModalChoixEnfant` | Authentification et rôles | Julien, Sylvain, Yesdevjr |
+| `tr-278-PageEvènementPrivé/tr-125-ModalChoixEnfant` | Authentification et rôles | Julien, Sylvain, Ilyes |
 | `tr-132-front-chat` | Authentification et rôles | Julien, Sylvain, Ania |
 | `tr-112-PageEventPublic-Ilyes` | Authentification et rôles | Julien, Sylvain, Ania |
 | `tr-112-PageEventPublic` | Authentification et rôles | Julien, Sylvain, Ania |
@@ -82,15 +82,15 @@ Cette section résume simplement les contributions visibles dans l’historique 
 | Date | Auteur | Branche / sujet |
 |---|---|---|
 | 2024-07-02 | Julien | `tr-00-cablage-login` |
-| 2024-06-12 | Yesdevjr | `tr-278-PageEvènementPrivé/tr-125-ModalChoixEnfant` |
-| 2024-06-12 | Yesdevjr | `tr-112-PageEventPublic-Ilyes` |
+| 2024-06-12 | Ilyes | `tr-278-PageEvènementPrivé/tr-125-ModalChoixEnfant` |
+| 2024-06-12 | Ilyes | `tr-112-PageEventPublic-Ilyes` |
 | 2024-06-10 | Julien | `develop` |
 | 2024-05-21 | Sylvain | `develop` |
 | 2024-05-21 | Sylvain | `develop` |
 | 2024-05-21 | Julien | `develop` |
 | 2024-05-21 | Ania | `tr-83-PageParticipation` |
 | 2024-05-19 | Ania | `tr-97-ModifyProfil` |
-| 2024-04-30 | Yesdevjr | `develop` |
+| 2024-04-30 | Ilyes | `develop` |
 | 2024-04-30 | Ania | `develop` |
 | 2024-04-30 | Sylvain | `develop` |
 
