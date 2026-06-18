@@ -38,26 +38,24 @@ Cette section résume simplement les contributions visibles dans l’historique 
 
 - Projet : **Eduka Front**
 - Périmètre : **Interface web React / front-end applicatif**
-- Historique analysé : **145 commits**
+- Historique analysé : **144 commits**
 - Merges détectés : **15**
 
 ### Contributeurs
 
 | Personne | Rôle visible dans le projet | Branches principales | Merges |
 |---|---|---|---:|
-| Julien TANGUY | Front-end principal : pages, parcours utilisateur, intégration UI et évolutions fonctionnelles. | `HEAD -> origin/main`, `develop`, `main`, `devops` | `3` |
-| Sylvain | Fonctionnalités front : écrans, composants et améliorations applicatives. | `HEAD -> origin/main`, `debuggage`, `develop`, `devops` | `3` |
-| Ania Cousin | UI, corrections et participation aux fonctionnalités front. | `tr-cablage-Login`, `HEAD -> origin/main`, `debuggage`, `develop` | `3` |
-| yeslifeprod-rgb | Documentation, mise en forme GitHub et maintenance du dépôt. | `HEAD -> origin/main`, `debuggage`, `develop`, `devops` | `3` |
-| baptiste | Support front : intégration, ajustements et maintenance. | `HEAD -> origin/main`, `debuggage`, `develop`, `devops` | `2` |
-| Ange-BC | Contribution ponctuelle front. | `HEAD -> origin/main`, `debuggage`, `develop`, `devops` | `1` |
-| Yesdevjr | Développement applicatif | `HEAD -> origin/main`, `main` | `0` |
+| Julien TANGUY | Front-end principal : pages, parcours utilisateur, intégration UI et évolutions fonctionnelles. | `main`, `develop`, `devops`, `debuggage` | `3` |
+| Sylvain | Fonctionnalités front : écrans, composants et améliorations applicatives. | `main`, `debuggage`, `develop`, `devops` | `3` |
+| Ania Cousin | UI, corrections et participation aux fonctionnalités front. | `main`, `tr-cablage-Login`, `debuggage`, `develop` | `3` |
+| yeslifeprod-rgb | Documentation, mise en forme GitHub et maintenance du dépôt. | `main`, `debuggage`, `develop`, `devops` | `3` |
+| baptiste | Support front : intégration, ajustements et maintenance. | `main`, `debuggage`, `develop`, `devops` | `2` |
+| Ange-BC | Contribution ponctuelle front. | `main`, `debuggage`, `develop`, `devops` | `1` |
 
 ### Fonctionnalités / branches clés
 
 | Branche | Fonctionnalité lisible | Contributeurs principaux |
 |---|---|---|
-| `HEAD -> origin/main` | Authentification et rôles | Julien TANGUY, Sylvain, yeslifeprod-rgb |
 | `develop` | Authentification et rôles | Julien TANGUY, Sylvain, yeslifeprod-rgb |
 | `devops` | Authentification et rôles | Julien TANGUY, Sylvain, yeslifeprod-rgb |
 | `debuggage` | Authentification et rôles | Julien TANGUY, Sylvain, yeslifeprod-rgb |
@@ -75,6 +73,7 @@ Cette section résume simplement les contributions visibles dans l’historique 
 | `tr-278-PageEvènementPrivé/tr-125-ModalChoixEnfant` | Authentification et rôles | Julien TANGUY, Sylvain, yeslifeprod-rgb |
 | `tr-132-front-chat` | Authentification et rôles | Julien TANGUY, Sylvain, Ania Cousin |
 | `tr-112-PageEventPublic-Ilyes` | Authentification et rôles | Julien TANGUY, Sylvain, Ania Cousin |
+| `tr-112-PageEventPublic` | Authentification et rôles | Julien TANGUY, Sylvain, Ania Cousin |
 
 ### Merges importants
 
