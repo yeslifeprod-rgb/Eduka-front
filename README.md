@@ -1,38 +1,12 @@
-# React + TypeScript + Vite
+# EDUKA — Front-end
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interface web développée avec React et TypeScript pour centraliser les activités et les échanges entre parents. Elle permet de consulter et publier des activités, rejoindre des groupes et utiliser une messagerie intégrée. L’interface responsive communique avec le back-end via une API REST.
 
-Currently, two official plugins are available:
+Le projet a été réalisé en équipe de quatre développeurs, accompagnés de deux leads.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-
-<!-- CONTRIBUTIONS-GITLAB:START -->
 ## Contributions projet
 
-Cette section résume simplement les contributions visibles dans l’historique GitLab importé sur GitHub. Elle est pensée pour une lecture recruteur : qui a contribué, sur quelles parties, et quels merges existent.
+Cette section résume les contributions visibles dans l’historique GitLab importé sur GitHub.
 
 ### Vue rapide
 
@@ -40,8 +14,6 @@ Cette section résume simplement les contributions visibles dans l’historique 
 - Périmètre : **Interface web React / front-end applicatif**
 - Historique analysé : **144 commits**
 - Merges détectés : **15**
-
-> Note : les chiffres viennent de l’auteur Git enregistré dans l’historique. Une merge request GitLab ou un merge peut apparaître sous la personne qui a validé le merge, même si le travail vient d’une autre branche.
 
 ### Contributeurs
 
@@ -53,7 +25,6 @@ Cette section résume simplement les contributions visibles dans l’historique 
 | Ilyes | Front-end / intégration : pages événement, choix enfant, maintenance et mise en forme GitHub. | `18` | `main`, `debuggage`, `develop`, `devops` | `3` |
 | baptiste | Support front : intégration, ajustements et maintenance. | `4` | `main`, `debuggage`, `develop`, `devops` | `2` |
 | Ange-BC | Contribution ponctuelle front. | `1` | `main`, `debuggage`, `develop`, `devops` | `1` |
-
 
 ### Merges Git détectés
 
@@ -72,5 +43,4 @@ Cette section résume simplement les contributions visibles dans l’historique 
 | 2024-04-30 | Ania | `develop` |
 | 2024-04-30 | Sylvain | `develop` |
 
-> Note : les noms sont regroupés quand plusieurs identités Git correspondent à la même personne.
-<!-- CONTRIBUTIONS-GITLAB:END -->
+> Les noms sont regroupés quand plusieurs identités Git correspondent à la même personne.
